@@ -1,0 +1,1948 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maitriser Claude - Synapse Medicine</title>
+<style>
+:root {
+  --blue: #00A0FF;
+  --blue-dark: #0031FF;
+  --blue-light: #4DD7FF;
+  --violet: #BC2DFF;
+  --magenta: #FF0099;
+  --teal: #22C9AB;
+  --grad-start: #F30FA8;
+  --grad-mid: #D928C8;
+  --grad-mid2: #3C64FF;
+  --grad-end: #0A97FF;
+  --text-title: #223439;
+  --text-body: #1F1F1F;
+  --text-secondary: #6E7881;
+  --bg-blue: #F2FAFF;
+  --bg-violet: #F6EBFF;
+  --bg-magenta: #FEF2FA;
+  --bg-teal: #F0FDF9;
+  --bg-grad: linear-gradient(135deg, #FEF2FA 0%, #F2FAFF 100%);
+  --shadow: 0 4px 24px rgba(0,49,255,0.08);
+  --shadow-hover: 0 12px 40px rgba(0,49,255,0.15);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --transition: 0.3s ease;
+  --terminal-bg: #1F1F1F;
+  --terminal-text: #E2E8F0;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color: var(--text-body); line-height: 1.65; background: #fff; overflow-x: hidden;
+}
+
+/* PROGRESS BAR */
+#progress-bar {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 1001;
+  background: linear-gradient(90deg, var(--grad-start), var(--grad-end));
+  width: 0; transition: width 0.15s linear;
+}
+
+/* HEADER */
+header {
+  position: sticky; top: 0; z-index: 1000;
+  background: rgba(255,255,255,0.92); backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(0,49,255,0.06); padding: 0 2rem;
+}
+.header-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 60px; gap: 1rem;
+}
+.header-brand {
+  display: flex; align-items: center; gap: 0.75rem;
+  font-weight: 700; font-size: 1rem; color: var(--text-title);
+  white-space: nowrap; text-decoration: none;
+}
+.header-brand .dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--grad-start), var(--grad-end));
+}
+.header-nav { display: flex; gap: 0.4rem; overflow-x: auto; scrollbar-width: none; }
+.header-nav::-webkit-scrollbar { display: none; }
+.nav-pill {
+  padding: 5px 12px; border-radius: 20px; font-size: 0.78rem;
+  font-weight: 600; white-space: nowrap; cursor: pointer;
+  border: 1.5px solid #e5e7eb; color: var(--text-secondary);
+  background: transparent; transition: all var(--transition); text-decoration: none;
+  display: flex; align-items: center; gap: 0.4rem;
+}
+.nav-pill:hover, .nav-pill.active { border-color: transparent; color: #fff; }
+.nav-pill[data-level="1"]:hover, .nav-pill[data-level="1"].active { background: var(--blue); }
+.nav-pill[data-level="2"]:hover, .nav-pill[data-level="2"].active { background: var(--violet); }
+.nav-pill[data-level="3"]:hover, .nav-pill[data-level="3"].active { background: var(--magenta); }
+.nav-pill[data-level="4"]:hover, .nav-pill[data-level="4"].active { background: var(--teal); }
+.nav-pill[data-level="5"]:hover, .nav-pill[data-level="5"].active { background: linear-gradient(90deg, var(--grad-start), var(--grad-end)); }
+.nav-progress { font-size: 0.65rem; opacity: 0.85; }
+.header-counter { font-size: 0.78rem; color: var(--text-secondary); white-space: nowrap; font-weight: 500; }
+
+/* POLE SELECTOR */
+.pole-selector { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; margin-top: 1.5rem; }
+.pole-btn {
+  padding: 8px 18px; border-radius: 24px; font-size: 0.85rem; font-weight: 600;
+  border: 2px solid #e5e7eb; background: #fff; color: var(--text-secondary);
+  cursor: pointer; transition: all var(--transition);
+}
+.pole-btn:hover { border-color: var(--violet); color: var(--violet); }
+.pole-btn.active {
+  border-color: transparent; color: #fff;
+  background: linear-gradient(135deg, var(--grad-start), var(--grad-end));
+}
+.pole-indicator {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 3px 10px; border-radius: 12px; font-size: 0.72rem; font-weight: 600;
+  background: linear-gradient(135deg, rgba(243,15,168,0.08), rgba(10,151,255,0.08));
+  color: var(--violet); cursor: pointer; border: none;
+}
+.pole-indicator:hover { background: linear-gradient(135deg, rgba(243,15,168,0.15), rgba(10,151,255,0.15)); }
+
+/* HERO */
+.hero {
+  background: var(--bg-grad); padding: 4rem 2rem 3rem; text-align: center;
+}
+.hero-content { max-width: 700px; margin: 0 auto; }
+.hero h1 {
+  font-size: 2.8rem; font-weight: 800; line-height: 1.1;
+  background: linear-gradient(135deg, var(--grad-start) 0%, var(--grad-mid2) 50%, var(--grad-end) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  margin-bottom: 1rem;
+}
+.hero p { color: var(--text-secondary); font-size: 1.1rem; max-width: 550px; margin: 0 auto 1.5rem; }
+.hero-quiz { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+.hero-quiz button {
+  padding: 10px 22px; border-radius: 24px; font-size: 0.88rem; font-weight: 600;
+  border: 2px solid rgba(0,49,255,0.12); background: #fff; color: var(--text-title);
+  cursor: pointer; transition: all var(--transition);
+}
+.hero-quiz button:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-2px); box-shadow: var(--shadow); }
+.hero-stats {
+  display: flex; gap: 2rem; justify-content: center; margin-top: 2rem;
+  font-size: 0.9rem; color: var(--text-secondary);
+}
+.stat-num { font-weight: 800; color: var(--text-title); font-size: 1.3rem; }
+
+/* SECTIONS */
+.section { max-width: 900px; margin: 0 auto; padding: 4rem 2rem; }
+.section-alt { background: #f9fafb; }
+.section-title {
+  font-size: 1.8rem; font-weight: 800; color: var(--text-title);
+  margin-bottom: 0.5rem; line-height: 1.2;
+}
+.section-subtitle { color: var(--text-secondary); font-size: 1rem; max-width: 600px; margin-bottom: 2rem; }
+
+/* POURQUOI - redesigned */
+.pourquoi-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+.pourquoi-card {
+  padding: 1.5rem; border-radius: var(--radius); text-align: center;
+  background: #fff; border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: var(--shadow); transition: all var(--transition);
+}
+.pourquoi-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+.pourquoi-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+.pourquoi-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-title); }
+.pourquoi-card p { font-size: 0.85rem; color: var(--text-secondary); }
+
+/* CARDS-3 */
+.cards-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+.card-how {
+  padding: 1.5rem; border-radius: var(--radius); background: #fff;
+  border: 1px solid rgba(0,0,0,0.06); box-shadow: var(--shadow);
+}
+.card-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; margin-bottom: 1rem;
+}
+.card-how h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; }
+.card-how p { font-size: 0.85rem; color: var(--text-secondary); }
+
+/* ROADMAP */
+.roadmap-container { overflow-x: auto; padding: 2rem 0; }
+.roadmap { display: flex; align-items: center; min-width: 700px; justify-content: center; gap: 0; }
+.roadmap-node { text-align: center; text-decoration: none; color: inherit; flex: 0 0 auto; }
+.roadmap-circle {
+  width: 56px; height: 56px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 0.5rem; transition: transform var(--transition);
+}
+.roadmap-node:hover .roadmap-circle { transform: scale(1.12); }
+.roadmap-label { display: block; font-weight: 700; font-size: 0.8rem; color: var(--text-title); }
+.roadmap-sublabel { display: block; font-size: 0.72rem; color: var(--text-secondary); }
+.roadmap-line { width: 60px; height: 2px; background: #e5e7eb; flex-shrink: 0; }
+
+/* LEVEL SECTIONS */
+.level-header { margin-bottom: 2rem; }
+.level-pill {
+  display: inline-block; padding: 4px 14px; border-radius: 20px;
+  font-size: 0.78rem; font-weight: 700; color: #fff; margin-bottom: 0.75rem;
+}
+.level-header h2 { font-size: 1.6rem; font-weight: 800; color: var(--text-title); margin-bottom: 0.5rem; }
+.level-header p { color: var(--text-secondary); font-size: 0.95rem; }
+.case-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 2rem; }
+.case-card {
+  padding: 1rem 1.2rem; border-radius: var(--radius-sm);
+  background: rgba(255,255,255,0.7); border-left: 3px solid;
+  font-size: 0.88rem; font-weight: 500;
+}
+
+/* ACCORDION */
+.accordion-list { display: flex; flex-direction: column; gap: 1rem; }
+.accordion-item { border-radius: var(--radius); overflow: hidden; background: #fff; box-shadow: var(--shadow); }
+.accordion-header {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1rem 1.5rem; cursor: pointer; transition: background var(--transition);
+}
+.accordion-header:hover { background: rgba(0,0,0,0.02); }
+.accordion-num {
+  width: 32px; height: 32px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 0.85rem; color: #fff; flex-shrink: 0;
+}
+.accordion-title { font-weight: 700; font-size: 0.95rem; flex: 1; }
+.accordion-duration { font-size: 0.78rem; color: var(--text-secondary); white-space: nowrap; }
+.accordion-arrow { width: 20px; height: 20px; color: var(--text-secondary); transition: transform var(--transition); flex-shrink: 0; }
+.accordion-item.open .accordion-arrow { transform: rotate(180deg); }
+.accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.accordion-content { padding: 0 1.5rem 1.5rem 4.5rem; }
+.accordion-item.completed .accordion-header::after {
+  content: ''; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--teal); flex-shrink: 0;
+}
+
+/* CONTENT BLOCKS */
+.acc-block { margin-bottom: 1.2rem; }
+.acc-block-title { font-weight: 700; font-size: 0.85rem; margin-bottom: 0.5rem; }
+.acc-objective { font-size: 0.92rem; color: var(--text-body); font-weight: 500; padding: 0.8rem; background: rgba(0,0,0,0.02); border-radius: 8px; }
+.acc-checklist { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.acc-checklist li {
+  display: flex; align-items: flex-start; gap: 0.6rem; padding: 0.4rem 0;
+  font-size: 0.88rem; cursor: pointer; user-select: none;
+}
+.check-box {
+  width: 18px; height: 18px; border-radius: 4px; border: 2px solid #d1d5db;
+  flex-shrink: 0; margin-top: 2px; transition: all var(--transition);
+  display: flex; align-items: center; justify-content: center;
+}
+.acc-checklist li.checked .check-box {
+  background: var(--teal); border-color: var(--teal);
+}
+.acc-checklist li.checked .check-box::after { content: '\2713'; color: #fff; font-size: 0.7rem; font-weight: 700; }
+.acc-checklist li.checked span:last-child { text-decoration: line-through; opacity: 0.5; }
+.acc-links { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.acc-link {
+  padding: 4px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;
+  border: 1px solid; text-decoration: none; transition: all var(--transition);
+}
+.acc-link:hover { opacity: 0.8; }
+
+/* PROMPT BLOCK */
+.prompt-block {
+  border-radius: var(--radius-sm); overflow: hidden;
+  border: 1.5px solid rgba(0,49,255,0.12); margin-bottom: 1rem;
+}
+.prompt-block-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.5rem 1rem; background: rgba(0,49,255,0.04);
+}
+.prompt-block-label { font-size: 0.78rem; font-weight: 700; color: var(--blue-dark); }
+.btn-copy {
+  padding: 3px 10px; border-radius: 6px; font-size: 0.72rem; font-weight: 600;
+  border: 1px solid rgba(0,49,255,0.15); background: #fff; color: var(--blue-dark);
+  cursor: pointer; transition: all var(--transition);
+}
+.btn-copy:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
+.btn-copy.copied { background: var(--teal); color: #fff; border-color: var(--teal); }
+.prompt-block-body { padding: 0.8rem 1rem; font-size: 0.85rem; font-family: 'SF Mono', 'Fira Code', monospace; line-height: 1.6; color: var(--text-body); white-space: pre-wrap; }
+
+/* RESULT BLOCK */
+.result-block {
+  border-radius: var(--radius-sm); overflow: hidden;
+  border: 1.5px solid rgba(34,201,171,0.2); margin-bottom: 1rem;
+}
+.result-block-header {
+  padding: 0.5rem 1rem; background: rgba(34,201,171,0.06);
+}
+.result-block-label { font-size: 0.78rem; font-weight: 700; color: var(--teal); }
+.result-block-body { padding: 0.8rem 1rem; font-size: 0.85rem; color: var(--text-secondary); }
+
+/* CALLOUTS */
+.callout {
+  padding: 1rem 1.2rem; border-radius: var(--radius-sm);
+  font-size: 0.85rem; margin-bottom: 1rem; border-left: 3px solid;
+}
+.callout strong { display: inline; }
+.callout-tip { background: rgba(0,160,255,0.04); border-color: var(--blue); }
+.callout-remember { background: rgba(188,45,255,0.04); border-color: var(--violet); }
+
+/* EXERCISE BLOCK */
+.callout-exercise-wrap {
+  background: linear-gradient(135deg, rgba(243,15,168,0.04), rgba(10,151,255,0.04));
+  border: 1.5px solid rgba(243,15,168,0.12); border-radius: var(--radius-sm);
+  padding: 1.2rem; margin-bottom: 1rem;
+}
+.exercise-actions { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.75rem; }
+.btn-validate {
+  padding: 8px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 700;
+  border: none; color: #fff; cursor: pointer; transition: all var(--transition);
+}
+.btn-validate:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
+.btn-validate.validated { background: var(--teal) !important; cursor: default; }
+.btn-cancel {
+  padding: 6px 14px; border-radius: 6px; font-size: 0.78rem; font-weight: 600;
+  border: 1px solid #d1d5db; background: #fff; color: var(--text-secondary);
+  cursor: pointer; transition: all var(--transition); display: none;
+}
+.btn-cancel:hover { border-color: var(--magenta); color: var(--magenta); }
+.btn-cancel.shown { display: inline-block; }
+
+/* POLE EXAMPLES */
+.pole-example-block { margin-bottom: 1rem; }
+.pole-example-item {
+  padding: 0.6rem 1rem; border-radius: 8px; font-size: 0.85rem;
+  background: rgba(188,45,255,0.04); border: 1px solid rgba(188,45,255,0.1);
+}
+.pole-example-item strong { color: var(--violet); }
+
+/* CODE BLOCK */
+.code-block {
+  background: var(--terminal-bg); color: var(--terminal-text);
+  border-radius: var(--radius-sm); padding: 1.2rem 1.5rem;
+  font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.82rem;
+  line-height: 1.8; overflow-x: auto; margin-bottom: 1rem;
+  white-space: pre-wrap;
+}
+.cs { color: #60a5fa; } .ck { color: #f472b6; } .cv { color: #a5f3a5; } .cc { color: #fbbf24; }
+
+/* SVG DIAGRAM */
+.svg-diagram { display: flex; justify-content: center; margin: 1.5rem 0; overflow-x: auto; }
+.svg-diagram svg { max-width: 100%; height: auto; }
+
+/* ARCHITECTURE INTERACTIVE */
+.arch-layer {
+  padding: 1rem 1.2rem; border-radius: var(--radius-sm); margin-bottom: 0.6rem;
+  cursor: pointer; transition: all var(--transition); display: flex; align-items: flex-start; gap: 1rem;
+  position: relative;
+}
+.arch-layer:hover { box-shadow: var(--shadow); }
+.arch-layer-num {
+  width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 0.85rem; color: #fff;
+}
+.arch-layer-content { flex: 1; }
+.arch-layer-title { font-weight: 700; font-size: 0.9rem; }
+.arch-layer-desc { font-size: 0.82rem; color: var(--text-secondary); }
+.arch-layer-detail {
+  max-height: 0; overflow: hidden; transition: max-height 0.3s ease;
+  margin-top: 0; width: 100%;
+}
+.arch-layer.expanded .arch-layer-detail { max-height: 300px; margin-top: 0.75rem; }
+.arch-layer-detail ul {
+  list-style: none; padding: 0.5rem 0 0;
+  font-size: 0.82rem; color: var(--text-secondary);
+}
+.arch-layer-detail li { padding: 0.2rem 0; padding-left: 1rem; position: relative; }
+.arch-layer-detail li::before { content: '\2022'; position: absolute; left: 0; color: inherit; }
+
+/* BEFORE/AFTER - static */
+.ba-static { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
+.ba-side { padding: 1.5rem; border-radius: var(--radius); }
+.ba-left { background: #fef2f2; border: 1px solid rgba(239,68,68,0.15); }
+.ba-right { background: #f0fdf4; border: 1px solid rgba(34,197,94,0.15); }
+.ba-label {
+  font-weight: 700; font-size: 0.82rem; margin-bottom: 1rem;
+  padding: 4px 10px; border-radius: 6px; display: inline-block;
+}
+.ba-left .ba-label { background: rgba(239,68,68,0.1); color: #dc2626; }
+.ba-right .ba-label { background: rgba(34,197,94,0.1); color: #16a34a; }
+.ba-msg { margin-bottom: 0.75rem; }
+.ba-msg-user { font-weight: 700; font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.3rem; }
+.ba-msg-ai { font-size: 0.85rem; color: var(--text-body); line-height: 1.5; }
+.ba-msg p { font-size: 0.85rem; }
+
+/* TREE INTERACTIVE */
+.tree-container {
+  background: var(--terminal-bg); border-radius: var(--radius); padding: 1.5rem 2rem;
+  color: #e2e8f0; font-size: 0.88rem; line-height: 2; box-shadow: 0 8px 40px rgba(0,0,0,0.2);
+}
+.tree-line {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 2px 8px; border-radius: 6px; cursor: default;
+  transition: background var(--transition); position: relative;
+}
+.tree-line:hover { background: rgba(255,255,255,0.06); }
+.tree-icon { font-size: 1rem; }
+.tree-name { font-weight: 600; }
+.tree-arrow { color: #4a5568; }
+.tree-tooltip {
+  display: none; position: absolute; background: #fff;
+  color: var(--text-body); padding: 0.6rem 1rem; border-radius: 8px;
+  font-family: system-ui, -apple-system, sans-serif; font-size: 0.82rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15); z-index: 100;
+  min-width: 250px; max-width: 350px; white-space: normal; pointer-events: none;
+  left: 100%; top: 50%; transform: translateY(-50%); margin-left: 0.5rem;
+}
+.tree-line:hover .tree-tooltip { display: block; }
+
+/* MOCKUP STYLES */
+.mockup-container {
+  background: #f5f5f5; border-radius: var(--radius); padding: 0.5rem;
+  border: 1px solid #e5e7eb; margin: 1rem 0; overflow: hidden;
+}
+.mockup-titlebar {
+  display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.75rem;
+  background: #e8e8e8; border-radius: 8px 8px 0 0;
+}
+.mockup-dot { width: 10px; height: 10px; border-radius: 50%; }
+.mockup-dot.red { background: #ff5f57; }
+.mockup-dot.yellow { background: #febc2e; }
+.mockup-dot.green { background: #28c840; }
+.mockup-body { background: #fff; border-radius: 0 0 8px 8px; padding: 1rem; }
+
+/* FOOTER */
+footer {
+  background: var(--text-title); color: rgba(255,255,255,0.7);
+  padding: 3rem 2rem; text-align: center;
+}
+footer a { color: var(--blue-light); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+footer .footer-links { display: flex; gap: 2rem; justify-content: center; margin-top: 1rem; font-size: 0.9rem; flex-wrap: wrap; }
+
+/* ANIMATIONS */
+.fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+.stagger-1 { transition-delay: 0.1s; } .stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; } .stagger-4 { transition-delay: 0.4s; }
+.stagger-5 { transition-delay: 0.5s; }
+
+/* LEVEL COLORS */
+.lc-1 { color: var(--blue); } .lc-2 { color: var(--violet); } .lc-3 { color: var(--magenta); }
+.lc-4 { color: var(--teal); }
+.lc-5 { background: linear-gradient(90deg, var(--grad-start), var(--grad-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.bg-1 { background: var(--blue); } .bg-2 { background: var(--violet); } .bg-3 { background: var(--magenta); }
+.bg-4 { background: var(--teal); }
+.bg-5 { background: linear-gradient(90deg, var(--grad-start), var(--grad-end)); }
+.bdr-1 { border-color: var(--blue); } .bdr-2 { border-color: var(--violet); }
+.bdr-3 { border-color: var(--magenta); } .bdr-4 { border-color: var(--teal); }
+.level-bg-1 { background: var(--bg-blue); } .level-bg-2 { background: var(--bg-violet); }
+.level-bg-3 { background: var(--bg-magenta); } .level-bg-4 { background: var(--bg-teal); }
+.level-bg-5 { background: var(--bg-grad); }
+
+.reset-link {
+  display: inline-block; margin-top: 1rem; font-size: 0.78rem;
+  color: var(--text-secondary); cursor: pointer; border: none;
+  background: none; text-decoration: underline; opacity: 0.6;
+}
+.reset-link:hover { opacity: 1; }
+
+/* MODULE PROGRESS BAR */
+.module-progress {
+  height: 3px; background: rgba(0,0,0,0.06); border-radius: 2px;
+  margin-top: 1rem; overflow: hidden;
+}
+.module-progress-fill { height: 100%; border-radius: 2px; transition: width 0.4s ease; width: 0; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .pourquoi-cards { grid-template-columns: 1fr; }
+  .cards-3 { grid-template-columns: 1fr; }
+  .case-cards { grid-template-columns: 1fr; }
+  .accordion-content { padding-left: 1.5rem; }
+  .hero { padding: 3rem 1rem 2.5rem; }
+  .hero-quiz { flex-direction: column; align-items: center; }
+  .roadmap { min-width: 600px; }
+  .header-nav { display: none; }
+  .ba-static { grid-template-columns: 1fr; }
+  .section { padding: 3rem 1rem; }
+  .tree-tooltip { left: 0; top: 100%; transform: none; margin-left: 0; margin-top: 4px; }
+  .pole-selector { gap: 0.3rem; }
+  .pole-btn { padding: 6px 12px; font-size: 0.78rem; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- HEADER -->
+<header>
+<div class="header-inner">
+  <a href="#" class="header-brand" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+    <span class="dot"></span>Synapse Medicine <span style="color:var(--text-secondary);font-weight:400;">|</span> Maitriser Claude
+  </a>
+  <nav class="header-nav">
+    <a href="#level-1" class="nav-pill" data-level="1">Chat <span class="nav-progress" data-mod="1"></span></a>
+    <a href="#level-2" class="nav-pill" data-level="2">Cowork <span class="nav-progress" data-mod="2"></span></a>
+    <a href="#level-3" class="nav-pill" data-level="3">Skills <span class="nav-progress" data-mod="3"></span></a>
+    <a href="#level-4" class="nav-pill" data-level="4">Power <span class="nav-progress" data-mod="4"></span></a>
+    <a href="#level-5" class="nav-pill" data-level="5">Orchestration <span class="nav-progress" data-mod="5"></span></a>
+  </nav>
+  <div style="display:flex;align-items:center;gap:0.75rem;">
+    <button class="pole-indicator" onclick="document.getElementById('pole-select').scrollIntoView({behavior:'smooth'});" id="pole-header-btn">Mon pole</button>
+    <div class="header-counter" id="step-counter">0 / 13</div>
+  </div>
+</div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+<div class="hero-content">
+  <h1>Maitriser Claude</h1>
+  <p>De la premiere question a l'orchestration d'agents sur tes vrais livrables. 13 etapes concretes, des prompts a copier, des schemas visuels.</p>
+  <div class="hero-quiz">
+    <button onclick="smoothScrollTo('level-1')">Je decouvre Claude</button>
+    <button onclick="smoothScrollTo('level-2')">J'utilise deja le chat</button>
+    <button onclick="smoothScrollTo('level-4')">Je veux aller plus loin</button>
+  </div>
+  <div class="hero-stats">
+    <span><span class="stat-num" data-count="13">0</span>&nbsp;etapes</span>
+    <span><span class="stat-num" data-count="5">0</span>&nbsp;niveaux</span>
+    <span>~<span class="stat-num" data-count="11">0</span>h de pratique</span>
+  </div>
+
+  <!-- POLE SELECTOR -->
+  <div id="pole-select" style="margin-top:2.5rem;">
+    <p style="font-weight:700;font-size:0.9rem;color:var(--text-title);margin-bottom:0.75rem;">Ton pole chez Synapse :</p>
+    <div class="pole-selector">
+      <button class="pole-btn" data-pole="tech" onclick="selectPole('tech')">Tech</button>
+      <button class="pole-btn" data-pole="revenue" onclick="selectPole('revenue')">Revenue</button>
+      <button class="pole-btn" data-pole="qara" onclick="selectPole('qara')">Qara</button>
+      <button class="pole-btn" data-pole="product" onclick="selectPole('product')">Product</button>
+      <button class="pole-btn" data-pole="medical" onclick="selectPole('medical')">Medical</button>
+      <button class="pole-btn" data-pole="ga" onclick="selectPole('ga')">G&A</button>
+    </div>
+    <p style="font-size:0.78rem;color:var(--text-secondary);margin-top:0.5rem;">Les exemples s'adaptent a ton pole. Tu peux changer a tout moment.</p>
+  </div>
+</div>
+</section>
+
+<!-- POURQUOI CE PARCOURS -->
+<div class="section-alt">
+<section class="section">
+  <h2 class="section-title fade-in" style="text-align:center;">Pourquoi ce parcours</h2>
+  <p class="section-subtitle fade-in" style="text-align:center;margin:0 auto 2rem;">La plupart utilisent Claude comme un chatbot basique. La vraie puissance se debloque quand tu configures ton environnement.</p>
+  <div class="pourquoi-cards">
+    <div class="pourquoi-card fade-in stagger-1">
+      <div class="pourquoi-icon">&#128172;</div>
+      <h3>Niveau 1 : Tu poses des questions</h3>
+      <p>Claude repond de maniere generique. Tu copies-colles entre les outils. Pas de memoire.</p>
+    </div>
+    <div class="pourquoi-card fade-in stagger-2">
+      <div class="pourquoi-icon">&#9881;&#65039;</div>
+      <h3>Niveau 2 : Tu configures Claude</h3>
+      <p>Claude te connait, parle comme toi, lit tes fichiers. Plus de copier-coller.</p>
+    </div>
+    <div class="pourquoi-card fade-in stagger-3">
+      <div class="pourquoi-icon">&#127919;</div>
+      <h3>Niveau 3+ : Tu orchestres des agents</h3>
+      <p>Claude delegue, automatise, et produit tes livrables dans ton format. Tu supervises.</p>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- COMMENT CA MARCHE -->
+<section class="section">
+  <h2 class="section-title fade-in">Comment ca marche</h2>
+  <div class="cards-3">
+    <div class="card-how fade-in stagger-1">
+      <div class="card-icon" style="background:var(--bg-blue);">&#128336;</div>
+      <h3>A ton rythme</h3>
+      <p>Pas de deadline. Tu avances quand tu veux. Ta progression est sauvegardee dans ton navigateur.</p>
+    </div>
+    <div class="card-how fade-in stagger-2">
+      <div class="card-icon" style="background:var(--bg-violet);">&#128200;</div>
+      <h3>Prompts a copier</h3>
+      <p>Chaque etape inclut des prompts concrets et le resultat attendu.</p>
+    </div>
+    <div class="card-how fade-in stagger-3">
+      <div class="card-icon" style="background:var(--bg-teal);">&#127919;</div>
+      <h3>Ton vrai travail</h3>
+      <p>Les exercices s'appliquent a ton metier. Les exemples s'adaptent a ton pole.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<div class="section-alt">
+<section class="section">
+  <h2 class="section-title fade-in" style="text-align:center;">Le parcours</h2>
+  <div class="roadmap-container">
+    <div class="roadmap">
+      <a href="#level-1" class="roadmap-node fade-in stagger-1">
+        <div class="roadmap-circle" style="background:var(--bg-blue);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#00A0FF" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <span class="roadmap-label">Niveau 1</span>
+        <span class="roadmap-sublabel">Chat (3 etapes)</span>
+      </a>
+      <div class="roadmap-line"></div>
+      <a href="#level-2" class="roadmap-node fade-in stagger-2">
+        <div class="roadmap-circle" style="background:var(--bg-violet);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#BC2DFF" stroke-width="2" stroke-linecap="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <span class="roadmap-label">Niveau 2</span>
+        <span class="roadmap-sublabel">Cowork (3 etapes)</span>
+      </a>
+      <div class="roadmap-line"></div>
+      <a href="#level-3" class="roadmap-node fade-in stagger-3">
+        <div class="roadmap-circle" style="background:var(--bg-magenta);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FF0099" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="9" height="9" rx="2"/><rect x="13" y="2" width="9" height="9" rx="2"/><rect x="2" y="13" width="9" height="9" rx="2"/><rect x="13" y="13" width="9" height="9" rx="2"/></svg>
+        </div>
+        <span class="roadmap-label">Niveau 3</span>
+        <span class="roadmap-sublabel">Skills (3 etapes)</span>
+      </a>
+      <div class="roadmap-line"></div>
+      <a href="#level-4" class="roadmap-node fade-in stagger-4">
+        <div class="roadmap-circle" style="background:var(--bg-teal);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22C9AB" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <span class="roadmap-label">Niveau 4</span>
+        <span class="roadmap-sublabel">Power (2 etapes)</span>
+      </a>
+      <div class="roadmap-line"></div>
+      <a href="#level-5" class="roadmap-node fade-in stagger-5">
+        <div class="roadmap-circle" style="background:linear-gradient(135deg,rgba(243,15,168,0.1),rgba(10,151,255,0.1));">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
+            <defs><linearGradient id="grad-icon" x1="0" y1="0" x2="24" y2="24"><stop offset="0%" stop-color="#F30FA8"/><stop offset="100%" stop-color="#0A97FF"/></linearGradient></defs>
+            <circle cx="12" cy="12" r="3" stroke="url(#grad-icon)"/><circle cx="4" cy="6" r="2" stroke="url(#grad-icon)"/><circle cx="20" cy="6" r="2" stroke="url(#grad-icon)"/><circle cx="4" cy="18" r="2" stroke="url(#grad-icon)"/><circle cx="20" cy="18" r="2" stroke="url(#grad-icon)"/>
+            <line x1="6" y1="7" x2="10" y2="10" stroke="url(#grad-icon)"/><line x1="18" y1="7" x2="14" y2="10" stroke="url(#grad-icon)"/><line x1="6" y1="17" x2="10" y2="14" stroke="url(#grad-icon)"/><line x1="18" y1="17" x2="14" y2="14" stroke="url(#grad-icon)"/>
+          </svg>
+        </div>
+        <span class="roadmap-label">Niveau 5</span>
+        <span class="roadmap-sublabel">Orchestration (2 etapes)</span>
+      </a>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ARCHITECTURE INTERACTIVE (only) -->
+<section class="section">
+  <h2 class="section-title fade-in" style="text-align:center;">Architecture Claude - 5 couches</h2>
+  <p class="section-subtitle fade-in" style="text-align:center;margin-left:auto;margin-right:auto;">Chaque couche ajoute une capacite. Clique pour en savoir plus.</p>
+  <div style="display:flex;flex-direction:column;gap:0;">
+    <div class="arch-layer fade-in stagger-1" style="background:rgba(0,160,255,0.06);border:1px solid rgba(0,160,255,0.15);" onclick="this.classList.toggle('expanded')">
+      <div class="arch-layer-num bg-1">1</div>
+      <div class="arch-layer-content">
+        <div class="arch-layer-title" style="color:var(--blue);">CLAUDE.md - Memory Layer</div>
+        <div class="arch-layer-desc">Le cerveau de ton agent. Lu en premier a chaque session.</div>
+        <div class="arch-layer-detail"><ul>
+          <li>Regles d'architecture et conventions</li>
+          <li>Catalogue de ressources (fichiers, templates, liens)</li>
+          <li>Instructions de comportement globales</li>
+          <li>Contexte entreprise et equipe</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="arch-layer fade-in stagger-2" style="background:rgba(188,45,255,0.06);border:1px solid rgba(188,45,255,0.15);" onclick="this.classList.toggle('expanded')">
+      <div class="arch-layer-num bg-2">2</div>
+      <div class="arch-layer-content">
+        <div class="arch-layer-title" style="color:var(--violet);">SKILLS - Knowledge Layer</div>
+        <div class="arch-layer-desc">Tes taches recurrentes automatisees en recettes reutilisables.</div>
+        <div class="arch-layer-detail"><ul>
+          <li>Description matching - invocation automatique</li>
+          <li>Contexte specifique a la tache</li>
+          <li>Exemples reels comme reference</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="arch-layer fade-in stagger-3" style="background:rgba(255,0,153,0.06);border:1px solid rgba(255,0,153,0.15);" onclick="this.classList.toggle('expanded')">
+      <div class="arch-layer-num bg-3">3</div>
+      <div class="arch-layer-content">
+        <div class="arch-layer-title" style="color:var(--magenta);">HOOKS - Guardrail Layer</div>
+        <div class="arch-layer-desc">Garde-fous automatiques avant et apres chaque action.</div>
+        <div class="arch-layer-detail"><ul>
+          <li>PreToolUse - validation avant action</li>
+          <li>PostToolUse - verification apres action</li>
+          <li>Deterministe, pas de l'IA - comme des git hooks</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="arch-layer fade-in stagger-4" style="background:rgba(34,201,171,0.06);border:1px solid rgba(34,201,171,0.15);" onclick="this.classList.toggle('expanded')">
+      <div class="arch-layer-num bg-4">4</div>
+      <div class="arch-layer-content">
+        <div class="arch-layer-title" style="color:var(--teal);">SUBAGENTS - Delegation Layer</div>
+        <div class="arch-layer-desc">Instances specialisees pour deleguer des sous-taches.</div>
+        <div class="arch-layer-detail"><ul>
+          <li>Fenetre de contexte isolee par subagent</li>
+          <li>Roles : analyste, redacteur, verificateur...</li>
+          <li>Pas de recursion - un subagent ne spawne pas d'autres subagents</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="arch-layer fade-in stagger-5" style="background:linear-gradient(135deg,rgba(243,15,168,0.04),rgba(10,151,255,0.04));border:1px solid rgba(60,100,255,0.15);" onclick="this.classList.toggle('expanded')">
+      <div class="arch-layer-num bg-5">5</div>
+      <div class="arch-layer-content">
+        <div class="arch-layer-title lc-5">PLUGINS - Distribution Layer</div>
+        <div class="arch-layer-desc">Packages partageables : skills, agents, hooks, commands.</div>
+        <div class="arch-layer-detail"><ul>
+          <li>Organisation : skills/, agents/, hooks/, commands/</li>
+          <li>Partage entre equipes et projets</li>
+          <li>Marketplace de plugins communautaires</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== NIVEAU 1 - CHAT ===================== -->
+<div class="level-bg-1" id="level-1">
+<section class="section">
+  <div class="level-header fade-in">
+    <span class="level-pill bg-1">Niveau 1</span>
+    <h2>Claude Chat</h2>
+    <p>Les bases solides. Decouvre l'interface, les modeles, et les techniques de prompt qui changent tout.</p>
+  </div>
+  <div class="module-progress"><div class="module-progress-fill" data-mod="1" style="background:var(--blue);"></div></div>
+
+  <div class="accordion-list">
+
+    <!-- ETAPE 1 -->
+    <div class="accordion-item fade-in" data-step="1" data-mod="1">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="accordion-num bg-1">1</div>
+        <div class="accordion-title">Premiers pas et choix du modele</div>
+        <span class="accordion-duration">30 min</span>
+        <svg class="accordion-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+      </div>
+      <div class="accordion-body"><div class="accordion-content">
+        <div class="acc-block">
+          <div class="acc-block-title lc-1">Objectif</div>
+          <p class="acc-objective">Maitriser l'interface Claude et comprendre quand utiliser Sonnet, Opus ou Extended Thinking.</p>
+        </div>
+        <div class="acc-block">
+          <div class="acc-block-title lc-1">A faire (pas a pas)</div>
+          <ul class="acc-checklist" data-step="1">
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Va sur claude.ai et connecte-toi avec ton email Synapse</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Cree un nouveau chat. Observe l'interface : historique a gauche, zone de chat au centre</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Clique sur le selecteur de modele. 3 options : Sonnet (rapide), Opus (profond), Extended Thinking (raisonnement visible)</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Tape la question ci-dessous avec chaque modele et compare les reponses</span></li>
+          </ul>
+        </div>
+
+        <div class="svg-diagram">
+          <svg width="720" height="220" viewBox="0 0 720 220" fill="none" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,-apple-system,Arial,sans-serif;">
+            <rect x="10" y="10" width="220" height="200" rx="14" fill="rgba(0,160,255,0.06)" stroke="rgba(0,160,255,0.25)" stroke-width="1.5"/>
+            <circle cx="120" cy="50" r="22" fill="rgba(0,160,255,0.12)" stroke="#00A0FF" stroke-width="2"/>
+            <text x="120" y="55" text-anchor="middle" fill="#00A0FF" font-size="16">&#9889;</text>
+            <text x="120" y="90" text-anchor="middle" fill="#223439" font-weight="700" font-size="16">Sonnet</text>
+            <text x="120" y="112" text-anchor="middle" fill="#6E7881" font-size="11">Questions du quotidien</text>
+            <text x="120" y="130" text-anchor="middle" fill="#6E7881" font-size="11">Reponse en ~15 sec</text>
+            <rect x="50" y="165" width="140" height="28" rx="14" fill="rgba(0,160,255,0.1)"/>
+            <text x="120" y="184" text-anchor="middle" fill="#00A0FF" font-weight="600" font-size="11">Ton modele par defaut</text>
+            <rect x="250" y="10" width="220" height="200" rx="14" fill="rgba(188,45,255,0.06)" stroke="rgba(188,45,255,0.25)" stroke-width="1.5"/>
+            <circle cx="360" cy="50" r="22" fill="rgba(188,45,255,0.12)" stroke="#BC2DFF" stroke-width="2"/>
+            <text x="360" y="55" text-anchor="middle" fill="#BC2DFF" font-size="16">&#128300;</text>
+            <text x="360" y="90" text-anchor="middle" fill="#223439" font-weight="700" font-size="16">Opus</text>
+            <text x="360" y="112" text-anchor="middle" fill="#6E7881" font-size="11">Analyse complexe</text>
+            <text x="360" y="130" text-anchor="middle" fill="#6E7881" font-size="11">Nuances et contexte juridique</text>
+            <rect x="290" y="165" width="140" height="28" rx="14" fill="rgba(188,45,255,0.1)"/>
+            <text x="360" y="184" text-anchor="middle" fill="#BC2DFF" font-weight="600" font-size="11">Strategie, juridique</text>
+            <rect x="490" y="10" width="220" height="200" rx="14" fill="rgba(255,0,153,0.06)" stroke="rgba(255,0,153,0.25)" stroke-width="1.5"/>
+            <circle cx="600" cy="50" r="22" fill="rgba(255,0,153,0.12)" stroke="#FF0099" stroke-width="2"/>
+            <text x="600" y="55" text-anchor="middle" fill="#FF0099" font-size="16">&#129504;</text>
+            <text x="600" y="90" text-anchor="middle" fill="#223439" font-weight="700" font-size="16">Extended Thinking</text>
+            <text x="600" y="112" text-anchor="middle" fill="#6E7881" font-size="11">Raisonnement etape par etape</text>
+            <text x="600" y="130" text-anchor="middle" fill="#6E7881" font-size="11">Tu vois "comment" il pense</text>
+            <rect x="530" y="165" width="140" height="28" rx="14" fill="rgba(255,0,153,0.1)"/>
+            <text x="600" y="184" text-anchor="middle" fill="#FF0099" font-weight="600" font-size="11">Debug, audit, maths</text>
+          </svg>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-body">Analyse les avantages et inconvenients du teletravail total pour une entreprise tech de 90 personnes en France, sous convention Syntec.</div>
+        </div>
+
+        <div class="result-block">
+          <div class="result-block-header"><span class="result-block-label">Resultat attendu</span></div>
+          <div class="result-block-body">
+            <strong>Sonnet</strong> repond en ~15 sec avec une liste structuree.<br>
+            <strong>Opus</strong> repond en ~45 sec avec plus de nuances et du contexte juridique Syntec.<br>
+            <strong>Extended Thinking</strong> montre son raisonnement etape par etape avant de repondre.
+          </div>
+        </div>
+
+        <div class="pole-example-block">
+          <div class="acc-block-title lc-1">Exemple pour ton pole</div>
+          <div class="pole-example-item" data-pole="tech">Tech : "Explique-moi les trade-offs entre REST et gRPC pour notre API medicamenteuse"</div>
+          <div class="pole-example-item" data-pole="revenue">Revenue : "Resume les points de negociation cles de cette proposition de partenariat hospitalier"</div>
+          <div class="pole-example-item" data-pole="qara">Qara : "Compare les exigences ISO 13485 et ISO 27001 pour un SaaS medical"</div>
+          <div class="pole-example-item" data-pole="product">Product : "Analyse cette user story et identifie les edge cases manquants"</div>
+          <div class="pole-example-item" data-pole="medical">Medical : "Synthetise les recommandations HAS sur les interactions medicamenteuses"</div>
+          <div class="pole-example-item" data-pole="ga">G&A : "Compare les implications CDD vs interim pour un remplacement de 6 mois sous Syntec"</div>
+        </div>
+
+        <div class="callout callout-tip"><strong>Astuce</strong> - Par defaut, utilise Sonnet pour les questions rapides. Passe a Opus pour la profondeur (analyse juridique, strategie). Extended Thinking quand tu veux comprendre le raisonnement.</div>
+
+        <div class="callout-exercise-wrap">
+          <div class="acc-block-title" style="color:var(--grad-start);">Exercice</div>
+          <p style="font-size:0.9rem;">Pose une question liee a ton activite reelle. Teste les trois modeles avec la meme question. Note les differences.</p>
+          <div class="exercise-actions">
+            <button class="btn-validate bg-1" onclick="validateExercise(this, 1)">Termine</button>
+            <button class="btn-cancel" onclick="cancelExercise(this, 1)">Annuler</button>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- ETAPE 2 -->
+    <div class="accordion-item fade-in" data-step="2" data-mod="1">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="accordion-num bg-1">2</div>
+        <div class="accordion-title">Prompt design - La technique AskUserQuestion</div>
+        <span class="accordion-duration">30 min</span>
+        <svg class="accordion-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+      </div>
+      <div class="accordion-body"><div class="accordion-content">
+        <div class="acc-block">
+          <div class="acc-block-title lc-1">Objectif</div>
+          <p class="acc-objective">Apprendre la technique la plus puissante : ne PAS tout donner, mais demander a Claude de te poser des questions via AskUserQuestion. Ca produit un meilleur resultat ET ca consomme moins de tokens.</p>
+        </div>
+        <div class="acc-block">
+          <div class="acc-block-title lc-1">A faire (pas a pas)</div>
+          <ul class="acc-checklist" data-step="2">
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Tape un prompt vague "Fais-moi un reporting" et observe le resultat generique</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Maintenant ajoute "Utilise AskUserQuestion pour me poser les bonnes questions avant de commencer" et compare</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Teste la technique du role : "Tu es un consultant senior en strategie..."</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Decouvre les instructions systeme : en bas a gauche de l'interface Claude, clique sur ton compte, puis Parametres > General. Tu y trouves un champ "Instructions pour Claude" - c'est la que tu peux configurer des preferences permanentes.</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Applique le prompt ci-dessous sur une tache reelle de cette semaine</span></li>
+          </ul>
+        </div>
+
+        <!-- SVG mockup Settings -->
+        <div class="mockup-container" style="max-width:500px;">
+          <div class="mockup-titlebar">
+            <div class="mockup-dot red"></div><div class="mockup-dot yellow"></div><div class="mockup-dot green"></div>
+            <span style="font-size:0.75rem;color:#666;margin-left:0.5rem;">Parametres</span>
+          </div>
+          <div class="mockup-body" style="display:flex;gap:1rem;padding:0.75rem;">
+            <div style="width:120px;border-right:1px solid #eee;padding-right:0.75rem;font-size:0.72rem;">
+              <div style="padding:4px 8px;border-radius:6px;background:rgba(0,160,255,0.08);color:var(--blue);font-weight:600;margin-bottom:2px;">General</div>
+              <div style="padding:4px 8px;color:#999;">Compte</div>
+              <div style="padding:4px 8px;color:#999;">Utilisation</div>
+              <div style="padding:4px 8px;color:#999;">Capacites</div>
+              <div style="padding:4px 8px;color:#999;">Connecteurs</div>
+              <div style="padding:4px 8px;color:#999;">Claude Code</div>
+              <div style="padding:4px 8px;color:#999;">Cowork</div>
+            </div>
+            <div style="flex:1;font-size:0.72rem;">
+              <div style="font-weight:700;margin-bottom:0.5rem;">Profil</div>
+              <div style="color:#999;margin-bottom:0.75rem;">Nom complet, avatar, description du travail</div>
+              <div style="font-weight:700;margin-bottom:0.3rem;">Instructions pour Claude</div>
+              <div style="padding:0.5rem;border:1.5px solid var(--blue);border-radius:6px;background:rgba(0,160,255,0.03);color:#999;font-style:italic;">Tes instructions permanentes ici...</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-body">Je dois preparer [type de livrable] pour [audience]. Utilise AskUserQuestion pour me poser toutes les questions necessaires avant de commencer. Ne produis rien tant que tu n'as pas assez de contexte.</div>
+        </div>
+
+        <div class="result-block">
+          <div class="result-block-header"><span class="result-block-label">Resultat attendu</span></div>
+          <div class="result-block-body">Claude te pose 5-8 questions ciblees via un formulaire structure : perimetre, periode, KPIs, public cible, format. Apres tes reponses, il produit un livrable 10x meilleur que sans questions.</div>
+        </div>
+
+        <div class="pole-example-block">
+          <div class="acc-block-title lc-1">Exemple pour ton pole</div>
+          <div class="pole-example-item" data-pole="tech">"Je dois ecrire une RFC pour migrer notre auth de JWT vers OAuth2. Utilise AskUserQuestion."</div>
+          <div class="pole-example-item" data-pole="revenue">"Je dois repondre a un appel d'offres hospitalier. Utilise AskUserQuestion pour cadrer."</div>
+          <div class="pole-example-item" data-pole="qara">"Je dois preparer un audit interne qualite. Utilise AskUserQuestion avant de structurer."</div>
+          <div class="pole-example-item" data-pole="product">"Je dois preparer un go/no-go pour le lancement de la feature X. AskUserQuestion."</div>
+          <div class="pole-example-item" data-pole="medical">"Je dois synthetiser une revue de litterature sur les interactions. AskUserQuestion."</div>
+          <div class="pole-example-item" data-pole="ga">"Je dois preparer la revue salariale annuelle. AskUserQuestion pour cadrer l'exercice."</div>
+        </div>
+
+        <div class="callout callout-tip"><strong>Astuce</strong> - AskUserQuestion consomme moins de tokens qu'un long prompt initial car Claude ne genere pas de contenu inutile. Il pose des questions ciblees, tu reponds, et le livrable est produit en un seul passage.</div>
+        <div class="callout callout-remember"><strong>A retenir</strong> - Donne le contexte et l'objectif. Laisse Claude structurer l'approche via AskUserQuestion. C'est la difference entre un chatbot et un assistant.</div>
+
+        <div class="callout-exercise-wrap">
+          <div class="acc-block-title" style="color:var(--grad-start);">Exercice</div>
+          <p style="font-size:0.9rem;">Prends une tache reelle de cette semaine. Formule-la en une phrase + "Utilise AskUserQuestion". Compare avec un prompt classique.</p>
+          <div class="exercise-actions">
+            <button class="btn-validate bg-1" onclick="validateExercise(this, 2)">Termine</button>
+            <button class="btn-cancel" onclick="cancelExercise(this, 2)">Annuler</button>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- ETAPE 3 -->
+    <div class="accordion-item fade-in" data-step="3" data-mod="1">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="accordion-num bg-1">3</div>
+        <div class="accordion-title">Artifacts et Projects</div>
+        <span class="accordion-duration">45 min</span>
+        <svg class="accordion-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+      </div>
+      <div class="accordion-body"><div class="accordion-content">
+        <div class="acc-block">
+          <div class="acc-block-title lc-1">Objectif</div>
+          <p class="acc-objective">Comprendre les Artifacts (documents vivants modifiables en conversation) et les Projects (contexte persistant entre sessions) dans Claude Chat.</p>
+        </div>
+
+        <div class="callout callout-tip" style="margin-bottom:1.2rem;">
+          <strong>C'est quoi un Artifact ?</strong> - Un artifact, c'est un document que Claude cree dans un panneau a droite de la conversation : tableau, texte structure, code, diagramme... Tu peux le modifier en discutant ("ajoute une colonne", "change le titre"), le telecharger, ou le copier. C'est un livrable vivant, pas un simple message.
+        </div>
+
+        <div class="acc-block">
+          <div class="acc-block-title lc-1">A faire (pas a pas)</div>
+          <ul class="acc-checklist" data-step="3">
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Demande a Claude de creer un artifact : "Cree un tableau de suivi projet avec objectifs, avancement, risques"</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Modifie l'artifact en conversation : "Ajoute une colonne Impact" - observe la mise a jour en direct</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Cree un Project : clique sur "Projects" dans la sidebar gauche, donne un nom</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Ajoute 2-3 documents de contexte au Project (glisse-depose tes fichiers)</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Pose une question dans le Project et observe comment Claude utilise le contexte</span></li>
+          </ul>
+        </div>
+
+        <div class="callout callout-remember" style="margin-bottom:1.2rem;">
+          <strong>Projects Chat vs Projects Cowork</strong> - Attention, il y a deux types de Projects. Les <strong>Projects Chat</strong> (claude.ai) permettent d'uploader des documents et de garder du contexte entre les conversations. Les <strong>Projects Cowork</strong> (app desktop, qu'on verra au Niveau 2) pointent vers un dossier de ton disque et permettent a Claude de lire/ecrire des fichiers. Ce sont deux choses differentes. Les connecteurs configures dans Chat (Google Drive, etc.) ne sont pas automatiquement lies a Cowork.
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-body">Cree un tableau de bord projet avec : objectifs du trimestre, avancement par chantier (%), risques identifies, actions a prendre. Format : tableau structure avec code couleur.</div>
+        </div>
+
+        <div class="result-block">
+          <div class="result-block-header"><span class="result-block-label">Resultat attendu</span></div>
+          <div class="result-block-body">Un artifact interactif avec un vrai tableau, modifiable en conversation. Tu peux ajouter des colonnes, changer des valeurs, reformater - tout en discutant.</div>
+        </div>
+
+        <div class="pole-example-block">
+          <div class="acc-block-title lc-1">Exemple pour ton pole</div>
+          <div class="pole-example-item" data-pole="tech">Project "Refacto API" avec la spec technique et le schema de base de donnees</div>
+          <div class="pole-example-item" data-pole="revenue">Project "Compte CHU Bordeaux" avec l'historique des echanges et la proposition</div>
+          <div class="pole-example-item" data-pole="qara">Project "Audit ISO 13485" avec les documents de conformite et le plan d'audit</div>
+          <div class="pole-example-item" data-pole="product">Project "Roadmap Q3" avec le backlog et les feedbacks utilisateurs</div>
+          <div class="pole-example-item" data-pole="medical">Project "Revue interactions" avec les publications et les donnees Theriaque</div>
+          <div class="pole-example-item" data-pole="ga">Project "Recrutement Data Engineer" avec la fiche de poste et la grille d'entretien</div>
+        </div>
+
+        <div class="callout callout-tip"><strong>Astuce</strong> - Un Project bien alimente, c'est deja 50% du chemin vers un Claude personnalise. C'est le precurseur de l'arborescence Cowork qu'on verra au Niveau 2.</div>
+
+        <div class="callout-exercise-wrap">
+          <div class="acc-block-title" style="color:var(--grad-start);">Exercice</div>
+          <p style="font-size:0.9rem;">Cree un Project pour un de tes chantiers en cours. Ajoute 2-3 documents. Pose une question et observe comment Claude utilise le contexte.</p>
+          <div class="exercise-actions">
+            <button class="btn-validate bg-1" onclick="validateExercise(this, 3)">Termine</button>
+            <button class="btn-cancel" onclick="cancelExercise(this, 3)">Annuler</button>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+  </div>
+</section>
+</div>
+
+<!-- ===================== NIVEAU 2 - COWORK + PARAMETRAGE ===================== -->
+<div class="level-bg-2" id="level-2">
+<section class="section">
+  <div class="level-header fade-in">
+    <span class="level-pill bg-2">Niveau 2</span>
+    <h2>Cowork + Parametrage</h2>
+    <p>Installe l'app desktop, connecte tes outils, et construis ton espace de travail Claude personnalise.</p>
+  </div>
+  <div class="module-progress"><div class="module-progress-fill" data-mod="2" style="background:var(--violet);"></div></div>
+
+  <div class="accordion-list">
+
+    <!-- ETAPE 4 -->
+    <div class="accordion-item fade-in" data-step="4" data-mod="2">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="accordion-num bg-2">4</div>
+        <div class="accordion-title">Installer Cowork et decouvrir l'interface</div>
+        <span class="accordion-duration">30 min</span>
+        <svg class="accordion-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+      </div>
+      <div class="accordion-body"><div class="accordion-content">
+        <div class="acc-block">
+          <div class="acc-block-title lc-2">Objectif</div>
+          <p class="acc-objective">Passer du chat web a l'app desktop. Claude peut maintenant lire et ecrire directement dans tes dossiers.</p>
+        </div>
+        <div class="acc-block">
+          <div class="acc-block-title lc-2">A faire (pas a pas)</div>
+          <ul class="acc-checklist" data-step="4">
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Telecharge l'app desktop Claude depuis claude.ai/download</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Installe et connecte-toi avec ton email Synapse</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Tu vois deux onglets en haut : "Cowork" et un onglet "Code" (&lt;/&gt;). Cowork a une interface plus visuelle et conviviale. Code est le mode terminal, plus brut mais plus stable. Les deux accedent aux memes fichiers.</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Reste sur l'onglet Cowork pour commencer. Il fait tout ce dont tu as besoin.</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Pour connecter un dossier : regarde juste au-dessus de la zone de conversation, tu vois le chemin du dossier actuel. Clique sur l'icone "+" a cote pour ajouter un dossier de travail.</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Selectionne un dossier de projet en cours (un dossier precis, pas tout ton disque !)</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Teste : "Lis les fichiers dans ce dossier et donne-moi un inventaire"</span></li>
+          </ul>
+        </div>
+
+        <!-- SVG mockup - folder addition -->
+        <div class="mockup-container" style="max-width:500px;">
+          <div class="mockup-body" style="padding:0.5rem 1rem;display:flex;align-items:center;gap:0.5rem;font-size:0.78rem;">
+            <span style="padding:3px 10px;border-radius:6px;background:#f5f5f5;color:#666;">Local</span>
+            <span style="color:#ddd;">></span>
+            <span style="padding:3px 10px;border-radius:6px;background:#f5f5f5;color:#666;">Claude-Work</span>
+            <span style="width:24px;height:24px;border-radius:50%;background:var(--violet);color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.85rem;font-weight:700;cursor:pointer;">+</span>
+            <span style="font-size:0.7rem;color:var(--violet);font-weight:600;">&#8592; Ajouter un dossier ici</span>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-body">Lis tous les fichiers dans ce dossier. Pour chaque fichier, donne-moi : nom, type, et un resume en 1 phrase de ce qu'il contient.</div>
+        </div>
+
+        <div class="result-block">
+          <div class="result-block-header"><span class="result-block-label">Resultat attendu</span></div>
+          <div class="result-block-body">Claude lit tes fichiers reels et produit un inventaire structure. Il supporte .docx, .xlsx, .pdf, .pptx, .csv et bien d'autres.</div>
+        </div>
+
+        <div class="callout callout-tip"><strong>Astuce</strong> - Cowork lit les fichiers a la demande, il ne les charge pas tous en memoire. Tu peux pointer vers un dossier volumineux sans risque. Si Cowork est instable, bascule sur l'onglet Code - c'est le meme moteur, juste l'interface qui change.</div>
+        <div class="callout callout-remember"><strong>A retenir</strong> - Cowork = plus de copier-coller. Claude lit et ecrit directement dans tes dossiers. C'est le game changer pour les non-devs.</div>
+
+        <div class="callout-exercise-wrap">
+          <div class="acc-block-title" style="color:var(--grad-start);">Exercice</div>
+          <p style="font-size:0.9rem;">Connecte un dossier de projet en cours. Demande a Claude de lire un fichier et d'en extraire les points cles.</p>
+          <div class="exercise-actions">
+            <button class="btn-validate bg-2" onclick="validateExercise(this, 4)">Termine</button>
+            <button class="btn-cancel" onclick="cancelExercise(this, 4)">Annuler</button>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- ETAPE 5 -->
+    <div class="accordion-item fade-in" data-step="5" data-mod="2">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="accordion-num bg-2">5</div>
+        <div class="accordion-title">Connecteurs et plugins</div>
+        <span class="accordion-duration">45 min</span>
+        <svg class="accordion-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+      </div>
+      <div class="accordion-body"><div class="accordion-content">
+        <div class="acc-block">
+          <div class="acc-block-title lc-2">Objectif</div>
+          <p class="acc-objective">Connecter tes outils du quotidien (Slack, Notion, Gmail, Calendar) pour que Claude puisse y acceder directement.</p>
+        </div>
+        <div class="acc-block">
+          <div class="acc-block-title lc-2">A faire (pas a pas)</div>
+          <ul class="acc-checklist" data-step="5">
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Dans la sidebar gauche de Cowork, clique sur "Customize"</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Tu arrives sur l'ecran "Personnaliser Claude" avec 3 options : Connecteurs, Competences, Plugins</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Clique sur "Connecteurs" (icone en haut a gauche)</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Connecte les essentiels Synapse : Slack, Notion, Gmail, Google Calendar, Google Drive</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Pour chaque connecteur, verifie les autorisations : "Outils en lecture seule" (Toujours autoriser) vs "Outils d'ecriture/suppression" (Necessite une approbation)</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Note les plugins Bureau disponibles : Claude in Chrome, PowerPoint, Word, PDF Tools - on les detaillera a l'etape 9</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Teste : demande a Claude de lire tes derniers messages Slack ou tes prochains events Calendar</span></li>
+          </ul>
+        </div>
+
+        <!-- SVG mockup - Customize panel -->
+        <div class="mockup-container" style="max-width:550px;">
+          <div class="mockup-titlebar">
+            <div class="mockup-dot red"></div><div class="mockup-dot yellow"></div><div class="mockup-dot green"></div>
+            <span style="font-size:0.75rem;color:#666;margin-left:0.5rem;">Customize</span>
+          </div>
+          <div class="mockup-body" style="display:flex;gap:1rem;">
+            <div style="width:40px;border-right:1px solid #eee;display:flex;flex-direction:column;align-items:center;gap:0.5rem;padding:0.5rem 0;">
+              <div style="width:24px;height:24px;border-radius:6px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;font-size:0.7rem;">&#128196;</div>
+              <div style="width:24px;height:24px;border-radius:6px;background:var(--violet);display:flex;align-items:center;justify-content:center;font-size:0.7rem;color:#fff;">&#128268;</div>
+              <div style="width:24px;height:24px;border-radius:6px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;font-size:0.7rem;">&#9881;</div>
+            </div>
+            <div style="flex:1;">
+              <div style="font-weight:700;font-size:0.82rem;margin-bottom:0.75rem;">Connecteurs</div>
+              <div style="font-size:0.72rem;color:#999;margin-bottom:0.5rem;">Web</div>
+              <div style="display:flex;flex-wrap:wrap;gap:0.3rem;margin-bottom:0.5rem;">
+                <span style="padding:3px 8px;border-radius:4px;background:rgba(188,45,255,0.08);font-size:0.7rem;font-weight:600;color:var(--violet);">Gmail</span>
+                <span style="padding:3px 8px;border-radius:4px;background:rgba(0,160,255,0.08);font-size:0.7rem;font-weight:600;color:var(--blue);">Google Calendar</span>
+                <span style="padding:3px 8px;border-radius:4px;background:rgba(34,201,171,0.08);font-size:0.7rem;font-weight:600;color:var(--teal);">Google Drive</span>
+                <span style="padding:3px 8px;border-radius:4px;background:rgba(255,0,153,0.08);font-size:0.7rem;font-weight:600;color:var(--magenta);">Notion</span>
+                <span style="padding:3px 8px;border-radius:4px;background:rgba(0,49,255,0.08);font-size:0.7rem;font-weight:600;color:var(--blue-dark);">Slack</span>
+              </div>
+              <div style="font-size:0.72rem;color:#999;margin-bottom:0.5rem;">Bureau</div>
+              <div style="display:flex;flex-wrap:wrap;gap:0.3rem;">
+                <span style="padding:3px 8px;border-radius:4px;background:#f5f5f5;font-size:0.7rem;color:#666;">Claude in Chrome</span>
+                <span style="padding:3px 8px;border-radius:4px;background:#f5f5f5;font-size:0.7rem;color:#666;">PowerPoint</span>
+                <span style="padding:3px 8px;border-radius:4px;background:#f5f5f5;font-size:0.7rem;color:#666;">Word</span>
+                <span style="padding:3px 8px;border-radius:4px;background:#f5f5f5;font-size:0.7rem;color:#666;">PDF Tools</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout callout-tip"><strong>Securite</strong> - Par defaut, les outils de lecture (lire tes emails, ton agenda) sont en "Toujours autoriser". Les outils d'ecriture (envoyer un email, modifier un doc) necessitent ton approbation a chaque fois. C'est le bon reglage. Ne passe PAS les outils d'ecriture en "Toujours autoriser".</div>
+
+        <div class="prompt-block">
+          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-body">Lis mes 5 prochains evenements Google Calendar et mes 10 derniers messages Slack sur #general. Resume ce qui m'attend cette semaine.</div>
+        </div>
+
+        <div class="result-block">
+          <div class="result-block-header"><span class="result-block-label">Resultat attendu</span></div>
+          <div class="result-block-body">Claude accede directement a Slack et Calendar via les connecteurs (rapide, via API). Plus besoin de copier-coller entre les outils.</div>
+        </div>
+
+        <div class="callout callout-remember"><strong>A retenir</strong> - Les connecteurs transforment Claude d'un assistant qui lit tes fichiers en un assistant qui vit dans tes outils. Connecte Slack, Notion, Gmail et Calendar en priorite. Les connecteurs Bureau (Chrome, Word, PowerPoint, PDF) seront detailles a l'<strong>etape 9</strong>.</div>
+
+        <div class="callout-exercise-wrap">
+          <div class="acc-block-title" style="color:var(--grad-start);">Exercice</div>
+          <p style="font-size:0.9rem;">Connecte au moins 3 connecteurs (Slack, Gmail, Calendar). Teste chacun avec une question concrete.</p>
+          <div class="exercise-actions">
+            <button class="btn-validate bg-2" onclick="validateExercise(this, 5)">Termine</button>
+            <button class="btn-cancel" onclick="cancelExercise(this, 5)">Annuler</button>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- ETAPE 6 -->
+    <div class="accordion-item fade-in" data-step="6" data-mod="2">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="accordion-num bg-2">6</div>
+        <div class="accordion-title">Construire ton espace Claude-Work</div>
+        <span class="accordion-duration">60 min</span>
+        <svg class="accordion-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+      </div>
+      <div class="accordion-body"><div class="accordion-content">
+        <div class="acc-block">
+          <div class="acc-block-title lc-2">Objectif</div>
+          <p class="acc-objective">Creer l'arborescence qui transforme Claude d'un assistant generique en TON assistant. Remplir les fichiers de contexte pour qu'il te connaisse. Tester que tout fonctionne.</p>
+        </div>
+
+        <div class="callout callout-remember" style="margin-bottom:1.2rem;">
+          <strong>C'est quoi CLAUDE.md ?</strong> - C'est un fichier texte place a la racine de ton dossier de travail. Claude le lit automatiquement en premier a chaque nouvelle session. Il contient ton identite, tes regles, ton contexte. C'est l'equivalent de dire a un nouvel assistant "voila qui je suis et comment je travaille" - sauf que tu ne le dis qu'une fois.
+        </div>
+
+        <div class="acc-block">
+          <div class="acc-block-title lc-2">Prerequis - Prepare ces elements</div>
+          <ul class="acc-checklist" data-step="6">
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Ton profil LinkedIn (URL ou copier-coller)</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>3 a 5 messages (Slack, email) dont tu es satisfait du ton</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Tes meilleurs templates ou livrables types</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Le lien Notion ou wiki de ton equipe</span></li>
+          </ul>
+        </div>
+
+        <div class="acc-block">
+          <div class="acc-block-title lc-2">Phase 1 - Creer l'arborescence</div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-body">Cree l'arborescence suivante dans mon dossier Documents :
+Documents/Claude-Work/
+  .claude/
+    CLAUDE.md
+    skills/
+  ABOUT-ME/
+    about-me.md
+    my-rules.md
+    my-company.md
+  OUTPUTS/
+  TEMPLATES/</div>
+        </div>
+
+        <div class="acc-block">
+          <div class="acc-block-title lc-2">Phase 2 - Remplir about-me.md</div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-body">Voici mon profil LinkedIn [colle le lien ou le texte]. Tu peux aussi aller chercher mes infos sur Slack (bio, messages recents) ou sur notre Drive/Notion interne. Utilise AskUserQuestion pour me poser les questions complementaires. Puis cree un fichier about-me.md avec : mon identite, mon parcours (3-4 phrases), mon perimetre actuel, mes domaines d'expertise, les domaines ou j'attends de l'aide de Claude, et mes outils du quotidien.</div>
+        </div>
+
+        <div class="acc-block">
+          <div class="acc-block-title lc-2">Phase 3 - Remplir my-rules.md (LE PLUS IMPORTANT)</div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-body">Voici des messages que j'ai ecrits [colle 3-5 messages Slack, mails, ou docs]. Analyse mon style en profondeur puis cree my-rules.md avec ces sections :
+1. Regles fondamentales (demande avant d'agir, montre un plan, ne supprime rien sans accord)
+2. Facon de travailler (sois concis et pertinent par defaut, propose des options, si tu ne sais pas dis-le)
+3. Livrables (format selon contexte : Slack = court, mail = objet clair, Notion = structure)
+4. Patterns interdits - sois AGRESSIF, au moins 10 : pas de "C'est une excellente question", pas de "N'hesite pas", pas de reformulation de ma question, pas de disclaimer non demande, pas de transitions pompeuses, pas de tiret cadratin, pas de jargon inutile, pas de cours sur mon metier
+5. Integrite des donnees (ne jamais inventer ou completer une donnee source)</div>
+        </div>
+
+        <div class="acc-block">
+          <div class="acc-block-title lc-2">Phase 4 - Remplir my-company.md</div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-body">Je travaille chez [nom de ta boite]. Voici ma fiche de poste [colle-la ou donne le lien]. Utilise AskUserQuestion pour me poser les questions complementaires : mon equipe, mes objectifs, mes chantiers en cours, les outils internes, et ce qu'on dit NON en ce moment. Tu peux aussi aller chercher des infos sur Notion ou Slack pour completer. Confirme les infos trouvees avant de les integrer. Puis cree my-company.md.</div>
+        </div>
+
+        <div class="acc-block">
+          <div class="acc-block-title lc-2">Phase 5 - Generer CLAUDE.md et tester</div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-body">Lis les 3 fichiers ABOUT-ME/ et genere le CLAUDE.md : un resume executif de 40-60 lignes max qui pointe vers les fichiers de detail. Structure-le ainsi :
+1. Identite et contexte (2-3 lignes)
+2. Avant chaque tache - tableau des fichiers ABOUT-ME a lire selon le contexte
+3. Skills - tableau des skills disponibles (quand il y en aura)
+4. Regles cles - les 10 regles les plus importantes extraites de my-rules.md
+5. Catalogue des ressources - sections TEMPLATES/, OUTPUTS/, PROJECTS/ avec les fichiers cles et leur role
+6. Pages Notion et liens utiles</div>
+        </div>
+
+        <div class="acc-block">
+          <div class="acc-block-title lc-2">Voila ce que tu vas obtenir</div>
+        </div>
+        <div class="tree-container" style="margin-bottom:1.2rem;">
+          <div class="tree-line"><span class="tree-icon">&#128193;</span><span class="tree-name" style="color:#4DD7FF;">Documents/Claude-Work/</span><div class="tree-tooltip">Le dossier racine de ton espace Claude. Tout est organise ici.</div></div>
+          <div class="tree-line" style="padding-left:1.5rem;"><span class="tree-arrow">&#9500;&#9472;&#9472;</span><span class="tree-icon">&#128193;</span><span class="tree-name" style="color:#BC2DFF;">.claude/</span><div class="tree-tooltip">Configuration Claude : le CLAUDE.md (cerveau), les skills (recettes), et les settings.</div></div>
+          <div class="tree-line" style="padding-left:3rem;"><span class="tree-arrow">&#9500;&#9472;&#9472;</span><span class="tree-icon">&#128196;</span><span class="tree-name" style="color:#FF0099;">CLAUDE.md</span><div class="tree-tooltip">Le cerveau. Lu en premier a chaque session. Contient tes regles, ton contexte, et ton catalogue de ressources (skills, templates, outputs).</div></div>
+          <div class="tree-line" style="padding-left:3rem;"><span class="tree-arrow">&#9492;&#9472;&#9472;</span><span class="tree-icon">&#128193;</span><span class="tree-name" style="color:#FF0099;">skills/</span><div class="tree-tooltip">Tes taches recurrentes automatisees. Un sous-dossier par skill avec SKILL.md + exemples.</div></div>
+          <div class="tree-line" style="padding-left:1.5rem;"><span class="tree-arrow">&#9500;&#9472;&#9472;</span><span class="tree-icon">&#128193;</span><span class="tree-name" style="color:#22C9AB;">ABOUT-ME/</span><div class="tree-tooltip">Ton identite, tes regles, ta strategie. Les fichiers qui font de Claude TON assistant.</div></div>
+          <div class="tree-line" style="padding-left:3rem;"><span class="tree-arrow">&#9500;&#9472;&#9472;</span><span class="tree-icon">&#128196;</span><span class="tree-name" style="color:#6ee7b7;">about-me.md</span><div class="tree-tooltip">Ton poste, parcours, competences, outils.</div></div>
+          <div class="tree-line" style="padding-left:3rem;"><span class="tree-arrow">&#9500;&#9472;&#9472;</span><span class="tree-icon">&#128196;</span><span class="tree-name" style="color:#6ee7b7;">my-rules.md</span><div class="tree-tooltip">Ton ton, tes patterns interdits, tes formats preferes. LE fichier le plus important.</div></div>
+          <div class="tree-line" style="padding-left:3rem;"><span class="tree-arrow">&#9492;&#9472;&#9472;</span><span class="tree-icon">&#128196;</span><span class="tree-name" style="color:#6ee7b7;">my-company.md</span><div class="tree-tooltip">Ta boite, ton equipe, tes OKR, tes chantiers.</div></div>
+          <div class="tree-line" style="padding-left:1.5rem;"><span class="tree-arrow">&#9500;&#9472;&#9472;</span><span class="tree-icon">&#128193;</span><span class="tree-name" style="color:#FBBF24;">OUTPUTS/</span><div class="tree-tooltip">Livrables generes par Claude, ranges par projet.</div></div>
+          <div class="tree-line" style="padding-left:1.5rem;"><span class="tree-arrow">&#9492;&#9472;&#9472;</span><span class="tree-icon">&#128193;</span><span class="tree-name" style="color:#60a5fa;">TEMPLATES/</span><div class="tree-tooltip">Tes modeles de reference (.docx, .xlsx, .pptx).</div></div>
+        </div>
+
+        <div class="result-block">
+          <div class="result-block-header"><span class="result-block-label">Resultat attendu</span></div>
+          <div class="result-block-body">
+            Un espace Claude-Work complet avec 4 fichiers remplis a partir de TES vrais contenus. <strong>Test final</strong> : ferme la session, ouvre-en une nouvelle dans le dossier Claude-Work, tape "Qui suis-je ?" Claude doit repondre avec tes infos sans que tu les redonnes.
+          </div>
+        </div>
+
+        <div class="callout callout-tip"><strong>Regle d'or</strong> - Dans my-rules.md, ajoute toujours "Sois concis et pertinent par defaut. Developpe sur demande." Ca evite les reponses fleuve et force Claude a aller droit au point.</div>
+        <div class="callout callout-tip"><strong>Astuce</strong> - Rafraichis ton arborescence avec Claude une fois par semaine. Mets a jour my-company.md chaque trimestre (objectifs, chantiers). Ajoute une regle dans my-rules.md chaque fois que Claude fait un truc qui ne te convient pas.</div>
+        <div class="callout callout-remember"><strong>A retenir</strong> - 1h de setup = des centaines d'heures de meilleurs outputs. Le fichier my-rules.md est le plus important : c'est lui qui elimine le "ton Claude" generique.</div>
+
+        <div class="callout-exercise-wrap">
+          <div class="acc-block-title" style="color:var(--grad-start);">Exercice</div>
+          <p style="font-size:0.9rem;">Cree ton arborescence. Remplis les 4 fichiers. Teste avec "Qui suis-je ?" dans une nouvelle session.</p>
+          <div class="exercise-actions">
+            <button class="btn-validate bg-2" onclick="validateExercise(this, 6)">Termine</button>
+            <button class="btn-cancel" onclick="cancelExercise(this, 6)">Annuler</button>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+  </div>
+</section>
+</div>
+
+<!-- AVANT / APRES - STATIC -->
+<section class="section">
+  <h2 class="section-title fade-in" style="text-align:center;">Avant / Apres</h2>
+  <p class="section-subtitle fade-in" style="text-align:center;margin:0 auto 1rem;">La difference entre un Claude generique et un Claude configure.</p>
+  <div class="ba-static fade-in">
+    <div class="ba-side ba-left">
+      <div class="ba-label">Sans configuration</div>
+      <div class="ba-msg"><div class="ba-msg-user">Toi :</div><p>"Fais-moi un CR de la reunion produit"</p></div>
+      <div class="ba-msg"><div class="ba-msg-user">Claude :</div><div class="ba-msg-ai">"Bien sur ! Je serais ravi de vous aider. N'hesitez pas a me fournir les points discutes. Voici un template standard :<br>1. Participants<br>2. Ordre du jour<br>3. Decisions<br>N'hesitez pas !"</div></div>
+    </div>
+    <div class="ba-side ba-right">
+      <div class="ba-label">Avec ton arborescence</div>
+      <div class="ba-msg"><div class="ba-msg-user">Toi :</div><p>"Fais-moi un CR de la reunion produit"</p></div>
+      <div class="ba-msg"><div class="ba-msg-user">Claude :</div><div class="ba-msg-ai">"Je lis ta skill CR... Ok. Qui etait present ? Quelles decisions ? Actions et owners ?"<br><br><em style="font-size:0.82rem;opacity:0.6;">[Puis produit un CR dans ton format exact, range dans OUTPUTS/]</em></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- spacer removed - tree moved to step 6 -->
+
+<!-- ===================== NIVEAU 3 - SKILLS ===================== -->
+<div class="level-bg-3" id="level-3">
+<section class="section">
+  <div class="level-header fade-in">
+    <span class="level-pill bg-3">Niveau 3</span>
+    <h2>Skills & Automatisation</h2>
+    <p>Automatise tes taches recurrentes, programme des routines, et connecte les outils bureau.</p>
+  </div>
+  <div class="module-progress"><div class="module-progress-fill" data-mod="3" style="background:var(--magenta);"></div></div>
+
+  <div class="accordion-list">
+
+    <!-- ETAPE 7 -->
+    <div class="accordion-item fade-in" data-step="7" data-mod="3">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="accordion-num bg-3">7</div>
+        <div class="accordion-title">Creer ton premier Skill</div>
+        <span class="accordion-duration">60 min</span>
+        <svg class="accordion-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+      </div>
+      <div class="accordion-body"><div class="accordion-content">
+        <div class="acc-block">
+          <div class="acc-block-title lc-3">Objectif</div>
+          <p class="acc-objective">Automatiser une tache recurrente en creant un skill base sur tes vrais livrables. Un skill, c'est un mini-mode d'emploi que Claude lit quand tu lui demandes un type de tache precis.</p>
+        </div>
+
+        <div class="svg-diagram">
+          <svg width="700" height="100" viewBox="0 0 700 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,-apple-system,Arial,sans-serif;">
+            <rect x="5" y="20" width="90" height="50" rx="10" fill="rgba(255,0,153,0.08)" stroke="#FF0099" stroke-width="1.5"/>
+            <text x="50" y="42" text-anchor="middle" fill="#FF0099" font-weight="700" font-size="10">1. Identifier</text>
+            <text x="50" y="56" text-anchor="middle" fill="#6E7881" font-size="9">la tache</text>
+            <path d="M100 45 L118 45" stroke="#FF0099" stroke-width="1.5" marker-end="url(#arr-sk)"/>
+            <rect x="123" y="20" width="90" height="50" rx="10" fill="rgba(255,0,153,0.08)" stroke="#FF0099" stroke-width="1.5"/>
+            <text x="168" y="42" text-anchor="middle" fill="#FF0099" font-weight="700" font-size="10">2. Collecter</text>
+            <text x="168" y="56" text-anchor="middle" fill="#6E7881" font-size="9">tes vrais livrables</text>
+            <path d="M218 45 L236 45" stroke="#FF0099" stroke-width="1.5" marker-end="url(#arr-sk)"/>
+            <rect x="241" y="20" width="90" height="50" rx="10" fill="rgba(255,0,153,0.08)" stroke="#FF0099" stroke-width="1.5"/>
+            <text x="286" y="42" text-anchor="middle" fill="#FF0099" font-weight="700" font-size="10">3. Analyser</text>
+            <text x="286" y="56" text-anchor="middle" fill="#6E7881" font-size="9">les patterns</text>
+            <path d="M336 45 L354 45" stroke="#FF0099" stroke-width="1.5" marker-end="url(#arr-sk)"/>
+            <rect x="359" y="20" width="90" height="50" rx="10" fill="rgba(255,0,153,0.08)" stroke="#FF0099" stroke-width="1.5"/>
+            <text x="404" y="42" text-anchor="middle" fill="#FF0099" font-weight="700" font-size="10">4. Creer</text>
+            <text x="404" y="56" text-anchor="middle" fill="#6E7881" font-size="9">SKILL.md</text>
+            <path d="M454 45 L472 45" stroke="#FF0099" stroke-width="1.5" marker-end="url(#arr-sk)"/>
+            <rect x="477" y="20" width="90" height="50" rx="10" fill="rgba(255,0,153,0.12)" stroke="#FF0099" stroke-width="2"/>
+            <text x="522" y="42" text-anchor="middle" fill="#FF0099" font-weight="700" font-size="10">5. Tester</text>
+            <text x="522" y="56" text-anchor="middle" fill="#6E7881" font-size="9">et iterer</text>
+            <defs><marker id="arr-sk" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M0,0 L6,2.5 L0,5" fill="none" stroke="#FF0099" stroke-width="1"/></marker></defs>
+          </svg>
+        </div>
+
+        <div class="acc-block">
+          <div class="acc-block-title lc-3">A faire</div>
+          <ul class="acc-checklist" data-step="7">
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Identifie une tache que tu fais au moins 2x par mois</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Rassemble 2-3 exemples REELS de livrables finis (pas des templates vides)</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Demande a Claude d'analyser tes exemples et de creer le skill</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Teste le skill sur un cas reel</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Itere : ajuste le SKILL.md jusqu'a satisfaction</span></li>
+          </ul>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-body">Voici 2 comptes-rendus de reunion que j'ai rediges [colle-les]. Analyse le format, le ton, la structure. Cree une skill "CR de reunion" dans .claude/skills/cr-reunion/SKILL.md qui reproduit exactement mon style. Inclus : sections obligatoires, format des actions, niveau de detail.</div>
+        </div>
+
+        <div class="result-block">
+          <div class="result-block-header"><span class="result-block-label">Resultat attendu</span></div>
+          <div class="result-block-body">Un dossier .claude/skills/cr-reunion/ avec SKILL.md + tes exemples. Quand tu dis "fais-moi un CR", Claude produit dans TON format, range dans OUTPUTS/.</div>
+        </div>
+
+        <div class="pole-example-block">
+          <div class="acc-block-title lc-3">Exemple pour ton pole</div>
+          <div class="pole-example-item" data-pole="tech">Skill "RFC technique" ou "Code review summary" base sur tes vraies RFCs</div>
+          <div class="pole-example-item" data-pole="revenue">Skill "Note de synthese client" ou "Proposition commerciale" base sur tes vrais livrables</div>
+          <div class="pole-example-item" data-pole="qara">Skill "Rapport d'audit" ou "Non-conformite" base sur tes vrais rapports</div>
+          <div class="pole-example-item" data-pole="product">Skill "Spec fonctionnelle" ou "Go/No-go analysis" base sur tes vraies specs</div>
+          <div class="pole-example-item" data-pole="medical">Skill "Revue de litterature" ou "Avis pharmaceutique" base sur tes vrais avis</div>
+          <div class="pole-example-item" data-pole="ga">Skill "Note de cadrage" ou "Reporting mensuel" base sur tes vrais reportings</div>
+        </div>
+
+        <div class="callout callout-tip"><strong>Astuce</strong> - La qualite d'un skill depend a 80% de la qualite des sources. Un bon skill n'est pas une liste de regles abstraites - c'est une analyse profonde de tes vrais livrables.</div>
+
+        <div class="callout-exercise-wrap">
+          <div class="acc-block-title" style="color:var(--grad-start);">Exercice</div>
+          <p style="font-size:0.9rem;">Identifie ta tache la plus recurrente. Fournis 2-3 livrables finis. Cree le skill. Teste-le. Itere.</p>
+          <div class="exercise-actions">
+            <button class="btn-validate bg-3" onclick="validateExercise(this, 7)">Termine</button>
+            <button class="btn-cancel" onclick="cancelExercise(this, 7)">Annuler</button>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- ETAPE 8 -->
+    <div class="accordion-item fade-in" data-step="8" data-mod="3">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="accordion-num bg-3">8</div>
+        <div class="accordion-title">Taches programmees</div>
+        <span class="accordion-duration">40 min</span>
+        <svg class="accordion-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+      </div>
+      <div class="accordion-body"><div class="accordion-content">
+        <div class="acc-block">
+          <div class="acc-block-title lc-3">Objectif</div>
+          <p class="acc-objective">Programmer Claude pour executer des taches automatiquement, meme quand tu n'es pas la.</p>
+        </div>
+
+        <div class="acc-block">
+          <div class="acc-block-title lc-3">Les 3 types de taches programmees</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;margin-bottom:1rem;">
+            <div style="padding:0.75rem;border-radius:8px;background:rgba(255,0,153,0.04);border:1px solid rgba(255,0,153,0.12);font-size:0.8rem;">
+              <strong style="color:var(--magenta);">Routines</strong><br>
+              <span style="color:var(--text-secondary);">Infra Anthropic, 24/7. Tourne meme PC eteint. Ideal pour les recaps hebdo.</span>
+            </div>
+            <div style="padding:0.75rem;border-radius:8px;background:rgba(188,45,255,0.04);border:1px solid rgba(188,45,255,0.12);font-size:0.8rem;">
+              <strong style="color:var(--violet);">Taches desktop</strong><br>
+              <span style="color:var(--text-secondary);">Tourne en local sur ton Mac. Acces a tes fichiers. Necessite que l'app soit ouverte.</span>
+            </div>
+            <div style="padding:0.75rem;border-radius:8px;background:rgba(0,160,255,0.04);border:1px solid rgba(0,160,255,0.12);font-size:0.8rem;">
+              <strong style="color:var(--blue);">/loop</strong><br>
+              <span style="color:var(--text-secondary);">Repetition en session. Utile pour surveiller un processus ou iterer sur un fichier.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="acc-block">
+          <div class="acc-block-title lc-3">A faire</div>
+          <ul class="acc-checklist" data-step="8">
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Dans la sidebar Cowork, clique sur "Scheduled" pour voir les taches programmees</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Cree ta premiere routine avec le prompt ci-dessous</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Verifie le premier resultat et ajuste</span></li>
+          </ul>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-body">Programme une routine qui, chaque lundi a 9h, lit mes derniers echanges Slack et Notion de la semaine precedente et genere un resume de ce qui s'est passe : decisions prises, actions en cours, sujets en attente. Range le resultat dans OUTPUTS/recaps/.</div>
+        </div>
+
+        <div class="result-block">
+          <div class="result-block-header"><span class="result-block-label">Resultat attendu</span></div>
+          <div class="result-block-body">Un resume automatique de ta semaine, genere sans effort. Chaque lundi, tu trouves un recap pret a lire.</div>
+        </div>
+
+        <div class="callout callout-tip"><strong>Astuce</strong> - Commence par une tache simple et previsible. Les routines Anthropic tournent 24/7 sans que ton Mac soit allume. Les taches creatives marchent mieux en interactif.</div>
+
+        <div class="callout-exercise-wrap">
+          <div class="acc-block-title" style="color:var(--grad-start);">Exercice</div>
+          <p style="font-size:0.9rem;">Programme une tache qui te fait gagner 15 minutes par semaine. Verifie le resultat apres la premiere execution.</p>
+          <div class="exercise-actions">
+            <button class="btn-validate bg-3" onclick="validateExercise(this, 8)">Termine</button>
+            <button class="btn-cancel" onclick="cancelExercise(this, 8)">Annuler</button>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- ETAPE 9 -->
+    <div class="accordion-item fade-in" data-step="9" data-mod="3">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="accordion-num bg-3">9</div>
+        <div class="accordion-title">Connecteurs avances : Chrome, Word, PowerPoint</div>
+        <span class="accordion-duration">40 min</span>
+        <svg class="accordion-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+      </div>
+      <div class="accordion-body"><div class="accordion-content">
+        <div class="acc-block">
+          <div class="acc-block-title lc-3">Objectif</div>
+          <p class="acc-objective">Aller au-dela des connecteurs web. Claude peut piloter Chrome, creer des presentations PowerPoint, rediger dans Word, et manipuler des PDFs.</p>
+        </div>
+
+        <div class="acc-block">
+          <div class="acc-block-title lc-3">A faire</div>
+          <ul class="acc-checklist" data-step="9">
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Dans Customize > Connecteurs > Bureau, active "Claude in Chrome" (inclus par defaut)</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Installe l'extension Chrome "Claude in Chrome" depuis le Chrome Web Store</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Teste : "Ouvre mon Google Sheets de suivi et resume les donnees"</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Active le connecteur "PowerPoint (By Anthropic)" et teste : "Cree une presentation de 5 slides sur [sujet]"</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Active "Word (By Anthropic)" et teste : "Redige un document structure sur [sujet]"</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Explore "PDF Tools" pour remplir, signer, fusionner des PDFs</span></li>
+          </ul>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-body">Cree une presentation PowerPoint de 5 slides sur [sujet]. Utilise les couleurs Synapse (bleu #00A0FF, violet #BC2DFF). Slide 1 = titre, Slide 2 = contexte, Slide 3-4 = contenu principal, Slide 5 = next steps.</div>
+        </div>
+
+        <div class="result-block">
+          <div class="result-block-header"><span class="result-block-label">Resultat attendu</span></div>
+          <div class="result-block-body">Un fichier .pptx genere directement, ouvrable dans PowerPoint ou Google Slides. Claude peut aussi ouvrir et modifier des presentations existantes.</div>
+        </div>
+
+        <div class="callout callout-tip"><strong>Astuce</strong> - Claude in Chrome navigue sur le web pour toi (lecture d'articles, remplissage de formulaires). PowerPoint et Word creent des fichiers natifs que tu peux ouvrir et modifier normalement. Combine-les avec tes skills pour des workflows complets.</div>
+
+        <div class="callout-exercise-wrap">
+          <div class="acc-block-title" style="color:var(--grad-start);">Exercice</div>
+          <p style="font-size:0.9rem;">Active un connecteur Bureau et produis un livrable reel (presentation, document, ou PDF rempli).</p>
+          <div class="exercise-actions">
+            <button class="btn-validate bg-3" onclick="validateExercise(this, 9)">Termine</button>
+            <button class="btn-cancel" onclick="cancelExercise(this, 9)">Annuler</button>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+  </div>
+</section>
+</div>
+
+<!-- ===================== NIVEAU 4 - POWER USER ===================== -->
+<div class="level-bg-4" id="level-4">
+<section class="section">
+  <div class="level-header fade-in">
+    <span class="level-pill bg-4">Niveau 4</span>
+    <h2>Power User</h2>
+    <p>Ajoute des garde-fous automatiques et delegue a des sous-agents specialises.</p>
+  </div>
+  <div class="module-progress"><div class="module-progress-fill" data-mod="4" style="background:var(--teal);"></div></div>
+
+  <div class="accordion-list">
+
+    <!-- ETAPE 10 -->
+    <div class="accordion-item fade-in" data-step="10" data-mod="4">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="accordion-num bg-4">10</div>
+        <div class="accordion-title">Hooks - Garde-fous automatiques</div>
+        <span class="accordion-duration">40 min</span>
+        <svg class="accordion-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+      </div>
+      <div class="accordion-body"><div class="accordion-content">
+        <div class="acc-block">
+          <div class="acc-block-title lc-4">Objectif</div>
+          <p class="acc-objective">Mettre en place des regles automatiques qui s'executent avant ou apres les actions de Claude. Ce n'est pas de l'IA, c'est du code deterministe - comme des git hooks.</p>
+        </div>
+
+        <div class="callout callout-remember" style="margin-bottom:1.2rem;">
+          <strong>C'est quoi un hook ?</strong> - Un hook, c'est un script qui se declenche automatiquement quand un evenement se produit. Par exemple : "quand Claude attend mon input, envoie-moi une notification macOS". Ca se configure dans le fichier <code>.claude/settings.json</code> - un fichier de configuration technique qu'on n'avait pas encore touche.
+        </div>
+
+        <div class="svg-diagram">
+          <svg width="600" height="100" viewBox="0 0 600 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,-apple-system,Arial,sans-serif;">
+            <rect x="10" y="25" width="130" height="50" rx="12" fill="rgba(34,201,171,0.1)" stroke="#22C9AB" stroke-width="2"/>
+            <text x="75" y="48" text-anchor="middle" fill="#22C9AB" font-weight="700" font-size="12">Evenement</text>
+            <text x="75" y="62" text-anchor="middle" fill="#6E7881" font-size="9">Claude attend, ecrit...</text>
+            <path d="M145 50 L195 50" stroke="#22C9AB" stroke-width="2" marker-end="url(#arr-hk)"/>
+            <rect x="200" y="25" width="130" height="50" rx="12" fill="rgba(255,0,153,0.08)" stroke="#FF0099" stroke-width="2"/>
+            <text x="265" y="48" text-anchor="middle" fill="#FF0099" font-weight="700" font-size="12">Filtre</text>
+            <text x="265" y="62" text-anchor="middle" fill="#6E7881" font-size="9">Quel type d'action ?</text>
+            <path d="M335 50 L385 50" stroke="#FF0099" stroke-width="2" marker-end="url(#arr-hk2)"/>
+            <rect x="390" y="25" width="180" height="50" rx="12" fill="rgba(34,201,171,0.15)" stroke="#22C9AB" stroke-width="2"/>
+            <text x="480" y="48" text-anchor="middle" fill="#22C9AB" font-weight="700" font-size="12">Action automatique</text>
+            <text x="480" y="62" text-anchor="middle" fill="#6E7881" font-size="9">Notifier, valider, loguer</text>
+            <defs>
+              <marker id="arr-hk" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M0,0 L6,2.5 L0,5" fill="none" stroke="#22C9AB" stroke-width="1"/></marker>
+              <marker id="arr-hk2" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M0,0 L6,2.5 L0,5" fill="none" stroke="#FF0099" stroke-width="1"/></marker>
+            </defs>
+          </svg>
+        </div>
+
+        <div class="acc-block">
+          <div class="acc-block-title lc-4">A faire</div>
+          <ul class="acc-checklist" data-step="10">
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Comprends le principe : Evenement > Filtre > Action automatique</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Demande a Claude de creer ton premier hook avec le prompt ci-dessous</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Verifie que le fichier .claude/settings.json a ete cree</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Teste en lancant une tache et en attendant que Claude te notifie</span></li>
+          </ul>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-body">Cree un hook simple dans .claude/settings.json qui m'envoie une notification macOS quand tu attends mon input. Explique-moi ce que tu as fait.</div>
+        </div>
+
+        <div class="result-block">
+          <div class="result-block-header"><span class="result-block-label">Resultat attendu</span></div>
+          <div class="result-block-body">Un fichier .claude/settings.json avec un hook Notification fonctionnel. Tu recois une notification macOS chaque fois que Claude attend ton input.</div>
+        </div>
+
+        <div class="callout callout-tip"><strong>Astuce</strong> - Les hooks RENFORCENT les restrictions. Une instruction dans CLAUDE.md est une demande. Un hook est une application. Si une regle doit tenir a chaque fois, fais-en un hook. Pour les demandes complexes, tu peux aussi creer un hook /plan qui active le mode planification de Claude.</div>
+
+        <div class="callout-exercise-wrap">
+          <div class="acc-block-title" style="color:var(--grad-start);">Exercice</div>
+          <p style="font-size:0.9rem;">Cree un hook de notification. Teste qu'il fonctionne.</p>
+          <div class="exercise-actions">
+            <button class="btn-validate bg-4" onclick="validateExercise(this, 10)">Termine</button>
+            <button class="btn-cancel" onclick="cancelExercise(this, 10)">Annuler</button>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- ETAPE 11 -->
+    <div class="accordion-item fade-in" data-step="11" data-mod="4">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="accordion-num bg-4">11</div>
+        <div class="accordion-title">Subagents - Deleguer des sous-taches</div>
+        <span class="accordion-duration">50 min</span>
+        <svg class="accordion-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+      </div>
+      <div class="accordion-body"><div class="accordion-content">
+        <div class="acc-block">
+          <div class="acc-block-title lc-4">Objectif</div>
+          <p class="acc-objective">Deleguer a des sous-agents specialises avec leur propre contexte isole. Tu envoies une mission, tu recuperes le resultat resume.</p>
+        </div>
+
+        <div class="acc-block">
+          <div class="acc-block-title lc-4">A faire</div>
+          <ul class="acc-checklist" data-step="11">
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Comprends le concept : un subagent a sa propre fenetre de contexte. Il ne voit que ce que tu lui donnes.</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Teste le prompt ci-dessous avec deux documents reels</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Observe comment le contexte principal n'est pas pollue par les details</span></li>
+          </ul>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-body">Lance deux subagents en parallele. Le premier analyse le document A et extrait les KPIs. Le deuxieme analyse le document B et extrait les risques. Fusionne les resultats dans une note de synthese.</div>
+        </div>
+
+        <div class="result-block">
+          <div class="result-block-header"><span class="result-block-label">Resultat attendu</span></div>
+          <div class="result-block-body">Deux analyses en parallele, fusionnees en un seul livrable. Le contexte principal n'est pas pollue par les details.</div>
+        </div>
+
+        <div class="pole-example-block">
+          <div class="acc-block-title lc-4">Exemple pour ton pole</div>
+          <div class="pole-example-item" data-pole="tech">Subagent 1 analyse le code, Subagent 2 ecrit les tests</div>
+          <div class="pole-example-item" data-pole="revenue">Subagent 1 recherche le prospect, Subagent 2 redige l'email personnalise</div>
+          <div class="pole-example-item" data-pole="qara">Subagent 1 verifie la conformite, Subagent 2 redige le rapport d'ecart</div>
+          <div class="pole-example-item" data-pole="product">Subagent 1 analyse les feedbacks, Subagent 2 redige la spec</div>
+          <div class="pole-example-item" data-pole="medical">Subagent 1 analyse les publications, Subagent 2 synthetise les conclusions</div>
+          <div class="pole-example-item" data-pole="ga">Subagent 1 analyse le CV, Subagent 2 prepare les questions d'entretien</div>
+        </div>
+
+        <div class="callout callout-tip"><strong>Astuce</strong> - Utilise un subagent chaque fois qu'une tache secondaire risque d'inonder ta conversation. Le subagent lit 50 fichiers mais ne te renvoie que 10 lignes de conclusions.</div>
+
+        <div class="callout-exercise-wrap">
+          <div class="acc-block-title" style="color:var(--grad-start);">Exercice</div>
+          <p style="font-size:0.9rem;">Identifie une tache decomposable en 2 sous-taches. Lance un subagent pour chacune.</p>
+          <div class="exercise-actions">
+            <button class="btn-validate bg-4" onclick="validateExercise(this, 11)">Termine</button>
+            <button class="btn-cancel" onclick="cancelExercise(this, 11)">Annuler</button>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+  </div>
+</section>
+</div>
+
+<!-- ===================== NIVEAU 5 - ORCHESTRATION ===================== -->
+<div class="level-bg-5" id="level-5">
+<section class="section">
+  <div class="level-header fade-in">
+    <span class="level-pill bg-5">Niveau 5</span>
+    <h2>Orchestration</h2>
+    <p>Tu n'es plus l'operateur, tu es le chef d'orchestre.</p>
+  </div>
+  <div class="module-progress"><div class="module-progress-fill" data-mod="5" style="background:linear-gradient(90deg,var(--grad-start),var(--grad-end));"></div></div>
+
+  <div class="accordion-list">
+
+    <!-- ETAPE 12 -->
+    <div class="accordion-item fade-in" data-step="12" data-mod="5">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="accordion-num bg-5">12</div>
+        <div class="accordion-title">Agent Teams</div>
+        <span class="accordion-duration">60 min</span>
+        <svg class="accordion-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+      </div>
+      <div class="accordion-body"><div class="accordion-content">
+        <div class="acc-block">
+          <div class="acc-block-title" style="color:var(--grad-start);">Objectif</div>
+          <p class="acc-objective">Orchestrer des equipes d'agents qui travaillent en parallele avec communication bidirectionnelle.</p>
+        </div>
+
+        <div class="callout callout-remember" style="margin-bottom:1rem;">
+          <strong>Subagent vs Agent Team</strong> - Un subagent rapporte au principal (unidirectionnel). Un agent team = plusieurs agents qui communiquent entre eux (bidirectionnel). C'est la difference entre deleguer une tache et orchestrer une equipe.
+        </div>
+
+        <div class="acc-block">
+          <div class="acc-block-title" style="color:var(--grad-start);">A faire</div>
+          <ul class="acc-checklist" data-step="12">
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Concois un workflow multi-agent sur un cas concret de ton metier</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Lance 2-3 agents en parallele avec des roles clairs</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Orchestre la fusion des resultats</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Mesure le gain de temps vs execution sequentielle</span></li>
+          </ul>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-body">Je dois preparer une presentation complete sur [sujet]. Lance une equipe de 3 agents : Agent 1 = recherche et donnees. Agent 2 = redaction et structure. Agent 3 = mise en forme et visuels. Coordonne-les et fusionne le resultat.</div>
+        </div>
+
+        <div class="pole-example-block">
+          <div class="acc-block-title" style="color:var(--grad-start);">Exemple pour ton pole</div>
+          <div class="pole-example-item" data-pole="tech">Agent 1 ecrit les tests, Agent 2 refactore, Agent 3 met a jour la doc</div>
+          <div class="pole-example-item" data-pole="revenue">Veille concurrentielle > analyse > deck comparatif > recommandations</div>
+          <div class="pole-example-item" data-pole="qara">Revue documentaire > gap analysis > plan de remediation > rapport</div>
+          <div class="pole-example-item" data-pole="product">Research users > specs > maquettes > user stories</div>
+          <div class="pole-example-item" data-pole="medical">Revue litterature > extraction donnees > synthese > recommandations</div>
+          <div class="pole-example-item" data-pole="ga">Collecte donnees > reporting > analyse > presentation staff meeting</div>
+        </div>
+
+        <div class="callout callout-tip"><strong>Astuce</strong> - Le secret n'est pas le nombre d'agents mais la qualite du decoupage. Des taches reellement independantes = gain de temps. Des taches interdependantes = overhead de coordination.</div>
+
+        <div class="callout-exercise-wrap">
+          <div class="acc-block-title" style="color:var(--grad-start);">Exercice</div>
+          <p style="font-size:0.9rem;">Choisis un livrable qui te prend 2-3 heures. Decoupe en 3 sous-taches. Lance un agent par sous-tache.</p>
+          <div class="exercise-actions">
+            <button class="btn-validate bg-5" onclick="validateExercise(this, 12)">Termine</button>
+            <button class="btn-cancel" onclick="cancelExercise(this, 12)">Annuler</button>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- ETAPE 13 -->
+    <div class="accordion-item fade-in" data-step="13" data-mod="5">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="accordion-num bg-5">13</div>
+        <div class="accordion-title">Projet final - Workflow complet</div>
+        <span class="accordion-duration">90 min</span>
+        <svg class="accordion-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+      </div>
+      <div class="accordion-body"><div class="accordion-content">
+        <div class="acc-block">
+          <div class="acc-block-title" style="color:var(--grad-start);">Objectif</div>
+          <p class="acc-objective">Combiner tout ce que tu as appris dans un workflow de bout en bout qui divise ton temps par 3-5.</p>
+        </div>
+        <div class="acc-block">
+          <div class="acc-block-title" style="color:var(--grad-start);">A faire</div>
+          <ul class="acc-checklist" data-step="13">
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Choisis un livrable complexe qui te prend 4-6 heures</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Concois le workflow : skills, connecteurs, hooks, agents</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Execute le workflow complet</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Mesure le temps. Calcule le ROI : temps gagne x frequence x 52 = heures/an</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Documente le workflow pour l'AI Task Force</span></li>
+          </ul>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-body">J'ai un livrable complexe a produire : [description]. C'est une tache que je fais [frequence]. Aide-moi a concevoir un workflow optimal en utilisant skills, connecteurs et agents paralleles. Montre-moi le plan avant d'executer.</div>
+        </div>
+
+        <div class="result-block">
+          <div class="result-block-header"><span class="result-block-label">Resultat attendu</span></div>
+          <div class="result-block-body">Un workflow documente, reproductible, qui divise ton temps par 3-5 sur cette tache. Un ROI mesurable.</div>
+        </div>
+
+        <div class="pole-example-block">
+          <div class="acc-block-title" style="color:var(--grad-start);">Exemple pour ton pole</div>
+          <div class="pole-example-item" data-pole="tech">CI/CD review complet : analyse PR > RFC > tests > merge</div>
+          <div class="pole-example-item" data-pole="revenue">Reponse appel d'offres : analyse cahier des charges > redaction > relecture > soumission</div>
+          <div class="pole-example-item" data-pole="qara">Preparation audit : collecte preuves > gap analysis > plan d'actions > rapport</div>
+          <div class="pole-example-item" data-pole="product">Discovery to delivery : research > specs > maquettes > stories > tickets</div>
+          <div class="pole-example-item" data-pole="medical">Revue systematique : search > screening > extraction > synthese > publication</div>
+          <div class="pole-example-item" data-pole="ga">Preparation staff meeting : collecte data > analyse > deck > diffusion</div>
+        </div>
+
+        <div class="callout callout-tip"><strong>Astuce</strong> - Le ROI se mesure en heures gagnees PAR SEMAINE. Un workflow qui te fait gagner 2h sur une tache hebdomadaire = 100h/an. Partage tes workflows avec l'AI Task Force.</div>
+
+        <div class="callout-exercise-wrap">
+          <div class="acc-block-title" style="color:var(--grad-start);">Exercice</div>
+          <p style="font-size:0.9rem;">Construis ton workflow. Mesure le temps. Calcule le ROI annuel. Partage ton retour d'experience.</p>
+          <div class="exercise-actions">
+            <button class="btn-validate bg-5" onclick="validateExercise(this, 13)">Termine</button>
+            <button class="btn-cancel" onclick="cancelExercise(this, 13)">Annuler</button>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+  </div>
+</section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p style="font-weight:600;color:rgba(255,255,255,0.9);margin-bottom:0.5rem;">Synapse Medicine &middot; AI Task Force &middot; 2026</p>
+  <div class="footer-links">
+    <a href="https://www.notion.so/synapse-medicine/Working-with-AI-Synapse-3206bc097a95815fbf07ce2391454fa2" target="_blank">Working with AI @ Synapse</a>
+    <a href="https://docs.anthropic.com" target="_blank">Ressources Claude</a>
+  </div>
+  <button class="reset-link" onclick="if(confirm('Remettre ta progression a zero ?')){localStorage.removeItem('synapse-claude-guide');localStorage.removeItem('synapse-guide-pole');location.reload();}">Reinitialiser ma progression</button>
+</footer>
+
+<script>
+var STORAGE_KEY = 'synapse-claude-guide';
+var POLE_KEY = 'synapse-guide-pole';
+var TOTAL_STEPS = 13;
+var MODULE_STEPS = {1:[1,2,3], 2:[4,5,6], 3:[7,8,9], 4:[10,11], 5:[12,13]};
+var progress = {};
+try { progress = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch(e) { progress = {}; }
+
+// POLE SELECTION
+var currentPole = localStorage.getItem(POLE_KEY) || '';
+function selectPole(pole) {
+  currentPole = pole;
+  localStorage.setItem(POLE_KEY, pole);
+  document.querySelectorAll('.pole-btn').forEach(function(b) {
+    b.classList.toggle('active', b.dataset.pole === pole);
+  });
+  document.getElementById('pole-header-btn').textContent = pole.charAt(0).toUpperCase() + pole.slice(1);
+  // Show/hide pole examples
+  document.querySelectorAll('.pole-example-item').forEach(function(el) {
+    el.style.display = (el.dataset.pole === pole) ? 'block' : 'none';
+  });
+}
+if (currentPole) { setTimeout(function() { selectPole(currentPole); }, 50); }
+else {
+  // Show all by default
+  document.querySelectorAll('.pole-example-item').forEach(function(el) { el.style.display = 'none'; });
+}
+
+// PROGRESS BAR
+var progressBar = document.getElementById('progress-bar');
+function updateScrollProgress() {
+  var h = document.documentElement;
+  var scrollTop = h.scrollTop || document.body.scrollTop;
+  var scrollHeight = h.scrollHeight - h.clientHeight;
+  if (scrollHeight > 0) progressBar.style.width = ((scrollTop / scrollHeight) * 100) + '%';
+}
+window.addEventListener('scroll', updateScrollProgress, { passive: true });
+
+// NAV ACTIVE
+var navPills = document.querySelectorAll('.nav-pill');
+var levelSections = document.querySelectorAll('[id^="level-"]');
+function updateNav() {
+  var current = '';
+  levelSections.forEach(function(s) { if (s.getBoundingClientRect().top < 200) current = s.id; });
+  navPills.forEach(function(p) { p.classList.toggle('active', 'level-' + p.dataset.level === current); });
+}
+window.addEventListener('scroll', updateNav, { passive: true });
+
+function smoothScrollTo(id) {
+  var el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// COUNTER ANIMATION
+function animateCounters() {
+  document.querySelectorAll('.stat-num[data-count]').forEach(function(el) {
+    var target = parseInt(el.dataset.count); var current = 0;
+    var step = Math.max(1, Math.ceil(target / 30));
+    var timer = setInterval(function() {
+      current += step;
+      if (current >= target) { current = target; clearInterval(timer); }
+      el.textContent = current;
+    }, 40);
+  });
+}
+
+// INTERSECTION OBSERVER
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-in').forEach(function(el) { observer.observe(el); });
+
+// ACCORDION
+function toggleAccordion(header) {
+  var item = header.parentElement;
+  var body = item.querySelector('.accordion-body');
+  var isOpen = item.classList.contains('open');
+  if (isOpen) { body.style.maxHeight = null; item.classList.remove('open'); }
+  else { body.style.maxHeight = body.scrollHeight + 'px'; item.classList.add('open'); }
+}
+
+// CHECKLIST
+function saveProgress() { localStorage.setItem(STORAGE_KEY, JSON.stringify(progress)); updateAllProgress(); }
+
+function toggleCheck(li) {
+  li.classList.toggle('checked');
+  var step = li.closest('[data-step]').dataset.step;
+  var idx = Array.from(li.parentElement.children).indexOf(li);
+  progress['c' + step + '_' + idx] = li.classList.contains('checked');
+  saveProgress();
+}
+
+function restoreChecks() {
+  document.querySelectorAll('.acc-checklist').forEach(function(list) {
+    var step = list.closest('[data-step]').dataset.step;
+    Array.from(list.children).forEach(function(li, idx) {
+      if (progress['c' + step + '_' + idx]) li.classList.add('checked');
+    });
+  });
+}
+
+// EXERCISE VALIDATION
+function validateExercise(btn, step) {
+  if (btn.classList.contains('validated')) return;
+  btn.classList.add('validated');
+  btn.textContent = 'Termine ✓';
+  var cancelBtn = btn.nextElementSibling;
+  if (cancelBtn) cancelBtn.classList.add('shown');
+  progress['ex_' + step] = true;
+  saveProgress();
+  var item = btn.closest('[data-step]');
+  if (item) item.classList.add('completed');
+}
+
+function cancelExercise(btn, step) {
+  var validateBtn = btn.previousElementSibling;
+  validateBtn.classList.remove('validated');
+  validateBtn.textContent = 'Termine';
+  btn.classList.remove('shown');
+  delete progress['ex_' + step];
+  saveProgress();
+  var item = btn.closest('[data-step]');
+  if (item) item.classList.remove('completed');
+}
+
+function restoreExercises() {
+  for (var i = 1; i <= TOTAL_STEPS; i++) {
+    if (progress['ex_' + i]) {
+      var item = document.querySelector('[data-step="' + i + '"]');
+      if (item) {
+        var btn = item.querySelector('.btn-validate');
+        if (btn) { btn.classList.add('validated'); btn.textContent = 'Termine ✓'; }
+        var cancelBtn = item.querySelector('.btn-cancel');
+        if (cancelBtn) cancelBtn.classList.add('shown');
+        item.classList.add('completed');
+      }
+    }
+  }
+}
+
+// PROGRESS TRACKING
+function updateAllProgress() {
+  var totalCompleted = 0;
+  for (var i = 1; i <= TOTAL_STEPS; i++) { if (progress['ex_' + i]) totalCompleted++; }
+  document.getElementById('step-counter').textContent = totalCompleted + ' / ' + TOTAL_STEPS;
+
+  // Module progress
+  for (var mod = 1; mod <= 5; mod++) {
+    var steps = MODULE_STEPS[mod];
+    var done = 0;
+    steps.forEach(function(s) { if (progress['ex_' + s]) done++; });
+    var pct = (done / steps.length) * 100;
+    // Update nav pill
+    var navSpan = document.querySelector('.nav-progress[data-mod="' + mod + '"]');
+    if (navSpan) navSpan.textContent = done > 0 ? '(' + done + '/' + steps.length + ')' : '';
+    // Update module progress bar
+    var bar = document.querySelector('.module-progress-fill[data-mod="' + mod + '"]');
+    if (bar) bar.style.width = pct + '%';
+  }
+}
+
+// COPY PROMPT
+function copyPrompt(btn) {
+  var body = btn.closest('.prompt-block').querySelector('.prompt-block-body');
+  var text = body.textContent.trim();
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = 'Copie !'; btn.classList.add('copied');
+    setTimeout(function() { btn.textContent = 'Copier'; btn.classList.remove('copied'); }, 2000);
+  }).catch(function() {
+    var ta = document.createElement('textarea'); ta.value = text;
+    ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = 'Copie !'; btn.classList.add('copied');
+    setTimeout(function() { btn.textContent = 'Copier'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+// INIT
+document.addEventListener('DOMContentLoaded', function() {
+  restoreChecks();
+  restoreExercises();
+  updateAllProgress();
+  setTimeout(animateCounters, 500);
+});
+</script>
+</body>
+</html>
