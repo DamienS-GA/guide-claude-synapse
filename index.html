@@ -1143,14 +1143,16 @@ footer .footer-links { display: flex; gap: 2rem; justify-content: center; margin
           <div class="prompt-block-body">Cree l'arborescence suivante dans mon dossier Documents :
 Documents/Claude-Work/
   .claude/
-    CLAUDE.md
-    skills/
+    CLAUDE.md        <- Le cerveau. Lu en premier a chaque session.
+    skills/          <- Tes taches recurrentes automatisees (une skill = un SKILL.md + exemples)
   ABOUT-ME/
-    about-me.md
-    my-rules.md
-    my-company.md
-  OUTPUTS/
-  TEMPLATES/</div>
+    about-me.md      <- Ton poste, parcours, competences, outils
+    my-rules.md      <- Ton ton, tes patterns interdits, tes formats. LE fichier le plus important.
+    my-company.md    <- Ta boite, ton equipe, tes outils internes
+  OUTPUTS/           <- Tous les livrables produits par Claude, ranges par projet
+  TEMPLATES/         <- Tes modeles de reference (presentations, CR, emails types)
+
+Puis demande-moi si j'ai des templates a copier dans TEMPLATES/ des maintenant.</div>
         </div>
 
         <div class="acc-block">
@@ -1159,7 +1161,9 @@ Documents/Claude-Work/
 
         <div class="prompt-block">
           <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
-          <div class="prompt-block-body">Voici mon profil LinkedIn [colle le lien ou le texte]. Tu peux aussi aller chercher mes infos sur Slack (bio, messages recents) ou sur notre Drive/Notion interne. Utilise AskUserQuestion pour me poser les questions complementaires. Puis cree un fichier about-me.md avec : mon identite, mon parcours (3-4 phrases), mon perimetre actuel, mes domaines d'expertise, les domaines ou j'attends de l'aide de Claude, et mes outils du quotidien.</div>
+          <div class="prompt-block-body">Voici mon profil LinkedIn [colle le lien ou le texte] et ma fiche de poste [colle ou donne le fichier].
+Extrais-en un maximum d'infos : identite, parcours, poste, equipe, responsabilites, competences, outils. Si certains themes ne sont pas couverts (manager, localisation, domaines ou Claude peut m'aider le plus), utilise AskUserQuestion pour completer.
+Redige ensuite about-me.md toi-meme. Ne me donne pas un template vide. Montre-moi le resultat et demande "C'est fidele ? Tu veux ajuster quelque chose ?"</div>
         </div>
 
         <div class="acc-block">
@@ -1168,12 +1172,20 @@ Documents/Claude-Work/
 
         <div class="prompt-block">
           <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
-          <div class="prompt-block-body">Voici des messages que j'ai ecrits [colle 3-5 messages Slack, mails, ou docs]. Analyse mon style en profondeur puis cree my-rules.md avec ces sections :
-1. Regles fondamentales (demande avant d'agir, montre un plan, ne supprime rien sans accord)
-2. Facon de travailler (sois concis et pertinent par defaut, propose des options, si tu ne sais pas dis-le)
-3. Livrables (format selon contexte : Slack = court, mail = objet clair, Notion = structure)
-4. Patterns interdits - sois AGRESSIF, au moins 10 : pas de "C'est une excellente question", pas de "N'hesite pas", pas de reformulation de ma question, pas de disclaimer non demande, pas de transitions pompeuses, pas de tiret cadratin, pas de jargon inutile, pas de cours sur mon metier
-5. Integrite des donnees (ne jamais inventer ou completer une donnee source)</div>
+          <div class="prompt-block-body">Voici des messages que j'ai ecrits et dont je suis satisfait du ton [colle 3-5 messages Slack, mails ou Notion].
+
+Analyse mon style en profondeur : longueur de phrase, ponctuation, emojis ou pas, tutoiement/vouvoiement, ouvertures, clotures, tics de langage, mots recurrents, niveau de familiarite. Si tu as besoin d'affiner, utilise AskUserQuestion.
+
+Puis construis my-rules.md. Sois synthetique mais AGRESSIF sur les patterns interdits. Sections :
+1. Regles generales (langue, autonomie, validation, concision)
+2. Mon ton et style - interne vs externe, avec des exemples reels tires de mes messages
+3. Mots et expressions INTERDITS - liste precise
+4. Patterns de reformulation INTERDITS - au moins 6 : pas de reformulation de ma question, pas de "C'est une excellente question", pas de recap non demande, pas de transitions pompeuses, pas de "N'hesite pas si tu as d'autres questions", pas de disclaimer non demande
+5. Comportements INTERDITS - pas d'emojis non demandes, pas de sections supplementaires, pas d'allongement pour "faire complet"
+6. Formats par livrable (Slack = court, Email = objet clair + CTA, Notion = headers)
+7. Donnees et confidentialite (ne jamais inventer, citer ses sources)
+
+Mieux vaut trop de contraintes que pas assez. Montre-moi le resultat et demande "C'est assez strict ?"</div>
         </div>
 
         <div class="acc-block">
@@ -1182,22 +1194,26 @@ Documents/Claude-Work/
 
         <div class="prompt-block">
           <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
-          <div class="prompt-block-body">Je travaille chez [nom de ta boite]. Voici ma fiche de poste [colle-la ou donne le lien]. Utilise AskUserQuestion pour me poser les questions complementaires : mon equipe, mes objectifs, mes chantiers en cours, les outils internes, et ce qu'on dit NON en ce moment. Tu peux aussi aller chercher des infos sur Notion ou Slack pour completer. Confirme les infos trouvees avant de les integrer. Puis cree my-company.md.</div>
+          <div class="prompt-block-body">Je travaille chez Synapse Medicine. Va chercher les infos sur synapse-medicine.com et sur ce que tu connais deja de l'entreprise : secteur, activite, produits, taille, localisation, culture.
+Utilise AskUserQuestion pour completer ce que tu ne trouves pas : mon equipe (nom, taille, rattachement, mission), la convention collective applicable, et les outils internes (Slack, Notion, Google Workspace, Jira...).
+Redige my-company.md et montre-moi le resultat. Confirme les infos trouvees avant de les integrer.</div>
         </div>
 
         <div class="acc-block">
-          <div class="acc-block-title lc-2">Phase 5 - Generer CLAUDE.md et tester</div>
+          <div class="acc-block-title lc-2">Phase 5 - Completer CLAUDE.md</div>
         </div>
 
         <div class="prompt-block">
           <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
-          <div class="prompt-block-body">Lis les 3 fichiers ABOUT-ME/ et genere le CLAUDE.md : un resume executif de 40-60 lignes max qui pointe vers les fichiers de detail. Structure-le ainsi :
-1. Identite et contexte (2-3 lignes)
-2. Avant chaque tache - tableau des fichiers ABOUT-ME a lire selon le contexte
-3. Skills - tableau des skills disponibles (quand il y en aura)
-4. Regles cles - les 10 regles les plus importantes extraites de my-rules.md
-5. Catalogue des ressources - sections TEMPLATES/, OUTPUTS/, PROJECTS/ avec les fichiers cles et leur role
-6. Pages Notion et liens utiles</div>
+          <div class="prompt-block-body">Lis les 3 fichiers ABOUT-ME/ et complete le CLAUDE.md pour en faire un resume executif de 40-60 lignes max. C'est le fichier que Claude lit en premier a chaque session - il doit etre court et pointer vers les fichiers de detail. Structure :
+1. Identite (qui je suis, poste, equipe - 2-3 lignes)
+2. Fichiers de reference - tableau : quel fichier lire selon le contexte
+3. Regles cles - les 5-7 regles les plus importantes de my-rules.md
+4. Mon ton (resume en 3-4 lignes)
+5. Mots et patterns INTERDITS (les 5-10 plus critiques)
+6. Outils (liste courte, une ligne par outil)
+
+Montre-moi le resultat.</div>
         </div>
 
         <div class="acc-block">
@@ -1285,7 +1301,7 @@ Documents/Claude-Work/
       <div class="accordion-body"><div class="accordion-content">
         <div class="acc-block">
           <div class="acc-block-title lc-3">Objectif</div>
-          <p class="acc-objective">Automatiser une tache recurrente en creant un skill base sur tes vrais livrables. Un skill, c'est un mini-mode d'emploi que Claude lit quand tu lui demandes un type de tache precis.</p>
+          <p class="acc-objective">Automatiser une tache recurrente en creant un skill base sur tes vrais livrables. Un skill, c'est un mini-mode d'emploi que Claude lit quand tu lui demandes un type de tache precis (CR de reunion, mail de refus candidat, brief produit, reporting...). La cle : partir de sources reelles, pas de regles abstraites. Plus les sources sont riches, plus la skill est fidele.</p>
         </div>
 
         <div class="svg-diagram">
@@ -1316,22 +1332,32 @@ Documents/Claude-Work/
         <div class="acc-block">
           <div class="acc-block-title lc-3">A faire</div>
           <ul class="acc-checklist" data-step="7">
-            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Identifie une tache que tu fais au moins 2x par mois</span></li>
-            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Rassemble 2-3 exemples REELS de livrables finis (pas des templates vides)</span></li>
-            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Demande a Claude d'analyser tes exemples et de creer le skill</span></li>
-            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Teste le skill sur un cas reel</span></li>
-            <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Itere : ajuste le SKILL.md jusqu'a satisfaction</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span><strong>Phase 1 - Identifier :</strong> choisis une tache que tu fais au moins 2x par mois et formule la demande naturellement (ex : "fais-moi un CR", "prepare un mail de refus")</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span><strong>Phase 2 - Collecter :</strong> rassemble 2-3 exemples REELS de livrables finis (pas des templates vides). C'est LA phase qui fait la difference entre une skill generique et une skill excellente</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span><strong>Phase 3 - Construire :</strong> demande a Claude d'analyser tes exemples (structure, ton, patterns recurrents) et de creer le SKILL.md avec exemples de reference integres</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span><strong>Phase 4 - Tester :</strong> teste la skill sur un cas reel. Le premier jet n'est presque jamais parfait - c'est normal</span></li>
+            <li onclick="toggleCheck(this)"><span class="check-box"></span><span><strong>Phase 4 bis - Iterer :</strong> ajuste le SKILL.md, re-teste, redemande du feedback jusqu'a satisfaction</span></li>
           </ul>
         </div>
 
         <div class="prompt-block">
-          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
-          <div class="prompt-block-body">Voici 2 comptes-rendus de reunion que j'ai rediges [colle-les]. Analyse le format, le ton, la structure. Cree une skill "CR de reunion" dans .claude/skills/cr-reunion/SKILL.md qui reproduit exactement mon style. Inclus : sections obligatoires, format des actions, niveau de detail.</div>
+          <div class="prompt-block-header"><span class="prompt-block-label">Prompt Phase 1 - Identifier la tache</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-body">Je veux creer ma premiere skill. Aide-moi a identifier la bonne tache. Pose-moi des questions sur mes taches recurrentes (frequence, format, variantes) et propose-moi le meilleur candidat pour une skill.</div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-block-header"><span class="prompt-block-label">Prompt Phase 2+3 - Collecter et construire</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-body">Voici [2-3] exemples reels de [type de livrable] que j'ai produits [colle-les ou donne les fichiers]. Analyse en profondeur : structure, ton, patterns recurrents, longueur, elements obligatoires, regles implicites. Puis cree une skill dans .claude/skills/[nom]/SKILL.md qui reproduit exactement mon style. Le SKILL.md doit contenir : principe fondamental, declencheurs typiques, structure du livrable, regles specifiques, anti-patterns a eviter, et un exemple de reference complet.</div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-block-header"><span class="prompt-block-label">Prompt Phase 4 - Tester</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-body">Teste la skill que tu viens de creer sur ce cas concret : [decris le cas]. Produis le livrable en suivant le SKILL.md. Je vais comparer avec ce que j'aurais fait moi-meme.</div>
         </div>
 
         <div class="result-block">
           <div class="result-block-header"><span class="result-block-label">Resultat attendu</span></div>
-          <div class="result-block-body">Un dossier .claude/skills/cr-reunion/ avec SKILL.md + tes exemples. Quand tu dis "fais-moi un CR", Claude produit dans TON format, range dans OUTPUTS/.</div>
+          <div class="result-block-body">Un dossier .claude/skills/[nom-de-ta-skill]/ avec un SKILL.md complet (principe, declencheurs, structure, regles, anti-patterns, exemple) + tes exemples sources dans un sous-dossier exemples/. Quand tu formules ta demande naturellement, Claude produit dans TON format et range dans OUTPUTS/.</div>
         </div>
 
         <div class="pole-example-block">
@@ -1344,11 +1370,13 @@ Documents/Claude-Work/
           <div class="pole-example-item" data-pole="ga">Skill "Note de cadrage" ou "Reporting mensuel" base sur tes vrais reportings</div>
         </div>
 
-        <div class="callout callout-tip"><strong>Astuce</strong> - La qualite d'un skill depend a 80% de la qualite des sources. Un bon skill n'est pas une liste de regles abstraites - c'est une analyse profonde de tes vrais livrables.</div>
+        <div class="callout callout-tip"><strong>Astuce</strong> - La qualite d'une skill depend a 80% de la qualite des sources. Plus tu fournis d'exemples reels, plus Claude capte les regles implicites (ce que tu fais systematiquement sans le verbaliser). Un bon SKILL.md contient toujours un "Principe fondamental" (l'approche, pas juste la tache) et des "Anti-patterns" (ce qu'il ne faut JAMAIS faire).</div>
+
+        <div class="callout callout-tip"><strong>Structure du SKILL.md</strong> - Un bon SKILL.md suit cette structure : (1) Principe fondamental - 1-2 phrases sur l'approche (2) Declencheurs typiques - les formulations naturelles (3) Sources de reference - pointer vers le dossier exemples/ (4) Structure du livrable - sections detaillees (5) Regles specifiques - extraites de l'analyse (6) Anti-patterns - ce qu'il ne faut jamais faire (7) Exemple de reference complet.</div>
 
         <div class="callout-exercise-wrap">
           <div class="acc-block-title" style="color:var(--grad-start);">Exercice</div>
-          <p style="font-size:0.9rem;">Identifie ta tache la plus recurrente. Fournis 2-3 livrables finis. Cree le skill. Teste-le. Itere.</p>
+          <p style="font-size:0.9rem;">Identifie ta tache la plus recurrente. Rassemble 2-3 livrables finis. Utilise les prompts ci-dessus dans l'ordre (Phase 1, puis 2+3, puis 4). Itere jusqu'a ce que le resultat corresponde a ce que tu aurais fait toi-meme.</p>
           <div class="exercise-actions">
             <button class="btn-validate bg-3" onclick="validateExercise(this, 7)">Termine</button>
             <button class="btn-cancel" onclick="cancelExercise(this, 7)">Annuler</button>
