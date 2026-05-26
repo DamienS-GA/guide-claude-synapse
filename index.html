@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maitriser Claude - Synapse Medicine</title>
+<title data-i18n="doc.title">Maitriser Claude - Synapse Medicine</title>
 <style>
 :root {
   --blue: #00A0FF;
@@ -477,17 +477,18 @@ footer .footer-links { display: flex; gap: 2rem; justify-content: center; margin
 <header>
 <div class="header-inner">
   <a href="#" class="header-brand" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
-    <span class="dot"></span>Synapse Medicine <span style="color:var(--text-secondary);font-weight:400;">|</span> Maitriser Claude
+    <span class="dot"></span>Synapse Medicine <span style="color:var(--text-secondary);font-weight:400;">|</span> <span data-i18n="header.brand_suffix">Maitriser Claude</span>
   </a>
   <nav class="header-nav">
-    <a href="#level-1" class="nav-pill" data-level="1">Chat <span class="nav-progress" data-mod="1"></span></a>
-    <a href="#level-2" class="nav-pill" data-level="2">Cowork <span class="nav-progress" data-mod="2"></span></a>
-    <a href="#level-3" class="nav-pill" data-level="3">Skills <span class="nav-progress" data-mod="3"></span></a>
-    <a href="#level-4" class="nav-pill" data-level="4">Power <span class="nav-progress" data-mod="4"></span></a>
-    <a href="#level-5" class="nav-pill" data-level="5">Orchestration <span class="nav-progress" data-mod="5"></span></a>
+    <a href="#level-1" class="nav-pill" data-level="1"><span data-i18n="nav.chat">Chat</span> <span class="nav-progress" data-mod="1"></span></a>
+    <a href="#level-2" class="nav-pill" data-level="2"><span data-i18n="nav.cowork">Cowork</span> <span class="nav-progress" data-mod="2"></span></a>
+    <a href="#level-3" class="nav-pill" data-level="3"><span data-i18n="nav.skills">Skills</span> <span class="nav-progress" data-mod="3"></span></a>
+    <a href="#level-4" class="nav-pill" data-level="4"><span data-i18n="nav.power">Power</span> <span class="nav-progress" data-mod="4"></span></a>
+    <a href="#level-5" class="nav-pill" data-level="5"><span data-i18n="nav.orchestration">Orchestration</span> <span class="nav-progress" data-mod="5"></span></a>
   </nav>
   <div style="display:flex;align-items:center;gap:0.75rem;">
-    <button class="pole-indicator" onclick="document.getElementById('pole-select').scrollIntoView({behavior:'smooth'});" id="pole-header-btn">Mon pole</button>
+    <button class="pole-indicator" onclick="document.getElementById('pole-select').scrollIntoView({behavior:'smooth'});" id="pole-header-btn" data-i18n="header.my_pole">Mon pole</button>
+    <button class="nav-pill" id="lang-toggle" onclick="toggleLang()" style="padding:4px 10px;font-size:0.72rem;cursor:pointer;">EN</button>
     <div class="header-counter" id="step-counter">0 / 13</div>
   </div>
 </div>
@@ -496,22 +497,22 @@ footer .footer-links { display: flex; gap: 2rem; justify-content: center; margin
 <!-- HERO -->
 <section class="hero">
 <div class="hero-content">
-  <h1>Maitriser Claude</h1>
-  <p>De la premiere question a l'orchestration d'agents sur tes vrais livrables. 13 etapes concretes, des prompts a copier, des schemas visuels.</p>
+  <h1 data-i18n="hero.title">Maitriser Claude</h1>
+  <p data-i18n="hero.subtitle">De la premiere question a l'orchestration d'agents sur tes vrais livrables. 13 etapes concretes, des prompts a copier, des schemas visuels.</p>
   <div class="hero-quiz">
-    <button onclick="smoothScrollTo('level-1')">Je decouvre Claude</button>
-    <button onclick="smoothScrollTo('level-2')">J'utilise deja le chat</button>
-    <button onclick="smoothScrollTo('level-4')">Je veux aller plus loin</button>
+    <button onclick="smoothScrollTo('level-1')" data-i18n="hero.quiz_discover">Je decouvre Claude</button>
+    <button onclick="smoothScrollTo('level-2')" data-i18n="hero.quiz_chat">J'utilise deja le chat</button>
+    <button onclick="smoothScrollTo('level-4')" data-i18n="hero.quiz_further">Je veux aller plus loin</button>
   </div>
   <div class="hero-stats">
-    <span><span class="stat-num" data-count="13">0</span>&nbsp;etapes</span>
-    <span><span class="stat-num" data-count="5">0</span>&nbsp;niveaux</span>
-    <span>~<span class="stat-num" data-count="11">0</span>h de pratique</span>
+    <span><span class="stat-num" data-count="13">0</span>&nbsp;<span data-i18n="hero.stat_steps">etapes</span></span>
+    <span><span class="stat-num" data-count="5">0</span>&nbsp;<span data-i18n="hero.stat_levels">niveaux</span></span>
+    <span>~<span class="stat-num" data-count="11">0</span><span data-i18n="hero.stat_practice">h de pratique</span></span>
   </div>
 
   <!-- POLE SELECTOR -->
   <div id="pole-select" style="margin-top:2.5rem;">
-    <p style="font-weight:700;font-size:0.9rem;color:var(--text-title);margin-bottom:0.75rem;">Ton pole chez Synapse :</p>
+    <p style="font-weight:700;font-size:0.9rem;color:var(--text-title);margin-bottom:0.75rem;" data-i18n="pole.label">Ton pole chez Synapse :</p>
     <div class="pole-selector">
       <button class="pole-btn" data-pole="tech" onclick="selectPole('tech')">Tech</button>
       <button class="pole-btn" data-pole="revenue" onclick="selectPole('revenue')">Revenue</button>
@@ -519,8 +520,9 @@ footer .footer-links { display: flex; gap: 2rem; justify-content: center; margin
       <button class="pole-btn" data-pole="product" onclick="selectPole('product')">Product</button>
       <button class="pole-btn" data-pole="medical" onclick="selectPole('medical')">Medical</button>
       <button class="pole-btn" data-pole="ga" onclick="selectPole('ga')">G&A</button>
+      <button class="pole-btn" data-pole="us" onclick="selectPole('us')">US Team</button>
     </div>
-    <p style="font-size:0.78rem;color:var(--text-secondary);margin-top:0.5rem;">Les exemples s'adaptent a ton pole. Tu peux changer a tout moment.</p>
+    <p style="font-size:0.78rem;color:var(--text-secondary);margin-top:0.5rem;" data-i18n="pole.tagline">Les exemples s'adaptent a ton pole. Tu peux changer a tout moment.</p>
   </div>
 </div>
 </section>
@@ -528,23 +530,23 @@ footer .footer-links { display: flex; gap: 2rem; justify-content: center; margin
 <!-- POURQUOI CE PARCOURS -->
 <div class="section-alt">
 <section class="section">
-  <h2 class="section-title fade-in" style="text-align:center;">Pourquoi ce parcours</h2>
-  <p class="section-subtitle fade-in" style="text-align:center;margin:0 auto 2rem;">La plupart utilisent Claude comme un chatbot basique. La vraie puissance se debloque quand tu configures ton environnement.</p>
+  <h2 class="section-title fade-in" style="text-align:center;" data-i18n="why.title">Pourquoi ce parcours</h2>
+  <p class="section-subtitle fade-in" style="text-align:center;margin:0 auto 2rem;" data-i18n="why.subtitle">La plupart utilisent Claude comme un chatbot basique. La vraie puissance se debloque quand tu configures ton environnement.</p>
   <div class="pourquoi-cards">
     <div class="pourquoi-card fade-in stagger-1">
       <div class="pourquoi-icon">&#128172;</div>
-      <h3>Niveau 1 : Tu poses des questions</h3>
-      <p>Claude repond de maniere generique. Tu copies-colles entre les outils. Pas de memoire.</p>
+      <h3 data-i18n="why.card1_title">Niveau 1 : Tu poses des questions</h3>
+      <p data-i18n="why.card1_body">Claude repond de maniere generique. Tu copies-colles entre les outils. Pas de memoire.</p>
     </div>
     <div class="pourquoi-card fade-in stagger-2">
       <div class="pourquoi-icon">&#9881;&#65039;</div>
-      <h3>Niveau 2 : Tu configures Claude</h3>
-      <p>Claude te connait, parle comme toi, lit tes fichiers. Plus de copier-coller.</p>
+      <h3 data-i18n="why.card2_title">Niveau 2 : Tu configures Claude</h3>
+      <p data-i18n="why.card2_body">Claude te connait, parle comme toi, lit tes fichiers. Plus de copier-coller.</p>
     </div>
     <div class="pourquoi-card fade-in stagger-3">
       <div class="pourquoi-icon">&#127919;</div>
-      <h3>Niveau 3+ : Tu orchestres des agents</h3>
-      <p>Claude delegue, automatise, et produit tes livrables dans ton format. Tu supervises.</p>
+      <h3 data-i18n="why.card3_title">Niveau 3+ : Tu orchestres des agents</h3>
+      <p data-i18n="why.card3_body">Claude delegue, automatise, et produit tes livrables dans ton format. Tu supervises.</p>
     </div>
   </div>
 </section>
@@ -552,22 +554,22 @@ footer .footer-links { display: flex; gap: 2rem; justify-content: center; margin
 
 <!-- COMMENT CA MARCHE -->
 <section class="section">
-  <h2 class="section-title fade-in">Comment ca marche</h2>
+  <h2 class="section-title fade-in" data-i18n="how.title">Comment ca marche</h2>
   <div class="cards-3">
     <div class="card-how fade-in stagger-1">
       <div class="card-icon" style="background:var(--bg-blue);">&#128336;</div>
-      <h3>A ton rythme</h3>
-      <p>Pas de deadline. Tu avances quand tu veux. Ta progression est sauvegardee dans ton navigateur.</p>
+      <h3 data-i18n="how.card1_title">A ton rythme</h3>
+      <p data-i18n="how.card1_body">Pas de deadline. Tu avances quand tu veux. Ta progression est sauvegardee dans ton navigateur.</p>
     </div>
     <div class="card-how fade-in stagger-2">
       <div class="card-icon" style="background:var(--bg-violet);">&#128200;</div>
-      <h3>Prompts a copier</h3>
-      <p>Chaque etape inclut des prompts concrets et le resultat attendu.</p>
+      <h3 data-i18n="how.card2_title">Prompts a copier</h3>
+      <p data-i18n="how.card2_body">Chaque etape inclut des prompts concrets et le resultat attendu.</p>
     </div>
     <div class="card-how fade-in stagger-3">
       <div class="card-icon" style="background:var(--bg-teal);">&#127919;</div>
-      <h3>Ton vrai travail</h3>
-      <p>Les exercices s'appliquent a ton metier. Les exemples s'adaptent a ton pole.</p>
+      <h3 data-i18n="how.card3_title">Ton vrai travail</h3>
+      <p data-i18n="how.card3_body">Les exercices s'appliquent a ton metier. Les exemples s'adaptent a ton pole.</p>
     </div>
   </div>
 </section>
@@ -575,39 +577,39 @@ footer .footer-links { display: flex; gap: 2rem; justify-content: center; margin
 <!-- ROADMAP -->
 <div class="section-alt">
 <section class="section">
-  <h2 class="section-title fade-in" style="text-align:center;">Le parcours</h2>
+  <h2 class="section-title fade-in" style="text-align:center;" data-i18n="roadmap.title">Le parcours</h2>
   <div class="roadmap-container">
     <div class="roadmap">
       <a href="#level-1" class="roadmap-node fade-in stagger-1">
         <div class="roadmap-circle" style="background:var(--bg-blue);">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#00A0FF" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </div>
-        <span class="roadmap-label">Niveau 1</span>
-        <span class="roadmap-sublabel">Chat (3 etapes)</span>
+        <span class="roadmap-label" data-i18n="roadmap.lvl1_label">Niveau 1</span>
+        <span class="roadmap-sublabel" data-i18n="roadmap.lvl1_sub">Chat (3 etapes)</span>
       </a>
       <div class="roadmap-line"></div>
       <a href="#level-2" class="roadmap-node fade-in stagger-2">
         <div class="roadmap-circle" style="background:var(--bg-violet);">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#BC2DFF" stroke-width="2" stroke-linecap="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
         </div>
-        <span class="roadmap-label">Niveau 2</span>
-        <span class="roadmap-sublabel">Cowork (3 etapes)</span>
+        <span class="roadmap-label" data-i18n="roadmap.lvl2_label">Niveau 2</span>
+        <span class="roadmap-sublabel" data-i18n="roadmap.lvl2_sub">Cowork (3 etapes)</span>
       </a>
       <div class="roadmap-line"></div>
       <a href="#level-3" class="roadmap-node fade-in stagger-3">
         <div class="roadmap-circle" style="background:var(--bg-magenta);">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FF0099" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="9" height="9" rx="2"/><rect x="13" y="2" width="9" height="9" rx="2"/><rect x="2" y="13" width="9" height="9" rx="2"/><rect x="13" y="13" width="9" height="9" rx="2"/></svg>
         </div>
-        <span class="roadmap-label">Niveau 3</span>
-        <span class="roadmap-sublabel">Skills (3 etapes)</span>
+        <span class="roadmap-label" data-i18n="roadmap.lvl3_label">Niveau 3</span>
+        <span class="roadmap-sublabel" data-i18n="roadmap.lvl3_sub">Skills (3 etapes)</span>
       </a>
       <div class="roadmap-line"></div>
       <a href="#level-4" class="roadmap-node fade-in stagger-4">
         <div class="roadmap-circle" style="background:var(--bg-teal);">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22C9AB" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
         </div>
-        <span class="roadmap-label">Niveau 4</span>
-        <span class="roadmap-sublabel">Power (2 etapes)</span>
+        <span class="roadmap-label" data-i18n="roadmap.lvl4_label">Niveau 4</span>
+        <span class="roadmap-sublabel" data-i18n="roadmap.lvl4_sub">Power (2 etapes)</span>
       </a>
       <div class="roadmap-line"></div>
       <a href="#level-5" class="roadmap-node fade-in stagger-5">
@@ -618,8 +620,8 @@ footer .footer-links { display: flex; gap: 2rem; justify-content: center; margin
             <line x1="6" y1="7" x2="10" y2="10" stroke="url(#grad-icon)"/><line x1="18" y1="7" x2="14" y2="10" stroke="url(#grad-icon)"/><line x1="6" y1="17" x2="10" y2="14" stroke="url(#grad-icon)"/><line x1="18" y1="17" x2="14" y2="14" stroke="url(#grad-icon)"/>
           </svg>
         </div>
-        <span class="roadmap-label">Niveau 5</span>
-        <span class="roadmap-sublabel">Orchestration (2 etapes)</span>
+        <span class="roadmap-label" data-i18n="roadmap.lvl5_label">Niveau 5</span>
+        <span class="roadmap-sublabel" data-i18n="roadmap.lvl5_sub">Orchestration (2 etapes)</span>
       </a>
     </div>
   </div>
@@ -628,67 +630,67 @@ footer .footer-links { display: flex; gap: 2rem; justify-content: center; margin
 
 <!-- ARCHITECTURE INTERACTIVE (only) -->
 <section class="section">
-  <h2 class="section-title fade-in" style="text-align:center;">Architecture Claude - 5 couches</h2>
-  <p class="section-subtitle fade-in" style="text-align:center;margin-left:auto;margin-right:auto;">Chaque couche ajoute une capacite. Clique pour en savoir plus.</p>
+  <h2 class="section-title fade-in" style="text-align:center;" data-i18n="arch.title">Architecture Claude - 5 couches</h2>
+  <p class="section-subtitle fade-in" style="text-align:center;margin-left:auto;margin-right:auto;" data-i18n="arch.subtitle">Chaque couche ajoute une capacite. Clique pour en savoir plus.</p>
   <div style="display:flex;flex-direction:column;gap:0;">
     <div class="arch-layer fade-in stagger-1" style="background:rgba(0,160,255,0.06);border:1px solid rgba(0,160,255,0.15);" onclick="this.classList.toggle('expanded')">
       <div class="arch-layer-num bg-1">1</div>
       <div class="arch-layer-content">
-        <div class="arch-layer-title" style="color:var(--blue);">CLAUDE.md - Memory Layer</div>
-        <div class="arch-layer-desc">Le cerveau de ton agent. Lu en premier a chaque session.</div>
+        <div class="arch-layer-title" style="color:var(--blue);" data-i18n="arch.l1_title">CLAUDE.md - Memory Layer</div>
+        <div class="arch-layer-desc" data-i18n="arch.l1_desc">Le cerveau de ton agent. Lu en premier a chaque session.</div>
         <div class="arch-layer-detail"><ul>
-          <li>Regles d'architecture et conventions</li>
-          <li>Catalogue de ressources (fichiers, templates, liens)</li>
-          <li>Instructions de comportement globales</li>
-          <li>Contexte entreprise et equipe</li>
+          <li data-i18n="arch.l1_li1">Regles d'architecture et conventions</li>
+          <li data-i18n="arch.l1_li2">Catalogue de ressources (fichiers, templates, liens)</li>
+          <li data-i18n="arch.l1_li3">Instructions de comportement globales</li>
+          <li data-i18n="arch.l1_li4">Contexte entreprise et equipe</li>
         </ul></div>
       </div>
     </div>
     <div class="arch-layer fade-in stagger-2" style="background:rgba(188,45,255,0.06);border:1px solid rgba(188,45,255,0.15);" onclick="this.classList.toggle('expanded')">
       <div class="arch-layer-num bg-2">2</div>
       <div class="arch-layer-content">
-        <div class="arch-layer-title" style="color:var(--violet);">SKILLS - Knowledge Layer</div>
-        <div class="arch-layer-desc">Tes taches recurrentes automatisees en recettes reutilisables.</div>
+        <div class="arch-layer-title" style="color:var(--violet);" data-i18n="arch.l2_title">SKILLS - Knowledge Layer</div>
+        <div class="arch-layer-desc" data-i18n="arch.l2_desc">Tes taches recurrentes automatisees en recettes reutilisables.</div>
         <div class="arch-layer-detail"><ul>
-          <li>Description matching - invocation automatique</li>
-          <li>Contexte specifique a la tache</li>
-          <li>Exemples reels comme reference</li>
+          <li data-i18n="arch.l2_li1">Description matching - invocation automatique</li>
+          <li data-i18n="arch.l2_li2">Contexte specifique a la tache</li>
+          <li data-i18n="arch.l2_li3">Exemples reels comme reference</li>
         </ul></div>
       </div>
     </div>
     <div class="arch-layer fade-in stagger-3" style="background:rgba(255,0,153,0.06);border:1px solid rgba(255,0,153,0.15);" onclick="this.classList.toggle('expanded')">
       <div class="arch-layer-num bg-3">3</div>
       <div class="arch-layer-content">
-        <div class="arch-layer-title" style="color:var(--magenta);">HOOKS - Guardrail Layer</div>
-        <div class="arch-layer-desc">Garde-fous automatiques avant et apres chaque action.</div>
+        <div class="arch-layer-title" style="color:var(--magenta);" data-i18n="arch.l3_title">HOOKS - Guardrail Layer</div>
+        <div class="arch-layer-desc" data-i18n="arch.l3_desc">Garde-fous automatiques avant et apres chaque action.</div>
         <div class="arch-layer-detail"><ul>
-          <li>PreToolUse - validation avant action</li>
-          <li>PostToolUse - verification apres action</li>
-          <li>Deterministe, pas de l'IA - comme des git hooks</li>
+          <li data-i18n="arch.l3_li1">PreToolUse - validation avant action</li>
+          <li data-i18n="arch.l3_li2">PostToolUse - verification apres action</li>
+          <li data-i18n="arch.l3_li3">Deterministe, pas de l'IA - comme des git hooks</li>
         </ul></div>
       </div>
     </div>
     <div class="arch-layer fade-in stagger-4" style="background:rgba(34,201,171,0.06);border:1px solid rgba(34,201,171,0.15);" onclick="this.classList.toggle('expanded')">
       <div class="arch-layer-num bg-4">4</div>
       <div class="arch-layer-content">
-        <div class="arch-layer-title" style="color:var(--teal);">SUBAGENTS - Delegation Layer</div>
-        <div class="arch-layer-desc">Instances specialisees pour deleguer des sous-taches.</div>
+        <div class="arch-layer-title" style="color:var(--teal);" data-i18n="arch.l4_title">SUBAGENTS - Delegation Layer</div>
+        <div class="arch-layer-desc" data-i18n="arch.l4_desc">Instances specialisees pour deleguer des sous-taches.</div>
         <div class="arch-layer-detail"><ul>
-          <li>Fenetre de contexte isolee par subagent</li>
-          <li>Roles : analyste, redacteur, verificateur...</li>
-          <li>Pas de recursion - un subagent ne spawne pas d'autres subagents</li>
+          <li data-i18n="arch.l4_li1">Fenetre de contexte isolee par subagent</li>
+          <li data-i18n="arch.l4_li2">Roles : analyste, redacteur, verificateur...</li>
+          <li data-i18n="arch.l4_li3">Pas de recursion - un subagent ne spawne pas d'autres subagents</li>
         </ul></div>
       </div>
     </div>
     <div class="arch-layer fade-in stagger-5" style="background:linear-gradient(135deg,rgba(243,15,168,0.04),rgba(10,151,255,0.04));border:1px solid rgba(60,100,255,0.15);" onclick="this.classList.toggle('expanded')">
       <div class="arch-layer-num bg-5">5</div>
       <div class="arch-layer-content">
-        <div class="arch-layer-title lc-5">PLUGINS - Distribution Layer</div>
-        <div class="arch-layer-desc">Packages partageables : skills, agents, hooks, commands.</div>
+        <div class="arch-layer-title lc-5" data-i18n="arch.l5_title">PLUGINS - Distribution Layer</div>
+        <div class="arch-layer-desc" data-i18n="arch.l5_desc">Packages partageables : skills, agents, hooks, commands.</div>
         <div class="arch-layer-detail"><ul>
-          <li>Organisation : skills/, agents/, hooks/, commands/</li>
-          <li>Partage entre equipes et projets</li>
-          <li>Marketplace de plugins communautaires</li>
+          <li data-i18n="arch.l5_li1">Organisation : skills/, agents/, hooks/, commands/</li>
+          <li data-i18n="arch.l5_li2">Partage entre equipes et projets</li>
+          <li data-i18n="arch.l5_li3">Marketplace de plugins communautaires</li>
         </ul></div>
       </div>
     </div>
@@ -699,9 +701,9 @@ footer .footer-links { display: flex; gap: 2rem; justify-content: center; margin
 <div class="level-bg-1" id="level-1">
 <section class="section">
   <div class="level-header fade-in">
-    <span class="level-pill bg-1">Niveau 1</span>
-    <h2>Claude Chat</h2>
-    <p>Les bases solides. Decouvre l'interface, les modeles, et les techniques de prompt qui changent tout.</p>
+    <span class="level-pill bg-1" data-i18n="lvl1.pill">Niveau 1</span>
+    <h2 data-i18n="lvl1.title">Claude Chat</h2>
+    <p data-i18n="lvl1.intro">Les bases solides. Decouvre l'interface, les modeles, et les techniques de prompt qui changent tout.</p>
   </div>
   <div class="module-progress"><div class="module-progress-fill" data-mod="1" style="background:var(--blue);"></div></div>
 
@@ -711,17 +713,17 @@ footer .footer-links { display: flex; gap: 2rem; justify-content: center; margin
     <div class="accordion-item fade-in" data-step="1" data-mod="1">
       <div class="accordion-header" onclick="toggleAccordion(this)">
         <div class="accordion-num bg-1">1</div>
-        <div class="accordion-title">Premiers pas et choix du modele</div>
+        <div class="accordion-title" data-i18n="step1.title">Premiers pas et choix du modele</div>
         <span class="accordion-duration">30 min</span>
         <svg class="accordion-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
       </div>
       <div class="accordion-body"><div class="accordion-content">
         <div class="acc-block">
-          <div class="acc-block-title lc-1">Objectif</div>
+          <div class="acc-block-title lc-1" data-i18n="common.objective">Objectif</div>
           <p class="acc-objective">Maitriser l'interface Claude et comprendre quand utiliser Sonnet, Opus ou Extended Thinking.</p>
         </div>
         <div class="acc-block">
-          <div class="acc-block-title lc-1">A faire (pas a pas)</div>
+          <div class="acc-block-title lc-1" data-i18n="common.todo_steps">A faire (pas a pas)</div>
           <ul class="acc-checklist" data-step="1">
             <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Va sur claude.ai et connecte-toi avec ton email Synapse</span></li>
             <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Cree un nouveau chat. Observe l'interface : historique a gauche, zone de chat au centre</span></li>
@@ -760,12 +762,12 @@ footer .footer-links { display: flex; gap: 2rem; justify-content: center; margin
         </div>
 
         <div class="prompt-block">
-          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-header"><span class="prompt-block-label" data-i18n="common.prompt_copy">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)" data-i18n="common.copy">Copier</button></div>
           <div class="prompt-block-body">Analyse les avantages et inconvenients du teletravail total pour une entreprise tech de 90 personnes en France, sous convention Syntec.</div>
         </div>
 
         <div class="result-block">
-          <div class="result-block-header"><span class="result-block-label">Resultat attendu</span></div>
+          <div class="result-block-header"><span class="result-block-label" data-i18n="common.expected">Resultat attendu</span></div>
           <div class="result-block-body">
             <strong>Sonnet</strong> repond en ~15 sec avec une liste structuree.<br>
             <strong>Opus</strong> repond en ~45 sec avec plus de nuances et du contexte juridique Syntec.<br>
@@ -774,23 +776,24 @@ footer .footer-links { display: flex; gap: 2rem; justify-content: center; margin
         </div>
 
         <div class="pole-example-block">
-          <div class="acc-block-title lc-1">Exemple pour ton pole</div>
+          <div class="acc-block-title lc-1" data-i18n="common.pole_example">Exemple pour ton pole</div>
           <div class="pole-example-item" data-pole="tech">Tech : "Explique-moi les trade-offs entre REST et gRPC pour notre API medicamenteuse"</div>
           <div class="pole-example-item" data-pole="revenue">Revenue : "Resume les points de negociation cles de cette proposition de partenariat hospitalier"</div>
           <div class="pole-example-item" data-pole="qara">Qara : "Compare les exigences ISO 13485 et ISO 27001 pour un SaaS medical"</div>
           <div class="pole-example-item" data-pole="product">Product : "Analyse cette user story et identifie les edge cases manquants"</div>
           <div class="pole-example-item" data-pole="medical">Medical : "Synthetise les recommandations HAS sur les interactions medicamenteuses"</div>
           <div class="pole-example-item" data-pole="ga">G&A : "Compare les implications CDD vs interim pour un remplacement de 6 mois sous Syntec"</div>
+          <div class="pole-example-item" data-pole="us">US Team : "Synthetise l'impact de la nouvelle guidance FDA sur notre roadmap produit et prepare 3 talking points pour le prochain call partenaire hospitalier"</div>
         </div>
 
-        <div class="callout callout-tip"><strong>Astuce</strong> - Par defaut, utilise Sonnet pour les questions rapides. Passe a Opus pour la profondeur (analyse juridique, strategie). Extended Thinking quand tu veux comprendre le raisonnement.</div>
+        <div class="callout callout-tip"><strong data-i18n="common.tip">Astuce</strong> - Par defaut, utilise Sonnet pour les questions rapides. Passe a Opus pour la profondeur (analyse juridique, strategie). Extended Thinking quand tu veux comprendre le raisonnement.</div>
 
         <div class="callout-exercise-wrap">
-          <div class="acc-block-title" style="color:var(--grad-start);">Exercice</div>
+          <div class="acc-block-title" style="color:var(--grad-start);" data-i18n="common.exercise">Exercice</div>
           <p style="font-size:0.9rem;">Pose une question liee a ton activite reelle. Teste les trois modeles avec la meme question. Note les differences.</p>
           <div class="exercise-actions">
-            <button class="btn-validate bg-1" onclick="validateExercise(this, 1)">Termine</button>
-            <button class="btn-cancel" onclick="cancelExercise(this, 1)">Annuler</button>
+            <button class="btn-validate bg-1" onclick="validateExercise(this, 1)" data-i18n="common.done">Termine</button>
+            <button class="btn-cancel" onclick="cancelExercise(this, 1)" data-i18n="common.cancel">Annuler</button>
           </div>
         </div>
       </div></div>
@@ -800,17 +803,17 @@ footer .footer-links { display: flex; gap: 2rem; justify-content: center; margin
     <div class="accordion-item fade-in" data-step="2" data-mod="1">
       <div class="accordion-header" onclick="toggleAccordion(this)">
         <div class="accordion-num bg-1">2</div>
-        <div class="accordion-title">Prompt design - La technique AskUserQuestion</div>
+        <div class="accordion-title" data-i18n="step2.title">Prompt design - La technique AskUserQuestion</div>
         <span class="accordion-duration">30 min</span>
         <svg class="accordion-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
       </div>
       <div class="accordion-body"><div class="accordion-content">
         <div class="acc-block">
-          <div class="acc-block-title lc-1">Objectif</div>
+          <div class="acc-block-title lc-1" data-i18n="common.objective">Objectif</div>
           <p class="acc-objective">Apprendre la technique la plus puissante : ne PAS tout donner, mais demander a Claude de te poser des questions via AskUserQuestion. Ca produit un meilleur resultat ET ca consomme moins de tokens.</p>
         </div>
         <div class="acc-block">
-          <div class="acc-block-title lc-1">A faire (pas a pas)</div>
+          <div class="acc-block-title lc-1" data-i18n="common.todo_steps">A faire (pas a pas)</div>
           <ul class="acc-checklist" data-step="2">
             <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Tape un prompt vague "Fais-moi un reporting" et observe le resultat generique</span></li>
             <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Maintenant ajoute "Utilise AskUserQuestion pour me poser les bonnes questions avant de commencer" et compare</span></li>
@@ -846,34 +849,35 @@ footer .footer-links { display: flex; gap: 2rem; justify-content: center; margin
         </div>
 
         <div class="prompt-block">
-          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-header"><span class="prompt-block-label" data-i18n="common.prompt_copy">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)" data-i18n="common.copy">Copier</button></div>
           <div class="prompt-block-body">Je dois preparer [type de livrable] pour [audience]. Utilise AskUserQuestion pour me poser toutes les questions necessaires avant de commencer. Ne produis rien tant que tu n'as pas assez de contexte.</div>
         </div>
 
         <div class="result-block">
-          <div class="result-block-header"><span class="result-block-label">Resultat attendu</span></div>
+          <div class="result-block-header"><span class="result-block-label" data-i18n="common.expected">Resultat attendu</span></div>
           <div class="result-block-body">Claude te pose 5-8 questions ciblees via un formulaire structure : perimetre, periode, KPIs, public cible, format. Apres tes reponses, il produit un livrable 10x meilleur que sans questions.</div>
         </div>
 
         <div class="pole-example-block">
-          <div class="acc-block-title lc-1">Exemple pour ton pole</div>
+          <div class="acc-block-title lc-1" data-i18n="common.pole_example">Exemple pour ton pole</div>
           <div class="pole-example-item" data-pole="tech">"Je dois ecrire une RFC pour migrer notre auth de JWT vers OAuth2. Utilise AskUserQuestion."</div>
           <div class="pole-example-item" data-pole="revenue">"Je dois repondre a un appel d'offres hospitalier. Utilise AskUserQuestion pour cadrer."</div>
           <div class="pole-example-item" data-pole="qara">"Je dois preparer un audit interne qualite. Utilise AskUserQuestion avant de structurer."</div>
           <div class="pole-example-item" data-pole="product">"Je dois preparer un go/no-go pour le lancement de la feature X. AskUserQuestion."</div>
           <div class="pole-example-item" data-pole="medical">"Je dois synthetiser une revue de litterature sur les interactions. AskUserQuestion."</div>
           <div class="pole-example-item" data-pole="ga">"Je dois preparer la revue salariale annuelle. AskUserQuestion pour cadrer l'exercice."</div>
+          <div class="pole-example-item" data-pole="us">"Je dois preparer notre go-to-market US (cible hospitaliere + validation clinique + scope produit). Utilise AskUserQuestion pour cadrer."</div>
         </div>
 
-        <div class="callout callout-tip"><strong>Astuce</strong> - AskUserQuestion consomme moins de tokens qu'un long prompt initial car Claude ne genere pas de contenu inutile. Il pose des questions ciblees, tu reponds, et le livrable est produit en un seul passage.</div>
-        <div class="callout callout-remember"><strong>A retenir</strong> - Donne le contexte et l'objectif. Laisse Claude structurer l'approche via AskUserQuestion. C'est la difference entre un chatbot et un assistant.</div>
+        <div class="callout callout-tip"><strong data-i18n="common.tip">Astuce</strong> - AskUserQuestion consomme moins de tokens qu'un long prompt initial car Claude ne genere pas de contenu inutile. Il pose des questions ciblees, tu reponds, et le livrable est produit en un seul passage.</div>
+        <div class="callout callout-remember"><strong data-i18n="common.remember">A retenir</strong> - Donne le contexte et l'objectif. Laisse Claude structurer l'approche via AskUserQuestion. C'est la difference entre un chatbot et un assistant.</div>
 
         <div class="callout-exercise-wrap">
-          <div class="acc-block-title" style="color:var(--grad-start);">Exercice</div>
+          <div class="acc-block-title" style="color:var(--grad-start);" data-i18n="common.exercise">Exercice</div>
           <p style="font-size:0.9rem;">Prends une tache reelle de cette semaine. Formule-la en une phrase + "Utilise AskUserQuestion". Compare avec un prompt classique.</p>
           <div class="exercise-actions">
-            <button class="btn-validate bg-1" onclick="validateExercise(this, 2)">Termine</button>
-            <button class="btn-cancel" onclick="cancelExercise(this, 2)">Annuler</button>
+            <button class="btn-validate bg-1" onclick="validateExercise(this, 2)" data-i18n="common.done">Termine</button>
+            <button class="btn-cancel" onclick="cancelExercise(this, 2)" data-i18n="common.cancel">Annuler</button>
           </div>
         </div>
       </div></div>
@@ -883,13 +887,13 @@ footer .footer-links { display: flex; gap: 2rem; justify-content: center; margin
     <div class="accordion-item fade-in" data-step="3" data-mod="1">
       <div class="accordion-header" onclick="toggleAccordion(this)">
         <div class="accordion-num bg-1">3</div>
-        <div class="accordion-title">Artifacts et Projects</div>
+        <div class="accordion-title" data-i18n="step3.title">Artifacts et Projects</div>
         <span class="accordion-duration">45 min</span>
         <svg class="accordion-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
       </div>
       <div class="accordion-body"><div class="accordion-content">
         <div class="acc-block">
-          <div class="acc-block-title lc-1">Objectif</div>
+          <div class="acc-block-title lc-1" data-i18n="common.objective">Objectif</div>
           <p class="acc-objective">Comprendre les Artifacts (documents vivants modifiables en conversation) et les Projects (contexte persistant entre sessions) dans Claude Chat.</p>
         </div>
 
@@ -898,7 +902,7 @@ footer .footer-links { display: flex; gap: 2rem; justify-content: center; margin
         </div>
 
         <div class="acc-block">
-          <div class="acc-block-title lc-1">A faire (pas a pas)</div>
+          <div class="acc-block-title lc-1" data-i18n="common.todo_steps">A faire (pas a pas)</div>
           <ul class="acc-checklist" data-step="3">
             <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Demande a Claude de creer un artifact : "Cree un tableau de suivi projet avec objectifs, avancement, risques"</span></li>
             <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Modifie l'artifact en conversation : "Ajoute une colonne Impact" - observe la mise a jour en direct</span></li>
@@ -913,33 +917,34 @@ footer .footer-links { display: flex; gap: 2rem; justify-content: center; margin
         </div>
 
         <div class="prompt-block">
-          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-header"><span class="prompt-block-label" data-i18n="common.prompt_copy">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)" data-i18n="common.copy">Copier</button></div>
           <div class="prompt-block-body">Cree un tableau de bord projet avec : objectifs du trimestre, avancement par chantier (%), risques identifies, actions a prendre. Format : tableau structure avec code couleur.</div>
         </div>
 
         <div class="result-block">
-          <div class="result-block-header"><span class="result-block-label">Resultat attendu</span></div>
+          <div class="result-block-header"><span class="result-block-label" data-i18n="common.expected">Resultat attendu</span></div>
           <div class="result-block-body">Un artifact interactif avec un vrai tableau, modifiable en conversation. Tu peux ajouter des colonnes, changer des valeurs, reformater - tout en discutant.</div>
         </div>
 
         <div class="pole-example-block">
-          <div class="acc-block-title lc-1">Exemple pour ton pole</div>
+          <div class="acc-block-title lc-1" data-i18n="common.pole_example">Exemple pour ton pole</div>
           <div class="pole-example-item" data-pole="tech">Project "Refacto API" avec la spec technique et le schema de base de donnees</div>
           <div class="pole-example-item" data-pole="revenue">Project "Compte CHU Bordeaux" avec l'historique des echanges et la proposition</div>
           <div class="pole-example-item" data-pole="qara">Project "Audit ISO 13485" avec les documents de conformite et le plan d'audit</div>
           <div class="pole-example-item" data-pole="product">Project "Roadmap Q3" avec le backlog et les feedbacks utilisateurs</div>
           <div class="pole-example-item" data-pole="medical">Project "Revue interactions" avec les publications et les donnees Theriaque</div>
           <div class="pole-example-item" data-pole="ga">Project "Recrutement Data Engineer" avec la fiche de poste et la grille d'entretien</div>
+          <div class="pole-example-item" data-pole="us">Project "US Market Launch" avec les prospects hospitaliers, le plan de validation clinique et la roadmap de localisation produit</div>
         </div>
 
-        <div class="callout callout-tip"><strong>Astuce</strong> - Un Project bien alimente, c'est deja 50% du chemin vers un Claude personnalise. C'est le precurseur de l'arborescence Cowork qu'on verra au Niveau 2.</div>
+        <div class="callout callout-tip"><strong data-i18n="common.tip">Astuce</strong> - Un Project bien alimente, c'est deja 50% du chemin vers un Claude personnalise. C'est le precurseur de l'arborescence Cowork qu'on verra au Niveau 2.</div>
 
         <div class="callout-exercise-wrap">
-          <div class="acc-block-title" style="color:var(--grad-start);">Exercice</div>
+          <div class="acc-block-title" style="color:var(--grad-start);" data-i18n="common.exercise">Exercice</div>
           <p style="font-size:0.9rem;">Cree un Project pour un de tes chantiers en cours. Ajoute 2-3 documents. Pose une question et observe comment Claude utilise le contexte.</p>
           <div class="exercise-actions">
-            <button class="btn-validate bg-1" onclick="validateExercise(this, 3)">Termine</button>
-            <button class="btn-cancel" onclick="cancelExercise(this, 3)">Annuler</button>
+            <button class="btn-validate bg-1" onclick="validateExercise(this, 3)" data-i18n="common.done">Termine</button>
+            <button class="btn-cancel" onclick="cancelExercise(this, 3)" data-i18n="common.cancel">Annuler</button>
           </div>
         </div>
       </div></div>
@@ -953,9 +958,9 @@ footer .footer-links { display: flex; gap: 2rem; justify-content: center; margin
 <div class="level-bg-2" id="level-2">
 <section class="section">
   <div class="level-header fade-in">
-    <span class="level-pill bg-2">Niveau 2</span>
-    <h2>Cowork + Parametrage</h2>
-    <p>Installe l'app desktop, connecte tes outils, et construis ton espace de travail Claude personnalise.</p>
+    <span class="level-pill bg-2" data-i18n="lvl2.pill">Niveau 2</span>
+    <h2 data-i18n="lvl2.title">Cowork + Parametrage</h2>
+    <p data-i18n="lvl2.intro">Installe l'app desktop, connecte tes outils, et construis ton espace de travail Claude personnalise.</p>
   </div>
   <div class="module-progress"><div class="module-progress-fill" data-mod="2" style="background:var(--violet);"></div></div>
 
@@ -965,17 +970,17 @@ footer .footer-links { display: flex; gap: 2rem; justify-content: center; margin
     <div class="accordion-item fade-in" data-step="4" data-mod="2">
       <div class="accordion-header" onclick="toggleAccordion(this)">
         <div class="accordion-num bg-2">4</div>
-        <div class="accordion-title">Installer Cowork et decouvrir l'interface</div>
+        <div class="accordion-title" data-i18n="step4.title">Installer Cowork et decouvrir l'interface</div>
         <span class="accordion-duration">30 min</span>
         <svg class="accordion-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
       </div>
       <div class="accordion-body"><div class="accordion-content">
         <div class="acc-block">
-          <div class="acc-block-title lc-2">Objectif</div>
+          <div class="acc-block-title lc-2" data-i18n="common.objective">Objectif</div>
           <p class="acc-objective">Passer du chat web a l'app desktop. Claude peut maintenant lire et ecrire directement dans tes dossiers.</p>
         </div>
         <div class="acc-block">
-          <div class="acc-block-title lc-2">A faire (pas a pas)</div>
+          <div class="acc-block-title lc-2" data-i18n="common.todo_steps">A faire (pas a pas)</div>
           <ul class="acc-checklist" data-step="4">
             <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Telecharge l'app desktop Claude depuis claude.ai/download</span></li>
             <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Installe et connecte-toi avec ton email Synapse</span></li>
@@ -999,24 +1004,24 @@ footer .footer-links { display: flex; gap: 2rem; justify-content: center; margin
         </div>
 
         <div class="prompt-block">
-          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-header"><span class="prompt-block-label" data-i18n="common.prompt_copy">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)" data-i18n="common.copy">Copier</button></div>
           <div class="prompt-block-body">Lis tous les fichiers dans ce dossier. Pour chaque fichier, donne-moi : nom, type, et un resume en 1 phrase de ce qu'il contient.</div>
         </div>
 
         <div class="result-block">
-          <div class="result-block-header"><span class="result-block-label">Resultat attendu</span></div>
+          <div class="result-block-header"><span class="result-block-label" data-i18n="common.expected">Resultat attendu</span></div>
           <div class="result-block-body">Claude lit tes fichiers reels et produit un inventaire structure. Il supporte .docx, .xlsx, .pdf, .pptx, .csv et bien d'autres.</div>
         </div>
 
-        <div class="callout callout-tip"><strong>Astuce</strong> - Cowork lit les fichiers a la demande, il ne les charge pas tous en memoire. Tu peux pointer vers un dossier volumineux sans risque. Si Cowork est instable, bascule sur l'onglet Code - c'est le meme moteur, juste l'interface qui change.</div>
-        <div class="callout callout-remember"><strong>A retenir</strong> - Cowork = plus de copier-coller. Claude lit et ecrit directement dans tes dossiers. C'est le game changer pour les non-devs.</div>
+        <div class="callout callout-tip"><strong data-i18n="common.tip">Astuce</strong> - Cowork lit les fichiers a la demande, il ne les charge pas tous en memoire. Tu peux pointer vers un dossier volumineux sans risque. Si Cowork est instable, bascule sur l'onglet Code - c'est le meme moteur, juste l'interface qui change.</div>
+        <div class="callout callout-remember"><strong data-i18n="common.remember">A retenir</strong> - Cowork = plus de copier-coller. Claude lit et ecrit directement dans tes dossiers. C'est le game changer pour les non-devs.</div>
 
         <div class="callout-exercise-wrap">
-          <div class="acc-block-title" style="color:var(--grad-start);">Exercice</div>
+          <div class="acc-block-title" style="color:var(--grad-start);" data-i18n="common.exercise">Exercice</div>
           <p style="font-size:0.9rem;">Connecte un dossier de projet en cours. Demande a Claude de lire un fichier et d'en extraire les points cles.</p>
           <div class="exercise-actions">
-            <button class="btn-validate bg-2" onclick="validateExercise(this, 4)">Termine</button>
-            <button class="btn-cancel" onclick="cancelExercise(this, 4)">Annuler</button>
+            <button class="btn-validate bg-2" onclick="validateExercise(this, 4)" data-i18n="common.done">Termine</button>
+            <button class="btn-cancel" onclick="cancelExercise(this, 4)" data-i18n="common.cancel">Annuler</button>
           </div>
         </div>
       </div></div>
@@ -1026,17 +1031,17 @@ footer .footer-links { display: flex; gap: 2rem; justify-content: center; margin
     <div class="accordion-item fade-in" data-step="5" data-mod="2">
       <div class="accordion-header" onclick="toggleAccordion(this)">
         <div class="accordion-num bg-2">5</div>
-        <div class="accordion-title">Connecteurs et plugins</div>
+        <div class="accordion-title" data-i18n="step5.title">Connecteurs et plugins</div>
         <span class="accordion-duration">45 min</span>
         <svg class="accordion-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
       </div>
       <div class="accordion-body"><div class="accordion-content">
         <div class="acc-block">
-          <div class="acc-block-title lc-2">Objectif</div>
+          <div class="acc-block-title lc-2" data-i18n="common.objective">Objectif</div>
           <p class="acc-objective">Connecter tes outils du quotidien (Slack, Notion, Gmail, Calendar) pour que Claude puisse y acceder directement.</p>
         </div>
         <div class="acc-block">
-          <div class="acc-block-title lc-2">A faire (pas a pas)</div>
+          <div class="acc-block-title lc-2" data-i18n="common.todo_steps">A faire (pas a pas)</div>
           <ul class="acc-checklist" data-step="5">
             <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Dans la sidebar gauche de Cowork, clique sur "Customize"</span></li>
             <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Tu arrives sur l'ecran "Personnaliser Claude" avec 3 options : Connecteurs, Competences, Plugins</span></li>
@@ -1081,26 +1086,26 @@ footer .footer-links { display: flex; gap: 2rem; justify-content: center; margin
           </div>
         </div>
 
-        <div class="callout callout-tip"><strong>Securite</strong> - Par defaut, les outils de lecture (lire tes emails, ton agenda) sont en "Toujours autoriser". Les outils d'ecriture (envoyer un email, modifier un doc) necessitent ton approbation a chaque fois. C'est le bon reglage. Ne passe PAS les outils d'ecriture en "Toujours autoriser".</div>
+        <div class="callout callout-tip"><strong data-i18n="common.security">Securite</strong> - Par defaut, les outils de lecture (lire tes emails, ton agenda) sont en "Toujours autoriser". Les outils d'ecriture (envoyer un email, modifier un doc) necessitent ton approbation a chaque fois. C'est le bon reglage. Ne passe PAS les outils d'ecriture en "Toujours autoriser".</div>
 
         <div class="prompt-block">
-          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-header"><span class="prompt-block-label" data-i18n="common.prompt_copy">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)" data-i18n="common.copy">Copier</button></div>
           <div class="prompt-block-body">Lis mes 5 prochains evenements Google Calendar et mes 10 derniers messages Slack sur #general. Resume ce qui m'attend cette semaine.</div>
         </div>
 
         <div class="result-block">
-          <div class="result-block-header"><span class="result-block-label">Resultat attendu</span></div>
+          <div class="result-block-header"><span class="result-block-label" data-i18n="common.expected">Resultat attendu</span></div>
           <div class="result-block-body">Claude accede directement a Slack et Calendar via les connecteurs (rapide, via API). Plus besoin de copier-coller entre les outils.</div>
         </div>
 
-        <div class="callout callout-remember"><strong>A retenir</strong> - Les connecteurs transforment Claude d'un assistant qui lit tes fichiers en un assistant qui vit dans tes outils. Connecte Slack, Notion, Gmail et Calendar en priorite. Les connecteurs Bureau (Chrome, Word, PowerPoint, PDF) seront detailles a l'<strong>etape 9</strong>.</div>
+        <div class="callout callout-remember"><strong data-i18n="common.remember">A retenir</strong> - Les connecteurs transforment Claude d'un assistant qui lit tes fichiers en un assistant qui vit dans tes outils. Connecte Slack, Notion, Gmail et Calendar en priorite. Les connecteurs Bureau (Chrome, Word, PowerPoint, PDF) seront detailles a l'<strong>etape 9</strong>.</div>
 
         <div class="callout-exercise-wrap">
-          <div class="acc-block-title" style="color:var(--grad-start);">Exercice</div>
+          <div class="acc-block-title" style="color:var(--grad-start);" data-i18n="common.exercise">Exercice</div>
           <p style="font-size:0.9rem;">Connecte au moins 3 connecteurs (Slack, Gmail, Calendar). Teste chacun avec une question concrete.</p>
           <div class="exercise-actions">
-            <button class="btn-validate bg-2" onclick="validateExercise(this, 5)">Termine</button>
-            <button class="btn-cancel" onclick="cancelExercise(this, 5)">Annuler</button>
+            <button class="btn-validate bg-2" onclick="validateExercise(this, 5)" data-i18n="common.done">Termine</button>
+            <button class="btn-cancel" onclick="cancelExercise(this, 5)" data-i18n="common.cancel">Annuler</button>
           </div>
         </div>
       </div></div>
@@ -1110,13 +1115,13 @@ footer .footer-links { display: flex; gap: 2rem; justify-content: center; margin
     <div class="accordion-item fade-in" data-step="6" data-mod="2">
       <div class="accordion-header" onclick="toggleAccordion(this)">
         <div class="accordion-num bg-2">6</div>
-        <div class="accordion-title">Construire ton espace Claude-Work</div>
+        <div class="accordion-title" data-i18n="step6.title">Construire ton espace Claude-Work</div>
         <span class="accordion-duration">60 min</span>
         <svg class="accordion-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
       </div>
       <div class="accordion-body"><div class="accordion-content">
         <div class="acc-block">
-          <div class="acc-block-title lc-2">Objectif</div>
+          <div class="acc-block-title lc-2" data-i18n="common.objective">Objectif</div>
           <p class="acc-objective">Creer l'arborescence qui transforme Claude d'un assistant generique en TON assistant. Remplir les fichiers de contexte pour qu'il te connaisse. Tester que tout fonctionne.</p>
         </div>
 
@@ -1139,7 +1144,7 @@ footer .footer-links { display: flex; gap: 2rem; justify-content: center; margin
         </div>
 
         <div class="prompt-block">
-          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-header"><span class="prompt-block-label" data-i18n="common.prompt_copy">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)" data-i18n="common.copy">Copier</button></div>
           <div class="prompt-block-body">Cree l'arborescence suivante dans mon dossier Documents :
 Documents/Claude-Work/
   .claude/
@@ -1160,7 +1165,7 @@ Puis demande-moi si j'ai des templates a copier dans TEMPLATES/ des maintenant.<
         </div>
 
         <div class="prompt-block">
-          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-header"><span class="prompt-block-label" data-i18n="common.prompt_copy">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)" data-i18n="common.copy">Copier</button></div>
           <div class="prompt-block-body">Voici mon profil LinkedIn [colle le lien ou le texte] et ma fiche de poste [colle ou donne le fichier].
 Extrais-en un maximum d'infos : identite, parcours, poste, equipe, responsabilites, competences, outils. Si certains themes ne sont pas couverts (manager, localisation, domaines ou Claude peut m'aider le plus), utilise AskUserQuestion pour completer.
 Redige ensuite about-me.md toi-meme. Ne me donne pas un template vide. Montre-moi le resultat et demande "C'est fidele ? Tu veux ajuster quelque chose ?"</div>
@@ -1171,7 +1176,7 @@ Redige ensuite about-me.md toi-meme. Ne me donne pas un template vide. Montre-mo
         </div>
 
         <div class="prompt-block">
-          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-header"><span class="prompt-block-label" data-i18n="common.prompt_copy">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)" data-i18n="common.copy">Copier</button></div>
           <div class="prompt-block-body">Voici des messages que j'ai ecrits et dont je suis satisfait du ton [colle 3-5 messages Slack, mails ou Notion].
 
 Analyse mon style en profondeur : longueur de phrase, ponctuation, emojis ou pas, tutoiement/vouvoiement, ouvertures, clotures, tics de langage, mots recurrents, niveau de familiarite. Si tu as besoin d'affiner, utilise AskUserQuestion.
@@ -1193,7 +1198,7 @@ Mieux vaut trop de contraintes que pas assez. Montre-moi le resultat et demande 
         </div>
 
         <div class="prompt-block">
-          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-header"><span class="prompt-block-label" data-i18n="common.prompt_copy">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)" data-i18n="common.copy">Copier</button></div>
           <div class="prompt-block-body">Je travaille chez Synapse Medicine. Va chercher les infos sur synapse-medicine.com et sur ce que tu connais deja de l'entreprise : secteur, activite, produits, taille, localisation, culture.
 Utilise AskUserQuestion pour completer ce que tu ne trouves pas : mon equipe (nom, taille, rattachement, mission), la convention collective applicable, et les outils internes (Slack, Notion, Google Workspace, Jira...).
 Redige my-company.md et montre-moi le resultat. Confirme les infos trouvees avant de les integrer.</div>
@@ -1204,7 +1209,7 @@ Redige my-company.md et montre-moi le resultat. Confirme les infos trouvees avan
         </div>
 
         <div class="prompt-block">
-          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-header"><span class="prompt-block-label" data-i18n="common.prompt_copy">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)" data-i18n="common.copy">Copier</button></div>
           <div class="prompt-block-body">Lis les 3 fichiers ABOUT-ME/ et complete le CLAUDE.md pour en faire un resume executif de 40-60 lignes max. C'est le fichier que Claude lit en premier a chaque session - il doit etre court et pointer vers les fichiers de detail. Structure :
 1. Identite (qui je suis, poste, equipe - 2-3 lignes)
 2. Fichiers de reference - tableau : quel fichier lire selon le contexte
@@ -1233,22 +1238,22 @@ Montre-moi le resultat.</div>
         </div>
 
         <div class="result-block">
-          <div class="result-block-header"><span class="result-block-label">Resultat attendu</span></div>
+          <div class="result-block-header"><span class="result-block-label" data-i18n="common.expected">Resultat attendu</span></div>
           <div class="result-block-body">
             Un espace Claude-Work complet avec 4 fichiers remplis a partir de TES vrais contenus. <strong>Test final</strong> : ferme la session, ouvre-en une nouvelle dans le dossier Claude-Work, tape "Qui suis-je ?" Claude doit repondre avec tes infos sans que tu les redonnes.
           </div>
         </div>
 
-        <div class="callout callout-tip"><strong>Regle d'or</strong> - Dans my-rules.md, ajoute toujours "Sois concis et pertinent par defaut. Developpe sur demande." Ca evite les reponses fleuve et force Claude a aller droit au point.</div>
-        <div class="callout callout-tip"><strong>Astuce</strong> - Rafraichis ton arborescence avec Claude une fois par semaine. Mets a jour my-company.md chaque trimestre (objectifs, chantiers). Ajoute une regle dans my-rules.md chaque fois que Claude fait un truc qui ne te convient pas.</div>
-        <div class="callout callout-remember"><strong>A retenir</strong> - 1h de setup = des centaines d'heures de meilleurs outputs. Le fichier my-rules.md est le plus important : c'est lui qui elimine le "ton Claude" generique.</div>
+        <div class="callout callout-tip"><strong data-i18n="common.golden_rule">Regle d'or</strong> - Dans my-rules.md, ajoute toujours "Sois concis et pertinent par defaut. Developpe sur demande." Ca evite les reponses fleuve et force Claude a aller droit au point.</div>
+        <div class="callout callout-tip"><strong data-i18n="common.tip">Astuce</strong> - Rafraichis ton arborescence avec Claude une fois par semaine. Mets a jour my-company.md chaque trimestre (objectifs, chantiers). Ajoute une regle dans my-rules.md chaque fois que Claude fait un truc qui ne te convient pas.</div>
+        <div class="callout callout-remember"><strong data-i18n="common.remember">A retenir</strong> - 1h de setup = des centaines d'heures de meilleurs outputs. Le fichier my-rules.md est le plus important : c'est lui qui elimine le "ton Claude" generique.</div>
 
         <div class="callout-exercise-wrap">
-          <div class="acc-block-title" style="color:var(--grad-start);">Exercice</div>
+          <div class="acc-block-title" style="color:var(--grad-start);" data-i18n="common.exercise">Exercice</div>
           <p style="font-size:0.9rem;">Cree ton arborescence. Remplis les 4 fichiers. Teste avec "Qui suis-je ?" dans une nouvelle session.</p>
           <div class="exercise-actions">
-            <button class="btn-validate bg-2" onclick="validateExercise(this, 6)">Termine</button>
-            <button class="btn-cancel" onclick="cancelExercise(this, 6)">Annuler</button>
+            <button class="btn-validate bg-2" onclick="validateExercise(this, 6)" data-i18n="common.done">Termine</button>
+            <button class="btn-cancel" onclick="cancelExercise(this, 6)" data-i18n="common.cancel">Annuler</button>
           </div>
         </div>
       </div></div>
@@ -1282,9 +1287,9 @@ Montre-moi le resultat.</div>
 <div class="level-bg-3" id="level-3">
 <section class="section">
   <div class="level-header fade-in">
-    <span class="level-pill bg-3">Niveau 3</span>
-    <h2>Skills & Automatisation</h2>
-    <p>Automatise tes taches recurrentes, programme des routines, et connecte les outils bureau.</p>
+    <span class="level-pill bg-3" data-i18n="lvl3.pill">Niveau 3</span>
+    <h2 data-i18n="lvl3.title">Skills & Automatisation</h2>
+    <p data-i18n="lvl3.intro">Automatise tes taches recurrentes, programme des routines, et connecte les outils bureau.</p>
   </div>
   <div class="module-progress"><div class="module-progress-fill" data-mod="3" style="background:var(--magenta);"></div></div>
 
@@ -1294,13 +1299,13 @@ Montre-moi le resultat.</div>
     <div class="accordion-item fade-in" data-step="7" data-mod="3">
       <div class="accordion-header" onclick="toggleAccordion(this)">
         <div class="accordion-num bg-3">7</div>
-        <div class="accordion-title">Creer ton premier Skill</div>
+        <div class="accordion-title" data-i18n="step7.title">Creer ton premier Skill</div>
         <span class="accordion-duration">60 min</span>
         <svg class="accordion-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
       </div>
       <div class="accordion-body"><div class="accordion-content">
         <div class="acc-block">
-          <div class="acc-block-title lc-3">Objectif</div>
+          <div class="acc-block-title lc-3" data-i18n="common.objective">Objectif</div>
           <p class="acc-objective">Automatiser une tache recurrente en creant un skill base sur tes vrais livrables. Un skill, c'est un mini-mode d'emploi que Claude lit quand tu lui demandes un type de tache precis (CR de reunion, mail de refus candidat, brief produit, reporting...). La cle : partir de sources reelles, pas de regles abstraites. Plus les sources sont riches, plus la skill est fidele.</p>
         </div>
 
@@ -1330,7 +1335,7 @@ Montre-moi le resultat.</div>
         </div>
 
         <div class="acc-block">
-          <div class="acc-block-title lc-3">A faire</div>
+          <div class="acc-block-title lc-3" data-i18n="common.todo">A faire</div>
           <ul class="acc-checklist" data-step="7">
             <li onclick="toggleCheck(this)"><span class="check-box"></span><span><strong>Phase 1 - Identifier :</strong> choisis une tache que tu fais au moins 2x par mois et formule la demande naturellement (ex : "fais-moi un CR", "prepare un mail de refus")</span></li>
             <li onclick="toggleCheck(this)"><span class="check-box"></span><span><strong>Phase 2 - Collecter :</strong> rassemble 2-3 exemples REELS de livrables finis (pas des templates vides). C'est LA phase qui fait la difference entre une skill generique et une skill excellente</span></li>
@@ -1341,45 +1346,46 @@ Montre-moi le resultat.</div>
         </div>
 
         <div class="prompt-block">
-          <div class="prompt-block-header"><span class="prompt-block-label">Prompt Phase 1 - Identifier la tache</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-header"><span class="prompt-block-label">Prompt Phase 1 - Identifier la tache</span><button class="btn-copy" onclick="copyPrompt(this)" data-i18n="common.copy">Copier</button></div>
           <div class="prompt-block-body">Je veux creer ma premiere skill. Aide-moi a identifier la bonne tache. Pose-moi des questions sur mes taches recurrentes (frequence, format, variantes) et propose-moi le meilleur candidat pour une skill.</div>
         </div>
 
         <div class="prompt-block">
-          <div class="prompt-block-header"><span class="prompt-block-label">Prompt Phase 2+3 - Collecter et construire</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-header"><span class="prompt-block-label">Prompt Phase 2+3 - Collecter et construire</span><button class="btn-copy" onclick="copyPrompt(this)" data-i18n="common.copy">Copier</button></div>
           <div class="prompt-block-body">Voici [2-3] exemples reels de [type de livrable] que j'ai produits [colle-les ou donne les fichiers]. Analyse en profondeur : structure, ton, patterns recurrents, longueur, elements obligatoires, regles implicites. Puis cree une skill dans .claude/skills/[nom]/SKILL.md qui reproduit exactement mon style. Le SKILL.md doit contenir : principe fondamental, declencheurs typiques, structure du livrable, regles specifiques, anti-patterns a eviter, et un exemple de reference complet.</div>
         </div>
 
         <div class="prompt-block">
-          <div class="prompt-block-header"><span class="prompt-block-label">Prompt Phase 4 - Tester</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-header"><span class="prompt-block-label">Prompt Phase 4 - Tester</span><button class="btn-copy" onclick="copyPrompt(this)" data-i18n="common.copy">Copier</button></div>
           <div class="prompt-block-body">Teste la skill que tu viens de creer sur ce cas concret : [decris le cas]. Produis le livrable en suivant le SKILL.md. Je vais comparer avec ce que j'aurais fait moi-meme.</div>
         </div>
 
         <div class="result-block">
-          <div class="result-block-header"><span class="result-block-label">Resultat attendu</span></div>
+          <div class="result-block-header"><span class="result-block-label" data-i18n="common.expected">Resultat attendu</span></div>
           <div class="result-block-body">Un dossier .claude/skills/[nom-de-ta-skill]/ avec un SKILL.md complet (principe, declencheurs, structure, regles, anti-patterns, exemple) + tes exemples sources dans un sous-dossier exemples/. Quand tu formules ta demande naturellement, Claude produit dans TON format et range dans OUTPUTS/.</div>
         </div>
 
         <div class="pole-example-block">
-          <div class="acc-block-title lc-3">Exemple pour ton pole</div>
+          <div class="acc-block-title lc-3" data-i18n="common.pole_example">Exemple pour ton pole</div>
           <div class="pole-example-item" data-pole="tech">Skill "RFC technique" ou "Code review summary" base sur tes vraies RFCs</div>
           <div class="pole-example-item" data-pole="revenue">Skill "Note de synthese client" ou "Proposition commerciale" base sur tes vrais livrables</div>
           <div class="pole-example-item" data-pole="qara">Skill "Rapport d'audit" ou "Non-conformite" base sur tes vrais rapports</div>
           <div class="pole-example-item" data-pole="product">Skill "Spec fonctionnelle" ou "Go/No-go analysis" base sur tes vraies specs</div>
           <div class="pole-example-item" data-pole="medical">Skill "Revue de litterature" ou "Avis pharmaceutique" base sur tes vrais avis</div>
           <div class="pole-example-item" data-pole="ga">Skill "Note de cadrage" ou "Reporting mensuel" base sur tes vrais reportings</div>
+          <div class="pole-example-item" data-pole="us">Skill "US partner brief" ou "Cross-functional weekly" base sur tes vrais livrables transverses</div>
         </div>
 
-        <div class="callout callout-tip"><strong>Astuce</strong> - La qualite d'une skill depend a 80% de la qualite des sources. Plus tu fournis d'exemples reels, plus Claude capte les regles implicites (ce que tu fais systematiquement sans le verbaliser). Un bon SKILL.md contient toujours un "Principe fondamental" (l'approche, pas juste la tache) et des "Anti-patterns" (ce qu'il ne faut JAMAIS faire).</div>
+        <div class="callout callout-tip"><strong data-i18n="common.tip">Astuce</strong> - La qualite d'une skill depend a 80% de la qualite des sources. Plus tu fournis d'exemples reels, plus Claude capte les regles implicites (ce que tu fais systematiquement sans le verbaliser). Un bon SKILL.md contient toujours un "Principe fondamental" (l'approche, pas juste la tache) et des "Anti-patterns" (ce qu'il ne faut JAMAIS faire).</div>
 
-        <div class="callout callout-tip"><strong>Structure du SKILL.md</strong> - Un bon SKILL.md suit cette structure : (1) Principe fondamental - 1-2 phrases sur l'approche (2) Declencheurs typiques - les formulations naturelles (3) Sources de reference - pointer vers le dossier exemples/ (4) Structure du livrable - sections detaillees (5) Regles specifiques - extraites de l'analyse (6) Anti-patterns - ce qu'il ne faut jamais faire (7) Exemple de reference complet.</div>
+        <div class="callout callout-tip"><strong data-i18n="common.skill_structure">Structure du SKILL.md</strong> - Un bon SKILL.md suit cette structure : (1) Principe fondamental - 1-2 phrases sur l'approche (2) Declencheurs typiques - les formulations naturelles (3) Sources de reference - pointer vers le dossier exemples/ (4) Structure du livrable - sections detaillees (5) Regles specifiques - extraites de l'analyse (6) Anti-patterns - ce qu'il ne faut jamais faire (7) Exemple de reference complet.</div>
 
         <div class="callout-exercise-wrap">
-          <div class="acc-block-title" style="color:var(--grad-start);">Exercice</div>
+          <div class="acc-block-title" style="color:var(--grad-start);" data-i18n="common.exercise">Exercice</div>
           <p style="font-size:0.9rem;">Identifie ta tache la plus recurrente. Rassemble 2-3 livrables finis. Utilise les prompts ci-dessus dans l'ordre (Phase 1, puis 2+3, puis 4). Itere jusqu'a ce que le resultat corresponde a ce que tu aurais fait toi-meme.</p>
           <div class="exercise-actions">
-            <button class="btn-validate bg-3" onclick="validateExercise(this, 7)">Termine</button>
-            <button class="btn-cancel" onclick="cancelExercise(this, 7)">Annuler</button>
+            <button class="btn-validate bg-3" onclick="validateExercise(this, 7)" data-i18n="common.done">Termine</button>
+            <button class="btn-cancel" onclick="cancelExercise(this, 7)" data-i18n="common.cancel">Annuler</button>
           </div>
         </div>
       </div></div>
@@ -1389,13 +1395,13 @@ Montre-moi le resultat.</div>
     <div class="accordion-item fade-in" data-step="8" data-mod="3">
       <div class="accordion-header" onclick="toggleAccordion(this)">
         <div class="accordion-num bg-3">8</div>
-        <div class="accordion-title">Taches programmees</div>
+        <div class="accordion-title" data-i18n="step8.title">Taches programmees</div>
         <span class="accordion-duration">40 min</span>
         <svg class="accordion-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
       </div>
       <div class="accordion-body"><div class="accordion-content">
         <div class="acc-block">
-          <div class="acc-block-title lc-3">Objectif</div>
+          <div class="acc-block-title lc-3" data-i18n="common.objective">Objectif</div>
           <p class="acc-objective">Programmer Claude pour executer des taches automatiquement, meme quand tu n'es pas la.</p>
         </div>
 
@@ -1418,7 +1424,7 @@ Montre-moi le resultat.</div>
         </div>
 
         <div class="acc-block">
-          <div class="acc-block-title lc-3">A faire</div>
+          <div class="acc-block-title lc-3" data-i18n="common.todo">A faire</div>
           <ul class="acc-checklist" data-step="8">
             <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Dans la sidebar Cowork, clique sur "Scheduled" pour voir les taches programmees</span></li>
             <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Cree ta premiere routine avec le prompt ci-dessous</span></li>
@@ -1427,23 +1433,23 @@ Montre-moi le resultat.</div>
         </div>
 
         <div class="prompt-block">
-          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-header"><span class="prompt-block-label" data-i18n="common.prompt_copy">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)" data-i18n="common.copy">Copier</button></div>
           <div class="prompt-block-body">Programme une routine qui, chaque lundi a 9h, lit mes derniers echanges Slack et Notion de la semaine precedente et genere un resume de ce qui s'est passe : decisions prises, actions en cours, sujets en attente. Range le resultat dans OUTPUTS/recaps/.</div>
         </div>
 
         <div class="result-block">
-          <div class="result-block-header"><span class="result-block-label">Resultat attendu</span></div>
+          <div class="result-block-header"><span class="result-block-label" data-i18n="common.expected">Resultat attendu</span></div>
           <div class="result-block-body">Un resume automatique de ta semaine, genere sans effort. Chaque lundi, tu trouves un recap pret a lire.</div>
         </div>
 
-        <div class="callout callout-tip"><strong>Astuce</strong> - Commence par une tache simple et previsible. Les routines Anthropic tournent 24/7 sans que ton Mac soit allume. Les taches creatives marchent mieux en interactif.</div>
+        <div class="callout callout-tip"><strong data-i18n="common.tip">Astuce</strong> - Commence par une tache simple et previsible. Les routines Anthropic tournent 24/7 sans que ton Mac soit allume. Les taches creatives marchent mieux en interactif.</div>
 
         <div class="callout-exercise-wrap">
-          <div class="acc-block-title" style="color:var(--grad-start);">Exercice</div>
+          <div class="acc-block-title" style="color:var(--grad-start);" data-i18n="common.exercise">Exercice</div>
           <p style="font-size:0.9rem;">Programme une tache qui te fait gagner 15 minutes par semaine. Verifie le resultat apres la premiere execution.</p>
           <div class="exercise-actions">
-            <button class="btn-validate bg-3" onclick="validateExercise(this, 8)">Termine</button>
-            <button class="btn-cancel" onclick="cancelExercise(this, 8)">Annuler</button>
+            <button class="btn-validate bg-3" onclick="validateExercise(this, 8)" data-i18n="common.done">Termine</button>
+            <button class="btn-cancel" onclick="cancelExercise(this, 8)" data-i18n="common.cancel">Annuler</button>
           </div>
         </div>
       </div></div>
@@ -1453,18 +1459,18 @@ Montre-moi le resultat.</div>
     <div class="accordion-item fade-in" data-step="9" data-mod="3">
       <div class="accordion-header" onclick="toggleAccordion(this)">
         <div class="accordion-num bg-3">9</div>
-        <div class="accordion-title">Connecteurs avances : Chrome, Word, PowerPoint</div>
+        <div class="accordion-title" data-i18n="step9.title">Connecteurs avances : Chrome, Word, PowerPoint</div>
         <span class="accordion-duration">40 min</span>
         <svg class="accordion-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
       </div>
       <div class="accordion-body"><div class="accordion-content">
         <div class="acc-block">
-          <div class="acc-block-title lc-3">Objectif</div>
+          <div class="acc-block-title lc-3" data-i18n="common.objective">Objectif</div>
           <p class="acc-objective">Aller au-dela des connecteurs web. Claude peut piloter Chrome, creer des presentations PowerPoint, rediger dans Word, et manipuler des PDFs.</p>
         </div>
 
         <div class="acc-block">
-          <div class="acc-block-title lc-3">A faire</div>
+          <div class="acc-block-title lc-3" data-i18n="common.todo">A faire</div>
           <ul class="acc-checklist" data-step="9">
             <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Dans Customize > Connecteurs > Bureau, active "Claude in Chrome" (inclus par defaut)</span></li>
             <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Installe l'extension Chrome "Claude in Chrome" depuis le Chrome Web Store</span></li>
@@ -1476,23 +1482,23 @@ Montre-moi le resultat.</div>
         </div>
 
         <div class="prompt-block">
-          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-header"><span class="prompt-block-label" data-i18n="common.prompt_copy">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)" data-i18n="common.copy">Copier</button></div>
           <div class="prompt-block-body">Cree une presentation PowerPoint de 5 slides sur [sujet]. Utilise les couleurs Synapse (bleu #00A0FF, violet #BC2DFF). Slide 1 = titre, Slide 2 = contexte, Slide 3-4 = contenu principal, Slide 5 = next steps.</div>
         </div>
 
         <div class="result-block">
-          <div class="result-block-header"><span class="result-block-label">Resultat attendu</span></div>
+          <div class="result-block-header"><span class="result-block-label" data-i18n="common.expected">Resultat attendu</span></div>
           <div class="result-block-body">Un fichier .pptx genere directement, ouvrable dans PowerPoint ou Google Slides. Claude peut aussi ouvrir et modifier des presentations existantes.</div>
         </div>
 
-        <div class="callout callout-tip"><strong>Astuce</strong> - Claude in Chrome navigue sur le web pour toi (lecture d'articles, remplissage de formulaires). PowerPoint et Word creent des fichiers natifs que tu peux ouvrir et modifier normalement. Combine-les avec tes skills pour des workflows complets.</div>
+        <div class="callout callout-tip"><strong data-i18n="common.tip">Astuce</strong> - Claude in Chrome navigue sur le web pour toi (lecture d'articles, remplissage de formulaires). PowerPoint et Word creent des fichiers natifs que tu peux ouvrir et modifier normalement. Combine-les avec tes skills pour des workflows complets.</div>
 
         <div class="callout-exercise-wrap">
-          <div class="acc-block-title" style="color:var(--grad-start);">Exercice</div>
+          <div class="acc-block-title" style="color:var(--grad-start);" data-i18n="common.exercise">Exercice</div>
           <p style="font-size:0.9rem;">Active un connecteur Bureau et produis un livrable reel (presentation, document, ou PDF rempli).</p>
           <div class="exercise-actions">
-            <button class="btn-validate bg-3" onclick="validateExercise(this, 9)">Termine</button>
-            <button class="btn-cancel" onclick="cancelExercise(this, 9)">Annuler</button>
+            <button class="btn-validate bg-3" onclick="validateExercise(this, 9)" data-i18n="common.done">Termine</button>
+            <button class="btn-cancel" onclick="cancelExercise(this, 9)" data-i18n="common.cancel">Annuler</button>
           </div>
         </div>
       </div></div>
@@ -1506,9 +1512,9 @@ Montre-moi le resultat.</div>
 <div class="level-bg-4" id="level-4">
 <section class="section">
   <div class="level-header fade-in">
-    <span class="level-pill bg-4">Niveau 4</span>
-    <h2>Power User</h2>
-    <p>Ajoute des garde-fous automatiques et delegue a des sous-agents specialises.</p>
+    <span class="level-pill bg-4" data-i18n="lvl4.pill">Niveau 4</span>
+    <h2 data-i18n="lvl4.title">Power User</h2>
+    <p data-i18n="lvl4.intro">Ajoute des garde-fous automatiques et delegue a des sous-agents specialises.</p>
   </div>
   <div class="module-progress"><div class="module-progress-fill" data-mod="4" style="background:var(--teal);"></div></div>
 
@@ -1518,13 +1524,13 @@ Montre-moi le resultat.</div>
     <div class="accordion-item fade-in" data-step="10" data-mod="4">
       <div class="accordion-header" onclick="toggleAccordion(this)">
         <div class="accordion-num bg-4">10</div>
-        <div class="accordion-title">Hooks - Garde-fous automatiques</div>
+        <div class="accordion-title" data-i18n="step10.title">Hooks - Garde-fous automatiques</div>
         <span class="accordion-duration">40 min</span>
         <svg class="accordion-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
       </div>
       <div class="accordion-body"><div class="accordion-content">
         <div class="acc-block">
-          <div class="acc-block-title lc-4">Objectif</div>
+          <div class="acc-block-title lc-4" data-i18n="common.objective">Objectif</div>
           <p class="acc-objective">Mettre en place des regles automatiques qui s'executent avant ou apres les actions de Claude. Ce n'est pas de l'IA, c'est du code deterministe - comme des git hooks.</p>
         </div>
 
@@ -1553,7 +1559,7 @@ Montre-moi le resultat.</div>
         </div>
 
         <div class="acc-block">
-          <div class="acc-block-title lc-4">A faire</div>
+          <div class="acc-block-title lc-4" data-i18n="common.todo">A faire</div>
           <ul class="acc-checklist" data-step="10">
             <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Comprends le principe : Evenement > Filtre > Action automatique</span></li>
             <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Demande a Claude de creer ton premier hook avec le prompt ci-dessous</span></li>
@@ -1563,23 +1569,23 @@ Montre-moi le resultat.</div>
         </div>
 
         <div class="prompt-block">
-          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-header"><span class="prompt-block-label" data-i18n="common.prompt_copy">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)" data-i18n="common.copy">Copier</button></div>
           <div class="prompt-block-body">Cree un hook simple dans .claude/settings.json qui m'envoie une notification macOS quand tu attends mon input. Explique-moi ce que tu as fait.</div>
         </div>
 
         <div class="result-block">
-          <div class="result-block-header"><span class="result-block-label">Resultat attendu</span></div>
+          <div class="result-block-header"><span class="result-block-label" data-i18n="common.expected">Resultat attendu</span></div>
           <div class="result-block-body">Un fichier .claude/settings.json avec un hook Notification fonctionnel. Tu recois une notification macOS chaque fois que Claude attend ton input.</div>
         </div>
 
-        <div class="callout callout-tip"><strong>Astuce</strong> - Les hooks RENFORCENT les restrictions. Une instruction dans CLAUDE.md est une demande. Un hook est une application. Si une regle doit tenir a chaque fois, fais-en un hook. Pour les demandes complexes, tu peux aussi creer un hook /plan qui active le mode planification de Claude.</div>
+        <div class="callout callout-tip"><strong data-i18n="common.tip">Astuce</strong> - Les hooks RENFORCENT les restrictions. Une instruction dans CLAUDE.md est une demande. Un hook est une application. Si une regle doit tenir a chaque fois, fais-en un hook. Pour les demandes complexes, tu peux aussi creer un hook /plan qui active le mode planification de Claude.</div>
 
         <div class="callout-exercise-wrap">
-          <div class="acc-block-title" style="color:var(--grad-start);">Exercice</div>
+          <div class="acc-block-title" style="color:var(--grad-start);" data-i18n="common.exercise">Exercice</div>
           <p style="font-size:0.9rem;">Cree un hook de notification. Teste qu'il fonctionne.</p>
           <div class="exercise-actions">
-            <button class="btn-validate bg-4" onclick="validateExercise(this, 10)">Termine</button>
-            <button class="btn-cancel" onclick="cancelExercise(this, 10)">Annuler</button>
+            <button class="btn-validate bg-4" onclick="validateExercise(this, 10)" data-i18n="common.done">Termine</button>
+            <button class="btn-cancel" onclick="cancelExercise(this, 10)" data-i18n="common.cancel">Annuler</button>
           </div>
         </div>
       </div></div>
@@ -1589,18 +1595,18 @@ Montre-moi le resultat.</div>
     <div class="accordion-item fade-in" data-step="11" data-mod="4">
       <div class="accordion-header" onclick="toggleAccordion(this)">
         <div class="accordion-num bg-4">11</div>
-        <div class="accordion-title">Subagents - Deleguer des sous-taches</div>
+        <div class="accordion-title" data-i18n="step11.title">Subagents - Deleguer des sous-taches</div>
         <span class="accordion-duration">50 min</span>
         <svg class="accordion-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
       </div>
       <div class="accordion-body"><div class="accordion-content">
         <div class="acc-block">
-          <div class="acc-block-title lc-4">Objectif</div>
+          <div class="acc-block-title lc-4" data-i18n="common.objective">Objectif</div>
           <p class="acc-objective">Deleguer a des sous-agents specialises avec leur propre contexte isole. Tu envoies une mission, tu recuperes le resultat resume.</p>
         </div>
 
         <div class="acc-block">
-          <div class="acc-block-title lc-4">A faire</div>
+          <div class="acc-block-title lc-4" data-i18n="common.todo">A faire</div>
           <ul class="acc-checklist" data-step="11">
             <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Comprends le concept : un subagent a sa propre fenetre de contexte. Il ne voit que ce que tu lui donnes.</span></li>
             <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Teste le prompt ci-dessous avec deux documents reels</span></li>
@@ -1609,33 +1615,34 @@ Montre-moi le resultat.</div>
         </div>
 
         <div class="prompt-block">
-          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-header"><span class="prompt-block-label" data-i18n="common.prompt_copy">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)" data-i18n="common.copy">Copier</button></div>
           <div class="prompt-block-body">Lance deux subagents en parallele. Le premier analyse le document A et extrait les KPIs. Le deuxieme analyse le document B et extrait les risques. Fusionne les resultats dans une note de synthese.</div>
         </div>
 
         <div class="result-block">
-          <div class="result-block-header"><span class="result-block-label">Resultat attendu</span></div>
+          <div class="result-block-header"><span class="result-block-label" data-i18n="common.expected">Resultat attendu</span></div>
           <div class="result-block-body">Deux analyses en parallele, fusionnees en un seul livrable. Le contexte principal n'est pas pollue par les details.</div>
         </div>
 
         <div class="pole-example-block">
-          <div class="acc-block-title lc-4">Exemple pour ton pole</div>
+          <div class="acc-block-title lc-4" data-i18n="common.pole_example">Exemple pour ton pole</div>
           <div class="pole-example-item" data-pole="tech">Subagent 1 analyse le code, Subagent 2 ecrit les tests</div>
           <div class="pole-example-item" data-pole="revenue">Subagent 1 recherche le prospect, Subagent 2 redige l'email personnalise</div>
           <div class="pole-example-item" data-pole="qara">Subagent 1 verifie la conformite, Subagent 2 redige le rapport d'ecart</div>
           <div class="pole-example-item" data-pole="product">Subagent 1 analyse les feedbacks, Subagent 2 redige la spec</div>
           <div class="pole-example-item" data-pole="medical">Subagent 1 analyse les publications, Subagent 2 synthetise les conclusions</div>
           <div class="pole-example-item" data-pole="ga">Subagent 1 analyse le CV, Subagent 2 prepare les questions d'entretien</div>
+          <div class="pole-example-item" data-pole="us">Subagent 1 analyse l'appel d'offres hospitalier US, Subagent 2 redige la reponse cross-functional (commercial + clinique + produit)</div>
         </div>
 
-        <div class="callout callout-tip"><strong>Astuce</strong> - Utilise un subagent chaque fois qu'une tache secondaire risque d'inonder ta conversation. Le subagent lit 50 fichiers mais ne te renvoie que 10 lignes de conclusions.</div>
+        <div class="callout callout-tip"><strong data-i18n="common.tip">Astuce</strong> - Utilise un subagent chaque fois qu'une tache secondaire risque d'inonder ta conversation. Le subagent lit 50 fichiers mais ne te renvoie que 10 lignes de conclusions.</div>
 
         <div class="callout-exercise-wrap">
-          <div class="acc-block-title" style="color:var(--grad-start);">Exercice</div>
+          <div class="acc-block-title" style="color:var(--grad-start);" data-i18n="common.exercise">Exercice</div>
           <p style="font-size:0.9rem;">Identifie une tache decomposable en 2 sous-taches. Lance un subagent pour chacune.</p>
           <div class="exercise-actions">
-            <button class="btn-validate bg-4" onclick="validateExercise(this, 11)">Termine</button>
-            <button class="btn-cancel" onclick="cancelExercise(this, 11)">Annuler</button>
+            <button class="btn-validate bg-4" onclick="validateExercise(this, 11)" data-i18n="common.done">Termine</button>
+            <button class="btn-cancel" onclick="cancelExercise(this, 11)" data-i18n="common.cancel">Annuler</button>
           </div>
         </div>
       </div></div>
@@ -1649,9 +1656,9 @@ Montre-moi le resultat.</div>
 <div class="level-bg-5" id="level-5">
 <section class="section">
   <div class="level-header fade-in">
-    <span class="level-pill bg-5">Niveau 5</span>
-    <h2>Orchestration</h2>
-    <p>Tu n'es plus l'operateur, tu es le chef d'orchestre.</p>
+    <span class="level-pill bg-5" data-i18n="lvl5.pill">Niveau 5</span>
+    <h2 data-i18n="lvl5.title">Orchestration</h2>
+    <p data-i18n="lvl5.intro">Tu n'es plus l'operateur, tu es le chef d'orchestre.</p>
   </div>
   <div class="module-progress"><div class="module-progress-fill" data-mod="5" style="background:linear-gradient(90deg,var(--grad-start),var(--grad-end));"></div></div>
 
@@ -1661,13 +1668,13 @@ Montre-moi le resultat.</div>
     <div class="accordion-item fade-in" data-step="12" data-mod="5">
       <div class="accordion-header" onclick="toggleAccordion(this)">
         <div class="accordion-num bg-5">12</div>
-        <div class="accordion-title">Agent Teams</div>
+        <div class="accordion-title" data-i18n="step12.title">Agent Teams</div>
         <span class="accordion-duration">60 min</span>
         <svg class="accordion-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
       </div>
       <div class="accordion-body"><div class="accordion-content">
         <div class="acc-block">
-          <div class="acc-block-title" style="color:var(--grad-start);">Objectif</div>
+          <div class="acc-block-title" style="color:var(--grad-start);" data-i18n="common.objective">Objectif</div>
           <p class="acc-objective">Orchestrer des equipes d'agents qui travaillent en parallele avec communication bidirectionnelle.</p>
         </div>
 
@@ -1676,7 +1683,7 @@ Montre-moi le resultat.</div>
         </div>
 
         <div class="acc-block">
-          <div class="acc-block-title" style="color:var(--grad-start);">A faire</div>
+          <div class="acc-block-title" style="color:var(--grad-start);" data-i18n="common.todo">A faire</div>
           <ul class="acc-checklist" data-step="12">
             <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Concois un workflow multi-agent sur un cas concret de ton metier</span></li>
             <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Lance 2-3 agents en parallele avec des roles clairs</span></li>
@@ -1686,28 +1693,29 @@ Montre-moi le resultat.</div>
         </div>
 
         <div class="prompt-block">
-          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-header"><span class="prompt-block-label" data-i18n="common.prompt_copy">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)" data-i18n="common.copy">Copier</button></div>
           <div class="prompt-block-body">Je dois preparer une presentation complete sur [sujet]. Lance une equipe de 3 agents : Agent 1 = recherche et donnees. Agent 2 = redaction et structure. Agent 3 = mise en forme et visuels. Coordonne-les et fusionne le resultat.</div>
         </div>
 
         <div class="pole-example-block">
-          <div class="acc-block-title" style="color:var(--grad-start);">Exemple pour ton pole</div>
+          <div class="acc-block-title" style="color:var(--grad-start);" data-i18n="common.pole_example">Exemple pour ton pole</div>
           <div class="pole-example-item" data-pole="tech">Agent 1 ecrit les tests, Agent 2 refactore, Agent 3 met a jour la doc</div>
           <div class="pole-example-item" data-pole="revenue">Veille concurrentielle > analyse > deck comparatif > recommandations</div>
           <div class="pole-example-item" data-pole="qara">Revue documentaire > gap analysis > plan de remediation > rapport</div>
           <div class="pole-example-item" data-pole="product">Research users > specs > maquettes > user stories</div>
           <div class="pole-example-item" data-pole="medical">Revue litterature > extraction donnees > synthese > recommandations</div>
           <div class="pole-example-item" data-pole="ga">Collecte donnees > reporting > analyse > presentation staff meeting</div>
+          <div class="pole-example-item" data-pole="us">Market scan > clinical evidence review > product positioning > GTM brief</div>
         </div>
 
-        <div class="callout callout-tip"><strong>Astuce</strong> - Le secret n'est pas le nombre d'agents mais la qualite du decoupage. Des taches reellement independantes = gain de temps. Des taches interdependantes = overhead de coordination.</div>
+        <div class="callout callout-tip"><strong data-i18n="common.tip">Astuce</strong> - Le secret n'est pas le nombre d'agents mais la qualite du decoupage. Des taches reellement independantes = gain de temps. Des taches interdependantes = overhead de coordination.</div>
 
         <div class="callout-exercise-wrap">
-          <div class="acc-block-title" style="color:var(--grad-start);">Exercice</div>
+          <div class="acc-block-title" style="color:var(--grad-start);" data-i18n="common.exercise">Exercice</div>
           <p style="font-size:0.9rem;">Choisis un livrable qui te prend 2-3 heures. Decoupe en 3 sous-taches. Lance un agent par sous-tache.</p>
           <div class="exercise-actions">
-            <button class="btn-validate bg-5" onclick="validateExercise(this, 12)">Termine</button>
-            <button class="btn-cancel" onclick="cancelExercise(this, 12)">Annuler</button>
+            <button class="btn-validate bg-5" onclick="validateExercise(this, 12)" data-i18n="common.done">Termine</button>
+            <button class="btn-cancel" onclick="cancelExercise(this, 12)" data-i18n="common.cancel">Annuler</button>
           </div>
         </div>
       </div></div>
@@ -1717,17 +1725,17 @@ Montre-moi le resultat.</div>
     <div class="accordion-item fade-in" data-step="13" data-mod="5">
       <div class="accordion-header" onclick="toggleAccordion(this)">
         <div class="accordion-num bg-5">13</div>
-        <div class="accordion-title">Projet final - Workflow complet</div>
+        <div class="accordion-title" data-i18n="step13.title">Projet final - Workflow complet</div>
         <span class="accordion-duration">90 min</span>
         <svg class="accordion-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
       </div>
       <div class="accordion-body"><div class="accordion-content">
         <div class="acc-block">
-          <div class="acc-block-title" style="color:var(--grad-start);">Objectif</div>
+          <div class="acc-block-title" style="color:var(--grad-start);" data-i18n="common.objective">Objectif</div>
           <p class="acc-objective">Combiner tout ce que tu as appris dans un workflow de bout en bout qui divise ton temps par 3-5.</p>
         </div>
         <div class="acc-block">
-          <div class="acc-block-title" style="color:var(--grad-start);">A faire</div>
+          <div class="acc-block-title" style="color:var(--grad-start);" data-i18n="common.todo">A faire</div>
           <ul class="acc-checklist" data-step="13">
             <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Choisis un livrable complexe qui te prend 4-6 heures</span></li>
             <li onclick="toggleCheck(this)"><span class="check-box"></span><span>Concois le workflow : skills, connecteurs, hooks, agents</span></li>
@@ -1738,33 +1746,34 @@ Montre-moi le resultat.</div>
         </div>
 
         <div class="prompt-block">
-          <div class="prompt-block-header"><span class="prompt-block-label">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)">Copier</button></div>
+          <div class="prompt-block-header"><span class="prompt-block-label" data-i18n="common.prompt_copy">Prompt a copier</span><button class="btn-copy" onclick="copyPrompt(this)" data-i18n="common.copy">Copier</button></div>
           <div class="prompt-block-body">J'ai un livrable complexe a produire : [description]. C'est une tache que je fais [frequence]. Aide-moi a concevoir un workflow optimal en utilisant skills, connecteurs et agents paralleles. Montre-moi le plan avant d'executer.</div>
         </div>
 
         <div class="result-block">
-          <div class="result-block-header"><span class="result-block-label">Resultat attendu</span></div>
+          <div class="result-block-header"><span class="result-block-label" data-i18n="common.expected">Resultat attendu</span></div>
           <div class="result-block-body">Un workflow documente, reproductible, qui divise ton temps par 3-5 sur cette tache. Un ROI mesurable.</div>
         </div>
 
         <div class="pole-example-block">
-          <div class="acc-block-title" style="color:var(--grad-start);">Exemple pour ton pole</div>
+          <div class="acc-block-title" style="color:var(--grad-start);" data-i18n="common.pole_example">Exemple pour ton pole</div>
           <div class="pole-example-item" data-pole="tech">CI/CD review complet : analyse PR > RFC > tests > merge</div>
           <div class="pole-example-item" data-pole="revenue">Reponse appel d'offres : analyse cahier des charges > redaction > relecture > soumission</div>
           <div class="pole-example-item" data-pole="qara">Preparation audit : collecte preuves > gap analysis > plan d'actions > rapport</div>
           <div class="pole-example-item" data-pole="product">Discovery to delivery : research > specs > maquettes > stories > tickets</div>
           <div class="pole-example-item" data-pole="medical">Revue systematique : search > screening > extraction > synthese > publication</div>
           <div class="pole-example-item" data-pole="ga">Preparation staff meeting : collecte data > analyse > deck > diffusion</div>
+          <div class="pole-example-item" data-pole="us">US prospect workflow : discovery call > stakeholder mapping > clinical alignment > product fit > proposal</div>
         </div>
 
-        <div class="callout callout-tip"><strong>Astuce</strong> - Le ROI se mesure en heures gagnees PAR SEMAINE. Un workflow qui te fait gagner 2h sur une tache hebdomadaire = 100h/an. Partage tes workflows avec l'AI Task Force.</div>
+        <div class="callout callout-tip"><strong data-i18n="common.tip">Astuce</strong> - Le ROI se mesure en heures gagnees PAR SEMAINE. Un workflow qui te fait gagner 2h sur une tache hebdomadaire = 100h/an. Partage tes workflows avec l'AI Task Force.</div>
 
         <div class="callout-exercise-wrap">
-          <div class="acc-block-title" style="color:var(--grad-start);">Exercice</div>
+          <div class="acc-block-title" style="color:var(--grad-start);" data-i18n="common.exercise">Exercice</div>
           <p style="font-size:0.9rem;">Construis ton workflow. Mesure le temps. Calcule le ROI annuel. Partage ton retour d'experience.</p>
           <div class="exercise-actions">
-            <button class="btn-validate bg-5" onclick="validateExercise(this, 13)">Termine</button>
-            <button class="btn-cancel" onclick="cancelExercise(this, 13)">Annuler</button>
+            <button class="btn-validate bg-5" onclick="validateExercise(this, 13)" data-i18n="common.done">Termine</button>
+            <button class="btn-cancel" onclick="cancelExercise(this, 13)" data-i18n="common.cancel">Annuler</button>
           </div>
         </div>
       </div></div>
@@ -1781,7 +1790,7 @@ Montre-moi le resultat.</div>
     <a href="https://www.notion.so/synapse-medicine/Working-with-AI-Synapse-3206bc097a95815fbf07ce2391454fa2" target="_blank">Working with AI @ Synapse</a>
     <a href="https://docs.anthropic.com" target="_blank">Ressources Claude</a>
   </div>
-  <button class="reset-link" onclick="if(confirm('Remettre ta progression a zero ?')){localStorage.removeItem('synapse-claude-guide');localStorage.removeItem('synapse-guide-pole');location.reload();}">Reinitialiser ma progression</button>
+  <button class="reset-link" onclick="if(confirm(window.__i18n_t ? window.__i18n_t('footer.confirm_reset') : 'Remettre ta progression a zero ?')){localStorage.removeItem('synapse-claude-guide');localStorage.removeItem('synapse-guide-pole');location.reload();}">Reinitialiser ma progression</button>
 </footer>
 
 <script>
@@ -1891,7 +1900,7 @@ function restoreChecks() {
 function validateExercise(btn, step) {
   if (btn.classList.contains('validated')) return;
   btn.classList.add('validated');
-  btn.textContent = 'Termine ✓';
+  btn.textContent = window.__i18n_t ? window.__i18n_t('common.done_check') : 'Termine ✓';
   var cancelBtn = btn.nextElementSibling;
   if (cancelBtn) cancelBtn.classList.add('shown');
   progress['ex_' + step] = true;
@@ -1903,7 +1912,7 @@ function validateExercise(btn, step) {
 function cancelExercise(btn, step) {
   var validateBtn = btn.previousElementSibling;
   validateBtn.classList.remove('validated');
-  validateBtn.textContent = 'Termine';
+  validateBtn.textContent = window.__i18n_t ? window.__i18n_t('common.done') : 'Termine';
   btn.classList.remove('shown');
   delete progress['ex_' + step];
   saveProgress();
@@ -1917,7 +1926,7 @@ function restoreExercises() {
       var item = document.querySelector('[data-step="' + i + '"]');
       if (item) {
         var btn = item.querySelector('.btn-validate');
-        if (btn) { btn.classList.add('validated'); btn.textContent = 'Termine ✓'; }
+        if (btn) { btn.classList.add('validated'); btn.textContent = window.__i18n_t ? window.__i18n_t('common.done_check') : 'Termine ✓'; }
         var cancelBtn = item.querySelector('.btn-cancel');
         if (cancelBtn) cancelBtn.classList.add('shown');
         item.classList.add('completed');
@@ -1952,15 +1961,15 @@ function copyPrompt(btn) {
   var body = btn.closest('.prompt-block').querySelector('.prompt-block-body');
   var text = body.textContent.trim();
   navigator.clipboard.writeText(text).then(function() {
-    btn.textContent = 'Copie !'; btn.classList.add('copied');
-    setTimeout(function() { btn.textContent = 'Copier'; btn.classList.remove('copied'); }, 2000);
+    btn.textContent = window.__i18n_t ? window.__i18n_t('common.copied') : 'Copie !'; btn.classList.add('copied');
+    setTimeout(function() { btn.textContent = window.__i18n_t ? window.__i18n_t('common.copy') : 'Copier'; btn.classList.remove('copied'); }, 2000);
   }).catch(function() {
     var ta = document.createElement('textarea'); ta.value = text;
     ta.style.position = 'fixed'; ta.style.opacity = '0';
     document.body.appendChild(ta); ta.select(); document.execCommand('copy');
     document.body.removeChild(ta);
-    btn.textContent = 'Copie !'; btn.classList.add('copied');
-    setTimeout(function() { btn.textContent = 'Copier'; btn.classList.remove('copied'); }, 2000);
+    btn.textContent = window.__i18n_t ? window.__i18n_t('common.copied') : 'Copie !'; btn.classList.add('copied');
+    setTimeout(function() { btn.textContent = window.__i18n_t ? window.__i18n_t('common.copy') : 'Copier'; btn.classList.remove('copied'); }, 2000);
   });
 }
 
@@ -1972,5 +1981,120 @@ document.addEventListener('DOMContentLoaded', function() {
   setTimeout(animateCounters, 500);
 });
 </script>
+
+<script>
+/* ===== i18n: FR / EN toggle ===== */
+(function() {
+  var I18N_KEYS = {"doc.title": {"fr": "Maitriser Claude - Synapse Medicine", "en": "Master Claude - Synapse Medicine"}, "header.brand_suffix": {"fr": "Maitriser Claude", "en": "Master Claude"}, "nav.chat": {"fr": "Chat", "en": "Chat"}, "nav.cowork": {"fr": "Cowork", "en": "Cowork"}, "nav.skills": {"fr": "Skills", "en": "Skills"}, "nav.power": {"fr": "Power", "en": "Power"}, "nav.orchestration": {"fr": "Orchestration", "en": "Orchestration"}, "header.my_pole": {"fr": "Mon pole", "en": "My team"}, "hero.title": {"fr": "Maitriser Claude", "en": "Master Claude"}, "hero.subtitle": {"fr": "De la premiere question a l'orchestration d'agents sur tes vrais livrables. 13 etapes concretes, des prompts a copier, des schemas visuels.", "en": "From your first question to orchestrating agents on real deliverables. 13 concrete steps, copy-paste prompts, visual diagrams."}, "hero.quiz_discover": {"fr": "Je decouvre Claude", "en": "I am new to Claude"}, "hero.quiz_chat": {"fr": "J'utilise deja le chat", "en": "I already use chat"}, "hero.quiz_further": {"fr": "Je veux aller plus loin", "en": "I want to go further"}, "hero.stat_steps": {"fr": "etapes", "en": "steps"}, "hero.stat_levels": {"fr": "niveaux", "en": "levels"}, "hero.stat_practice": {"fr": "h de pratique", "en": "h of practice"}, "pole.label": {"fr": "Ton pole chez Synapse :", "en": "Your team at Synapse:"}, "pole.tagline": {"fr": "Les exemples s'adaptent a ton pole. Tu peux changer a tout moment.", "en": "Examples adapt to your team. You can switch anytime."}, "why.title": {"fr": "Pourquoi ce parcours", "en": "Why this guide"}, "why.subtitle": {"fr": "La plupart utilisent Claude comme un chatbot basique. La vraie puissance se debloque quand tu configures ton environnement.", "en": "Most people use Claude as a basic chatbot. The real power kicks in when you set up your environment."}, "why.card1_title": {"fr": "Niveau 1 : Tu poses des questions", "en": "Level 1: You ask questions"}, "why.card1_body": {"fr": "Claude repond de maniere generique. Tu copies-colles entre les outils. Pas de memoire.", "en": "Claude replies generically. You copy-paste between tools. No memory."}, "why.card2_title": {"fr": "Niveau 2 : Tu configures Claude", "en": "Level 2: You configure Claude"}, "why.card2_body": {"fr": "Claude te connait, parle comme toi, lit tes fichiers. Plus de copier-coller.", "en": "Claude knows you, writes like you, reads your files. No more copy-paste."}, "why.card3_title": {"fr": "Niveau 3+ : Tu orchestres des agents", "en": "Level 3+: You orchestrate agents"}, "why.card3_body": {"fr": "Claude delegue, automatise, et produit tes livrables dans ton format. Tu supervises.", "en": "Claude delegates, automates, and produces your deliverables in your format. You supervise."}, "how.title": {"fr": "Comment ca marche", "en": "How it works"}, "how.card1_title": {"fr": "A ton rythme", "en": "At your pace"}, "how.card1_body": {"fr": "Pas de deadline. Tu avances quand tu veux. Ta progression est sauvegardee dans ton navigateur.", "en": "No deadline. Move at your own pace. Your progress is saved in your browser."}, "how.card2_title": {"fr": "Prompts a copier", "en": "Copy-paste prompts"}, "how.card2_body": {"fr": "Chaque etape inclut des prompts concrets et le resultat attendu.", "en": "Each step includes concrete prompts and the expected output."}, "how.card3_title": {"fr": "Ton vrai travail", "en": "Your real work"}, "how.card3_body": {"fr": "Les exercices s'appliquent a ton metier. Les exemples s'adaptent a ton pole.", "en": "Exercises apply to your job. Examples adapt to your team."}, "roadmap.title": {"fr": "Le parcours", "en": "The journey"}, "roadmap.lvl1_label": {"fr": "Niveau 1", "en": "Level 1"}, "roadmap.lvl1_sub": {"fr": "Chat (3 etapes)", "en": "Chat (3 steps)"}, "roadmap.lvl2_label": {"fr": "Niveau 2", "en": "Level 2"}, "roadmap.lvl2_sub": {"fr": "Cowork (3 etapes)", "en": "Cowork (3 steps)"}, "roadmap.lvl3_label": {"fr": "Niveau 3", "en": "Level 3"}, "roadmap.lvl3_sub": {"fr": "Skills (3 etapes)", "en": "Skills (3 steps)"}, "roadmap.lvl4_label": {"fr": "Niveau 4", "en": "Level 4"}, "roadmap.lvl4_sub": {"fr": "Power (2 etapes)", "en": "Power (2 steps)"}, "roadmap.lvl5_label": {"fr": "Niveau 5", "en": "Level 5"}, "roadmap.lvl5_sub": {"fr": "Orchestration (2 etapes)", "en": "Orchestration (2 steps)"}, "arch.title": {"fr": "Architecture Claude - 5 couches", "en": "Claude architecture - 5 layers"}, "arch.subtitle": {"fr": "Chaque couche ajoute une capacite. Clique pour en savoir plus.", "en": "Each layer adds a capability. Click to learn more."}, "arch.l1_title": {"fr": "CLAUDE.md - Memory Layer", "en": "CLAUDE.md - Memory Layer"}, "arch.l2_title": {"fr": "SKILLS - Knowledge Layer", "en": "SKILLS - Knowledge Layer"}, "arch.l3_title": {"fr": "HOOKS - Guardrail Layer", "en": "HOOKS - Guardrail Layer"}, "arch.l4_title": {"fr": "SUBAGENTS - Delegation Layer", "en": "SUBAGENTS - Delegation Layer"}, "arch.l5_title": {"fr": "PLUGINS - Distribution Layer", "en": "PLUGINS - Distribution Layer"}, "arch.l1_desc": {"fr": "Le cerveau de ton agent. Lu en premier a chaque session.", "en": "The brain of your agent. Read first at every session."}, "arch.l2_desc": {"fr": "Tes taches recurrentes automatisees en recettes reutilisables.", "en": "Your recurring tasks turned into reusable recipes."}, "arch.l3_desc": {"fr": "Garde-fous automatiques avant et apres chaque action.", "en": "Automatic guardrails before and after each action."}, "arch.l4_desc": {"fr": "Instances specialisees pour deleguer des sous-taches.", "en": "Specialized instances to delegate subtasks."}, "arch.l5_desc": {"fr": "Packages partageables : skills, agents, hooks, commands.", "en": "Shareable packages: skills, agents, hooks, commands."}, "arch.l1_li1": {"fr": "Regles d'architecture et conventions", "en": "Architecture rules and conventions"}, "arch.l1_li2": {"fr": "Catalogue de ressources (fichiers, templates, liens)", "en": "Resource catalog (files, templates, links)"}, "arch.l1_li3": {"fr": "Instructions de comportement globales", "en": "Global behavior instructions"}, "arch.l1_li4": {"fr": "Contexte entreprise et equipe", "en": "Company and team context"}, "arch.l2_li1": {"fr": "Description matching - invocation automatique", "en": "Description matching - automatic invocation"}, "arch.l2_li2": {"fr": "Contexte specifique a la tache", "en": "Task-specific context"}, "arch.l2_li3": {"fr": "Exemples reels comme reference", "en": "Real examples as reference"}, "arch.l3_li1": {"fr": "PreToolUse - validation avant action", "en": "PreToolUse - validation before action"}, "arch.l3_li2": {"fr": "PostToolUse - verification apres action", "en": "PostToolUse - verification after action"}, "arch.l3_li3": {"fr": "Deterministe, pas de l'IA - comme des git hooks", "en": "Deterministic, not AI, like git hooks"}, "arch.l4_li1": {"fr": "Fenetre de contexte isolee par subagent", "en": "Isolated context window per subagent"}, "arch.l4_li2": {"fr": "Roles : analyste, redacteur, verificateur...", "en": "Roles: analyst, writer, reviewer..."}, "arch.l4_li3": {"fr": "Pas de recursion - un subagent ne spawne pas d'autres subagents", "en": "No recursion, a subagent does not spawn other subagents"}, "arch.l5_li1": {"fr": "Organisation : skills/, agents/, hooks/, commands/", "en": "Layout: skills/, agents/, hooks/, commands/"}, "arch.l5_li2": {"fr": "Partage entre equipes et projets", "en": "Sharing across teams and projects"}, "arch.l5_li3": {"fr": "Marketplace de plugins communautaires", "en": "Community plugin marketplace"}, "lvl1.pill": {"fr": "Niveau 1", "en": "Level 1"}, "lvl2.pill": {"fr": "Niveau 2", "en": "Level 2"}, "lvl3.pill": {"fr": "Niveau 3", "en": "Level 3"}, "lvl4.pill": {"fr": "Niveau 4", "en": "Level 4"}, "lvl5.pill": {"fr": "Niveau 5", "en": "Level 5"}, "lvl1.title": {"fr": "Claude Chat", "en": "Claude Chat"}, "lvl1.intro": {"fr": "Les bases solides. Decouvre l'interface, les modeles, et les techniques de prompt qui changent tout.", "en": "Solid foundations. Discover the interface, the models, and the prompt techniques that change everything."}, "lvl2.title": {"fr": "Cowork + Parametrage", "en": "Cowork + Setup"}, "lvl2.intro": {"fr": "Installe l'app desktop, connecte tes outils, et construis ton espace de travail Claude personnalise.", "en": "Install the desktop app, connect your tools, and build your personalized Claude workspace."}, "lvl3.title": {"fr": "Skills & Automatisation", "en": "Skills & Automation"}, "lvl3.intro": {"fr": "Automatise tes taches recurrentes, programme des routines, et connecte les outils bureau.", "en": "Automate recurring tasks, schedule routines, and connect desktop tools."}, "lvl4.title": {"fr": "Power User", "en": "Power User"}, "lvl4.intro": {"fr": "Ajoute des garde-fous automatiques et delegue a des sous-agents specialises.", "en": "Add automatic guardrails and delegate to specialized subagents."}, "lvl5.title": {"fr": "Orchestration", "en": "Orchestration"}, "lvl5.intro": {"fr": "Tu n'es plus l'operateur, tu es le chef d'orchestre.", "en": "You're no longer the operator, you're the conductor."}, "step1.title": {"fr": "Premiers pas et choix du modele", "en": "First steps and model selection"}, "step2.title": {"fr": "Prompt design - La technique AskUserQuestion", "en": "Prompt design - The AskUserQuestion technique"}, "step3.title": {"fr": "Artifacts et Projects", "en": "Artifacts and Projects"}, "step4.title": {"fr": "Installer Cowork et decouvrir l'interface", "en": "Install Cowork and explore the interface"}, "step5.title": {"fr": "Connecteurs et plugins", "en": "Connectors and plugins"}, "step6.title": {"fr": "Construire ton espace Claude-Work", "en": "Build your Claude-Work space"}, "step7.title": {"fr": "Creer ton premier Skill", "en": "Create your first Skill"}, "step8.title": {"fr": "Taches programmees", "en": "Scheduled tasks"}, "step9.title": {"fr": "Connecteurs avances : Chrome, Word, PowerPoint", "en": "Advanced connectors: Chrome, Word, PowerPoint"}, "step10.title": {"fr": "Hooks - Garde-fous automatiques", "en": "Hooks - Automatic guardrails"}, "step11.title": {"fr": "Subagents - Deleguer des sous-taches", "en": "Subagents - Delegate subtasks"}, "step12.title": {"fr": "Agent Teams", "en": "Agent Teams"}, "step13.title": {"fr": "Projet final - Workflow complet", "en": "Final project - Full workflow"}, "common.objective": {"fr": "Objectif", "en": "Objective"}, "common.todo_steps": {"fr": "A faire (pas a pas)", "en": "Steps to do"}, "common.todo": {"fr": "A faire", "en": "To do"}, "common.exercise": {"fr": "Exercice", "en": "Exercise"}, "common.pole_example": {"fr": "Exemple pour ton pole", "en": "Example for your team"}, "common.prompt_copy": {"fr": "Prompt a copier", "en": "Prompt to copy"}, "common.expected": {"fr": "Resultat attendu", "en": "Expected result"}, "common.copy": {"fr": "Copier", "en": "Copy"}, "common.copied": {"fr": "Copie !", "en": "Copied!"}, "common.done": {"fr": "Termine", "en": "Done"}, "common.done_check": {"fr": "Termine ✓", "en": "Done ✓"}, "common.cancel": {"fr": "Annuler", "en": "Cancel"}, "common.tip": {"fr": "Astuce", "en": "Tip"}, "common.remember": {"fr": "A retenir", "en": "Remember"}, "common.security": {"fr": "Securite", "en": "Security"}, "common.golden_rule": {"fr": "Regle d'or", "en": "Golden rule"}, "common.skill_structure": {"fr": "Structure du SKILL.md", "en": "SKILL.md structure"}, "footer.confirm_reset": {"fr": "Remettre ta progression a zero ?", "en": "Reset your progress?"}};
+  var FR_EN = {"Maitriser l'interface Claude et comprendre quand utiliser Sonnet, Opus ou Extended Thinking.": "Master the Claude interface and know when to use Sonnet, Opus, or Extended Thinking.", "Va sur claude.ai et connecte-toi avec ton email Synapse": "Go to claude.ai and log in with your Synapse email", "Cree un nouveau chat. Observe l'interface : historique a gauche, zone de chat au centre": "Start a new chat. Look around: history on the left, chat area in the center", "Clique sur le selecteur de modele. 3 options : Sonnet (rapide), Opus (profond), Extended Thinking (raisonnement visible)": "Click the model selector. 3 options: Sonnet (fast), Opus (deep), Extended Thinking (visible reasoning)", "Tape la question ci-dessous avec chaque modele et compare les reponses": "Try the question below with each model and compare the answers", "Analyse les avantages et inconvenients du teletravail total pour une entreprise tech de 90 personnes en France, sous convention Syntec.": "Analyze the pros and cons of fully remote work for a 90-person tech company. Consider compliance, culture, and productivity.", "Sonnet repond en ~15 sec avec une liste structuree.": "Sonnet replies in ~15 sec with a structured list.", "Opus repond en ~45 sec avec plus de nuances et du contexte juridique Syntec.": "Opus replies in ~45 sec with more nuance and regulatory context.", "Extended Thinking montre son raisonnement etape par etape avant de repondre.": "Extended Thinking shows its step-by-step reasoning before answering.", "Tech : \"Explique-moi les trade-offs entre REST et gRPC pour notre API medicamenteuse\"": "Tech: \"Walk me through the trade-offs between REST and gRPC for our drug data API\"", "Revenue : \"Resume les points de negociation cles de cette proposition de partenariat hospitalier\"": "Revenue: \"Summarize the key negotiation points in this hospital partnership proposal\"", "Qara : \"Compare les exigences ISO 13485 et ISO 27001 pour un SaaS medical\"": "QA/RA: \"Compare ISO 13485 and ISO 27001 requirements for a medical SaaS\"", "Product : \"Analyse cette user story et identifie les edge cases manquants\"": "Product: \"Review this user story and flag the missing edge cases\"", "Medical : \"Synthetise les recommandations HAS sur les interactions medicamenteuses\"": "Medical: \"Summarize the latest clinical guidelines on drug interactions\"", "G&A : \"Compare les implications CDD vs interim pour un remplacement de 6 mois sous Syntec\"": "G&A: \"Compare fixed-term contract vs contractor options for a 6-month backfill\"", "US Team : \"Synthetise l'impact de la nouvelle guidance FDA sur notre roadmap produit et prepare 3 talking points pour le prochain call partenaire hospitalier\"": "US Team: \"Summarize the impact of the new FDA guidance on our product roadmap and prep 3 talking points for the next hospital partner call\"", " - Par defaut, utilise Sonnet pour les questions rapides. Passe a Opus pour la profondeur (analyse juridique, strategie). Extended Thinking quand tu veux comprendre le raisonnement.": " - Use Sonnet by default for quick questions. Switch to Opus for depth (legal analysis, strategy). Extended Thinking when you want to see the reasoning.", "Pose une question liee a ton activite reelle. Teste les trois modeles avec la meme question. Note les differences.": "Ask a real question from your work. Try all three models with the same question. Note the differences.", "Tech": "Tech", "Revenue": "Revenue", "Qara": "QA/RA", "Product": "Product", "Medical": "Medical", "G&A": "G&A", "Apprendre la technique la plus puissante : ne PAS tout donner, mais demander a Claude de te poser des questions via AskUserQuestion. Ca produit un meilleur resultat ET ca consomme moins de tokens.": "Learn the most powerful prompt technique: DON'T give everything up front. Ask Claude to ask you questions via AskUserQuestion. Better output AND fewer tokens.", "Tape un prompt vague \"Fais-moi un reporting\" et observe le resultat generique": "Type a vague prompt like \"Make me a report\" and notice how generic the result is", "Maintenant ajoute \"Utilise AskUserQuestion pour me poser les bonnes questions avant de commencer\" et compare": "Now add \"Use AskUserQuestion to ask me the right questions before you start\" and compare", "Teste la technique du role : \"Tu es un consultant senior en strategie...\"": "Try the role technique: \"You are a senior strategy consultant...\"", "Decouvre les instructions systeme : en bas a gauche de l'interface Claude, clique sur ton compte, puis Parametres > General. Tu y trouves un champ \"Instructions pour Claude\" - c'est la que tu peux configurer des preferences permanentes.": "Discover system instructions: bottom-left of the Claude UI, click your account, then Settings > General. You'll find an \"Instructions for Claude\" field where you can set permanent preferences.", "Applique le prompt ci-dessous sur une tache reelle de cette semaine": "Apply the prompt below to a real task from this week", "Je dois preparer [type de livrable] pour [audience]. Utilise AskUserQuestion pour me poser toutes les questions necessaires avant de commencer. Ne produis rien tant que tu n'as pas assez de contexte.": "I need to produce [type of deliverable] for [audience]. Use AskUserQuestion to ask me everything you need before you start. Don't produce anything until you have enough context.", "Claude te pose 5-8 questions ciblees via un formulaire structure : perimetre, periode, KPIs, public cible, format. Apres tes reponses, il produit un livrable 10x meilleur que sans questions.": "Claude asks 5-8 targeted questions in a structured form: scope, timeframe, KPIs, audience, format. After you answer, the output is 10x better than without questions.", "\"Je dois ecrire une RFC pour migrer notre auth de JWT vers OAuth2. Utilise AskUserQuestion.\"": "\"I need to write an RFC to migrate our auth from JWT to OAuth2. Use AskUserQuestion.\"", "\"Je dois repondre a un appel d'offres hospitalier. Utilise AskUserQuestion pour cadrer.\"": "\"I need to respond to an RFP from a hospital network. Use AskUserQuestion to scope it.\"", "\"Je dois preparer un audit interne qualite. Utilise AskUserQuestion avant de structurer.\"": "\"I'm prepping an internal quality audit. Use AskUserQuestion before structuring.\"", "\"Je dois preparer un go/no-go pour le lancement de la feature X. AskUserQuestion.\"": "\"I'm preparing a go/no-go for the launch of feature X. AskUserQuestion.\"", "\"Je dois synthetiser une revue de litterature sur les interactions. AskUserQuestion.\"": "\"I need to synthesize a literature review on drug interactions. AskUserQuestion.\"", "\"Je dois preparer la revue salariale annuelle. AskUserQuestion pour cadrer l'exercice.\"": "\"I'm running the annual comp review. AskUserQuestion to frame the exercise.\"", "\"Je dois preparer notre go-to-market US (cible hospitaliere + validation clinique + scope produit). Utilise AskUserQuestion pour cadrer.\"": "\"I'm preparing our US go-to-market (hospital target + clinical validation + product scope). Use AskUserQuestion to scope it.\"", " - AskUserQuestion consomme moins de tokens qu'un long prompt initial car Claude ne genere pas de contenu inutile. Il pose des questions ciblees, tu reponds, et le livrable est produit en un seul passage.": " - AskUserQuestion uses fewer tokens than a long opening prompt because Claude doesn't generate unnecessary content. Targeted questions, your answers, single-pass delivery.", " - Donne le contexte et l'objectif. Laisse Claude structurer l'approche via AskUserQuestion. C'est la difference entre un chatbot et un assistant.": " - Give the context and the goal. Let Claude structure the approach via AskUserQuestion. That's the difference between a chatbot and an assistant.", "Prends une tache reelle de cette semaine. Formule-la en une phrase + \"Utilise AskUserQuestion\". Compare avec un prompt classique.": "Take a real task from this week. Phrase it in one sentence + \"Use AskUserQuestion\". Compare with a classic prompt.", "Comprendre les Artifacts (documents vivants modifiables en conversation) et les Projects (contexte persistant entre sessions) dans Claude Chat.": "Understand Artifacts (live documents you can edit in-conversation) and Projects (persistent context across sessions) in Claude Chat.", "C'est quoi un Artifact ?": "What's an Artifact?", " - Un artifact, c'est un document que Claude cree dans un panneau a droite de la conversation : tableau, texte structure, code, diagramme... Tu peux le modifier en discutant (\"ajoute une colonne\", \"change le titre\"), le telecharger, ou le copier. C'est un livrable vivant, pas un simple message.": " - An artifact is a document Claude creates in a panel next to the chat: table, structured text, code, diagram. You can edit it by talking (\"add a column\", \"change the title\"), download it, or copy it. It's a live deliverable, not just a message.", "Demande a Claude de creer un artifact : \"Cree un tableau de suivi projet avec objectifs, avancement, risques\"": "Ask Claude to create an artifact: \"Build a project tracker table with objectives, status, risks\"", "Modifie l'artifact en conversation : \"Ajoute une colonne Impact\" - observe la mise a jour en direct": "Edit the artifact in-conversation: \"Add an Impact column\" - watch the live update", "Cree un Project : clique sur \"Projects\" dans la sidebar gauche, donne un nom": "Create a Project: click \"Projects\" in the left sidebar, name it", "Ajoute 2-3 documents de contexte au Project (glisse-depose tes fichiers)": "Add 2-3 context documents to the Project (drag-and-drop your files)", "Pose une question dans le Project et observe comment Claude utilise le contexte": "Ask a question in the Project and notice how Claude uses the context", "Projects Chat vs Projects Cowork": "Projects Chat vs Projects Cowork", " - Attention, il y a deux types de Projects. Les ": "Heads-up, there are two kinds of Projects. ", "Projects Chat": "Projects Chat", " (claude.ai) permettent d'uploader des documents et de garder du contexte entre les conversations. Les ": " (claude.ai) let you upload documents and keep context across conversations. ", "Projects Cowork": "Projects Cowork", " (app desktop, qu'on verra au Niveau 2) pointent vers un dossier de ton disque et permettent a Claude de lire/ecrire des fichiers. Ce sont deux choses differentes. Les connecteurs configures dans Chat (Google Drive, etc.) ne sont pas automatiquement lies a Cowork.": " (desktop app, covered in Level 2) point to a folder on your disk and let Claude read/write files. They're different things. Connectors set up in Chat (Google Drive, etc.) are not automatically linked to Cowork.", "Cree un tableau de bord projet avec : objectifs du trimestre, avancement par chantier (%), risques identifies, actions a prendre. Format : tableau structure avec code couleur.": "Build a project dashboard with: quarterly objectives, workstream progress (%), identified risks, action items. Format: structured table with color coding.", "Un artifact interactif avec un vrai tableau, modifiable en conversation. Tu peux ajouter des colonnes, changer des valeurs, reformater - tout en discutant.": "An interactive artifact with a real table, editable in chat. You can add columns, change values, reformat, all by talking.", "Project \"Refacto API\" avec la spec technique et le schema de base de donnees": "Project \"API Refactor\" with the tech spec and database schema", "Project \"Compte CHU Bordeaux\" avec l'historique des echanges et la proposition": "Project \"Mayo Clinic Account\" with email history and the current proposal", "Project \"Audit ISO 13485\" avec les documents de conformite et le plan d'audit": "Project \"ISO 13485 Audit\" with compliance docs and the audit plan", "Project \"Roadmap Q3\" avec le backlog et les feedbacks utilisateurs": "Project \"Q3 Roadmap\" with the backlog and user feedback", "Project \"Revue interactions\" avec les publications et les donnees Theriaque": "Project \"Interactions Review\" with publications and Theriaque data", "Project \"Recrutement Data Engineer\" avec la fiche de poste et la grille d'entretien": "Project \"Data Engineer Hire\" with the job description and interview scorecard", "Project \"US Market Launch\" avec les prospects hospitaliers, le plan de validation clinique et la roadmap de localisation produit": "Project \"US Market Launch\" with hospital prospects, the clinical validation plan, and the product localization roadmap", " - Un Project bien alimente, c'est deja 50% du chemin vers un Claude personnalise. C'est le precurseur de l'arborescence Cowork qu'on verra au Niveau 2.": " - A well-loaded Project gets you 50% of the way to a personalized Claude. It's the precursor to the Cowork folder layout in Level 2.", "Cree un Project pour un de tes chantiers en cours. Ajoute 2-3 documents. Pose une question et observe comment Claude utilise le contexte.": "Create a Project for a current workstream. Add 2-3 documents. Ask a question and observe how Claude uses the context.", "Passer du chat web a l'app desktop. Claude peut maintenant lire et ecrire directement dans tes dossiers.": "Move from web chat to the desktop app. Claude can now read and write directly to your folders.", "Telecharge l'app desktop Claude depuis claude.ai/download": "Download the Claude desktop app from claude.ai/download", "Installe et connecte-toi avec ton email Synapse": "Install and log in with your Synapse email", "Tu vois deux onglets en haut : \"Cowork\" et un onglet \"Code\" (</>). Cowork a une interface plus visuelle et conviviale. Code est le mode terminal, plus brut mais plus stable. Les deux accedent aux memes fichiers.": "You'll see two tabs at the top: \"Cowork\" and a \"Code\" tab (</>). Cowork has a more visual, friendly UI. Code is the terminal mode, rougher but more stable. Both access the same files.", "Reste sur l'onglet Cowork pour commencer. Il fait tout ce dont tu as besoin.": "Stick to the Cowork tab to start. It does everything you need.", "Pour connecter un dossier : regarde juste au-dessus de la zone de conversation, tu vois le chemin du dossier actuel. Clique sur l'icone \"+\" a cote pour ajouter un dossier de travail.": "To connect a folder: look just above the chat area, you'll see the current folder path. Click the \"+\" icon next to it to add a working folder.", "Selectionne un dossier de projet en cours (un dossier precis, pas tout ton disque !)": "Pick a current project folder (a specific one, not your whole disk!)", "Teste : \"Lis les fichiers dans ce dossier et donne-moi un inventaire\"": "Test: \"Read the files in this folder and give me an inventory\"", "Lis tous les fichiers dans ce dossier. Pour chaque fichier, donne-moi : nom, type, et un resume en 1 phrase de ce qu'il contient.": "Read all files in this folder. For each file, give me: name, type, and a one-line summary of what it contains.", "Claude lit tes fichiers reels et produit un inventaire structure. Il supporte .docx, .xlsx, .pdf, .pptx, .csv et bien d'autres.": "Claude reads your real files and produces a structured inventory. It handles .docx, .xlsx, .pdf, .pptx, .csv and many more.", " - Cowork lit les fichiers a la demande, il ne les charge pas tous en memoire. Tu peux pointer vers un dossier volumineux sans risque. Si Cowork est instable, bascule sur l'onglet Code - c'est le meme moteur, juste l'interface qui change.": " - Cowork reads files on-demand, it doesn't load them all into memory. You can point at a large folder safely. If Cowork is flaky, switch to the Code tab - same engine, just a different UI.", " - Cowork = plus de copier-coller. Claude lit et ecrit directement dans tes dossiers. C'est le game changer pour les non-devs.": " - Cowork = no more copy-paste. Claude reads and writes directly in your folders. The game changer for non-engineers.", "Connecte un dossier de projet en cours. Demande a Claude de lire un fichier et d'en extraire les points cles.": "Connect a current project folder. Ask Claude to read a file and extract the key points.", "Ajouter un dossier ici": "Add a folder here", "Connecter tes outils du quotidien (Slack, Notion, Gmail, Calendar) pour que Claude puisse y acceder directement.": "Connect your daily tools (Slack, Notion, Gmail, Calendar) so Claude can access them directly.", "Dans la sidebar gauche de Cowork, clique sur \"Customize\"": "In the Cowork left sidebar, click \"Customize\"", "Tu arrives sur l'ecran \"Personnaliser Claude\" avec 3 options : Connecteurs, Competences, Plugins": "You'll land on the \"Customize Claude\" screen with 3 options: Connectors, Skills, Plugins", "Clique sur \"Connecteurs\" (icone en haut a gauche)": "Click \"Connectors\" (top-left icon)", "Connecte les essentiels Synapse : Slack, Notion, Gmail, Google Calendar, Google Drive": "Connect the essentials: Slack, Notion, Gmail, Google Calendar, Google Drive", "Pour chaque connecteur, verifie les autorisations : \"Outils en lecture seule\" (Toujours autoriser) vs \"Outils d'ecriture/suppression\" (Necessite une approbation)": "For each connector, check the permissions: \"Read-only tools\" (Always allow) vs \"Write/delete tools\" (Requires approval)", "Note les plugins Bureau disponibles : Claude in Chrome, PowerPoint, Word, PDF Tools - on les detaillera a l'etape 9": "Note the desktop plugins available: Claude in Chrome, PowerPoint, Word, PDF Tools - we'll cover them in step 9", "Teste : demande a Claude de lire tes derniers messages Slack ou tes prochains events Calendar": "Test: ask Claude to read your latest Slack messages or upcoming Calendar events", " - Par defaut, les outils de lecture (lire tes emails, ton agenda) sont en \"Toujours autoriser\". Les outils d'ecriture (envoyer un email, modifier un doc) necessitent ton approbation a chaque fois. C'est le bon reglage. Ne passe PAS les outils d'ecriture en \"Toujours autoriser\".": " - By default, read tools (read your emails, your calendar) are set to \"Always allow\". Write tools (send an email, edit a doc) require approval each time. That's the right setting. Do NOT switch write tools to \"Always allow\".", "Lis mes 5 prochains evenements Google Calendar et mes 10 derniers messages Slack sur #general. Resume ce qui m'attend cette semaine.": "Read my next 5 Google Calendar events and my last 10 Slack messages in #general. Summarize what's coming up this week.", "Claude accede directement a Slack et Calendar via les connecteurs (rapide, via API). Plus besoin de copier-coller entre les outils.": "Claude accesses Slack and Calendar directly via connectors (fast, via API). No more copy-paste between tools.", " - Les connecteurs transforment Claude d'un assistant qui lit tes fichiers en un assistant qui vit dans tes outils. Connecte Slack, Notion, Gmail et Calendar en priorite. Les connecteurs Bureau (Chrome, Word, PowerPoint, PDF) seront detailles a l'": " - Connectors turn Claude from a file-reading assistant into one that lives in your tools. Connect Slack, Notion, Gmail and Calendar first. The desktop connectors (Chrome, Word, PowerPoint, PDF) are detailed in ", "etape 9": "step 9", ".": ".", "Connecte au moins 3 connecteurs (Slack, Gmail, Calendar). Teste chacun avec une question concrete.": "Connect at least 3 connectors (Slack, Gmail, Calendar). Test each one with a concrete question.", "Connecteurs": "Connectors", "Web": "Web", "Bureau": "Desktop", "Creer l'arborescence qui transforme Claude d'un assistant generique en TON assistant. Remplir les fichiers de contexte pour qu'il te connaisse. Tester que tout fonctionne.": "Build the folder layout that turns Claude from a generic assistant into YOUR assistant. Fill in the context files so it knows you. Test that everything works.", "C'est quoi CLAUDE.md ?": "What is CLAUDE.md?", " - C'est un fichier texte place a la racine de ton dossier de travail. Claude le lit automatiquement en premier a chaque nouvelle session. Il contient ton identite, tes regles, ton contexte. C'est l'equivalent de dire a un nouvel assistant \"voila qui je suis et comment je travaille\" - sauf que tu ne le dis qu'une fois.": " - A text file at the root of your working folder. Claude reads it first every new session. It holds your identity, your rules, your context. It's like telling a new assistant \"here's who I am and how I work\", except you only say it once.", "Prerequis - Prepare ces elements": "Prerequisites - Get these ready", "Ton profil LinkedIn (URL ou copier-coller)": "Your LinkedIn profile (URL or copy-paste)", "3 a 5 messages (Slack, email) dont tu es satisfait du ton": "3 to 5 messages (Slack, email) where you like your own tone", "Tes meilleurs templates ou livrables types": "Your best templates or sample deliverables", "Le lien Notion ou wiki de ton equipe": "Your team's Notion or wiki link", "Phase 1 - Creer l'arborescence": "Phase 1 - Create the folder layout", "Phase 2 - Remplir about-me.md": "Phase 2 - Fill in about-me.md", "Phase 3 - Remplir my-rules.md (LE PLUS IMPORTANT)": "Phase 3 - Fill in my-rules.md (THE MOST IMPORTANT)", "Phase 4 - Remplir my-company.md": "Phase 4 - Fill in my-company.md", "Phase 5 - Completer CLAUDE.md": "Phase 5 - Complete CLAUDE.md", "Voila ce que tu vas obtenir": "Here's what you'll end up with", "Un espace Claude-Work complet avec 4 fichiers remplis a partir de TES vrais contenus. ": "A complete Claude-Work space with 4 files filled in from YOUR real content. ", "Test final": "Final test", " : ferme la session, ouvre-en une nouvelle dans le dossier Claude-Work, tape \"Qui suis-je ?\" Claude doit repondre avec tes infos sans que tu les redonnes.": ": close the session, open a new one in the Claude-Work folder, type \"Who am I?\" Claude should answer with your info without you giving it again.", " - Dans my-rules.md, ajoute toujours \"Sois concis et pertinent par defaut. Developpe sur demande.\" Ca evite les reponses fleuve et force Claude a aller droit au point.": " - In my-rules.md, always add \"Be concise and relevant by default. Expand on request.\" This avoids verbose answers and forces Claude to get to the point.", " - Rafraichis ton arborescence avec Claude une fois par semaine. Mets a jour my-company.md chaque trimestre (objectifs, chantiers). Ajoute une regle dans my-rules.md chaque fois que Claude fait un truc qui ne te convient pas.": " - Refresh your folder layout with Claude once a week. Update my-company.md each quarter (objectives, workstreams). Add a rule to my-rules.md every time Claude does something you don't like.", " - 1h de setup = des centaines d'heures de meilleurs outputs. Le fichier my-rules.md est le plus important : c'est lui qui elimine le \"ton Claude\" generique.": " - 1 hour of setup = hundreds of hours of better outputs. The my-rules.md file is the most important: it's what kills the generic \"Claude tone\".", "Cree ton arborescence. Remplis les 4 fichiers. Teste avec \"Qui suis-je ?\" dans une nouvelle session.": "Build your folder layout. Fill in the 4 files. Test with \"Who am I?\" in a new session.", "Avant / Apres": "Before / After", "La difference entre un Claude generique et un Claude configure.": "The difference between a generic Claude and a configured Claude.", "Sans configuration": "Without setup", "Avec ton arborescence": "With your folder layout", "Toi :": "You:", "Claude :": "Claude:", "\"Fais-moi un CR de la reunion produit\"": "\"Write me a recap of the product meeting\"", "\"Bien sur ! Je serais ravi de vous aider. N'hesitez pas a me fournir les points discutes. Voici un template standard :": "\"Of course! I'd be happy to help. Feel free to share the points discussed. Here's a standard template:", "1. Participants": "1. Attendees", "2. Ordre du jour": "2. Agenda", "3. Decisions": "3. Decisions", "N'hesitez pas !\"": "Let me know if you need anything else!\"", "\"Je lis ta skill CR... Ok. Qui etait present ? Quelles decisions ? Actions et owners ?\"": "\"Reading your meeting-recap skill... OK. Who was there? What decisions? Actions and owners?\"", "[Puis produit un CR dans ton format exact, range dans OUTPUTS/]": "[Then produces a recap in your exact format, saved to OUTPUTS/]", "Automatiser une tache recurrente en creant un skill base sur tes vrais livrables. Un skill, c'est un mini-mode d'emploi que Claude lit quand tu lui demandes un type de tache precis (CR de reunion, mail de refus candidat, brief produit, reporting...). La cle : partir de sources reelles, pas de regles abstraites. Plus les sources sont riches, plus la skill est fidele.": "Automate a recurring task by creating a skill based on your real deliverables. A skill is a mini-playbook Claude reads when you ask for a specific type of task (meeting recap, candidate rejection email, product brief, reporting...). The key: start from real sources, not abstract rules. The richer the sources, the truer the skill.", "Phase 1 - Identifier :": "Phase 1 - Identify:", " choisis une tache que tu fais au moins 2x par mois et formule la demande naturellement (ex : \"fais-moi un CR\", \"prepare un mail de refus\")": " pick a task you do at least twice a month and phrase the request naturally (e.g. \"write me a recap\", \"draft a rejection email\")", "Phase 2 - Collecter :": "Phase 2 - Collect:", " rassemble 2-3 exemples REELS de livrables finis (pas des templates vides). C'est LA phase qui fait la difference entre une skill generique et une skill excellente": " gather 2-3 REAL finished examples (not empty templates). THIS is the phase that separates a generic skill from an excellent one", "Phase 3 - Construire :": "Phase 3 - Build:", " demande a Claude d'analyser tes exemples (structure, ton, patterns recurrents) et de creer le SKILL.md avec exemples de reference integres": " ask Claude to analyze your examples (structure, tone, recurring patterns) and create the SKILL.md with reference examples built in", "Phase 4 - Tester :": "Phase 4 - Test:", " teste la skill sur un cas reel. Le premier jet n'est presque jamais parfait - c'est normal": " test the skill on a real case. The first pass is almost never perfect, that's normal", "Phase 4 bis - Iterer :": "Phase 4 bis - Iterate:", " ajuste le SKILL.md, re-teste, redemande du feedback jusqu'a satisfaction": " adjust the SKILL.md, retest, ask for feedback until you're satisfied", "Je veux creer ma premiere skill. Aide-moi a identifier la bonne tache. Pose-moi des questions sur mes taches recurrentes (frequence, format, variantes) et propose-moi le meilleur candidat pour une skill.": "I want to create my first skill. Help me identify the right task. Ask me about my recurring tasks (frequency, format, variants) and recommend the best candidate for a skill.", "Voici [2-3] exemples reels de [type de livrable] que j'ai produits [colle-les ou donne les fichiers]. Analyse en profondeur : structure, ton, patterns recurrents, longueur, elements obligatoires, regles implicites. Puis cree une skill dans .claude/skills/[nom]/SKILL.md qui reproduit exactement mon style. Le SKILL.md doit contenir : principe fondamental, declencheurs typiques, structure du livrable, regles specifiques, anti-patterns a eviter, et un exemple de reference complet.": "Here are [2-3] real examples of [type of deliverable] I've produced [paste them or give the files]. Analyze in depth: structure, tone, recurring patterns, length, mandatory elements, implicit rules. Then create a skill at .claude/skills/[name]/SKILL.md that reproduces my style exactly. The SKILL.md should contain: core principle, typical triggers, deliverable structure, specific rules, anti-patterns, and one complete reference example.", "Teste la skill que tu viens de creer sur ce cas concret : [decris le cas]. Produis le livrable en suivant le SKILL.md. Je vais comparer avec ce que j'aurais fait moi-meme.": "Test the skill you just created on this concrete case: [describe the case]. Produce the deliverable following the SKILL.md. I'll compare against what I would have done.", "Un dossier .claude/skills/[nom-de-ta-skill]/ avec un SKILL.md complet (principe, declencheurs, structure, regles, anti-patterns, exemple) + tes exemples sources dans un sous-dossier exemples/. Quand tu formules ta demande naturellement, Claude produit dans TON format et range dans OUTPUTS/.": "A .claude/skills/[your-skill-name]/ folder with a complete SKILL.md (principle, triggers, structure, rules, anti-patterns, example) + your source examples in an examples/ subfolder. When you phrase your request naturally, Claude produces in YOUR format and saves to OUTPUTS/.", "Skill \"RFC technique\" ou \"Code review summary\" base sur tes vraies RFCs": "Skill \"Technical RFC\" or \"Code review summary\" based on your real RFCs", "Skill \"Note de synthese client\" ou \"Proposition commerciale\" base sur tes vrais livrables": "Skill \"Account summary\" or \"Sales proposal\" based on your real deliverables", "Skill \"Rapport d'audit\" ou \"Non-conformite\" base sur tes vrais rapports": "Skill \"Audit report\" or \"Non-conformity\" based on your real reports", "Skill \"Spec fonctionnelle\" ou \"Go/No-go analysis\" base sur tes vraies specs": "Skill \"Functional spec\" or \"Go/No-go analysis\" based on your real specs", "Skill \"Revue de litterature\" ou \"Avis pharmaceutique\" base sur tes vrais avis": "Skill \"Literature review\" or \"Pharmaceutical opinion\" based on your real opinions", "Skill \"Note de cadrage\" ou \"Reporting mensuel\" base sur tes vrais reportings": "Skill \"Scoping note\" or \"Monthly reporting\" based on your real reports", "Skill \"US partner brief\" ou \"Cross-functional weekly\" base sur tes vrais livrables transverses": "Skill \"US partner brief\" or \"Cross-functional weekly\" based on your real cross-functional deliverables", " - La qualite d'une skill depend a 80% de la qualite des sources. Plus tu fournis d'exemples reels, plus Claude capte les regles implicites (ce que tu fais systematiquement sans le verbaliser). Un bon SKILL.md contient toujours un \"Principe fondamental\" (l'approche, pas juste la tache) et des \"Anti-patterns\" (ce qu'il ne faut JAMAIS faire).": " - 80% of a skill's quality comes from source quality. The more real examples you provide, the more Claude picks up implicit rules (things you do systematically without verbalizing). A good SKILL.md always contains a \"Core principle\" (the approach, not just the task) and \"Anti-patterns\" (what should NEVER happen).", " - Un bon SKILL.md suit cette structure : (1) Principe fondamental - 1-2 phrases sur l'approche (2) Declencheurs typiques - les formulations naturelles (3) Sources de reference - pointer vers le dossier exemples/ (4) Structure du livrable - sections detaillees (5) Regles specifiques - extraites de l'analyse (6) Anti-patterns - ce qu'il ne faut jamais faire (7) Exemple de reference complet.": " - A good SKILL.md follows this structure: (1) Core principle - 1-2 sentences on the approach (2) Typical triggers - natural phrasings (3) Reference sources - point to the examples/ folder (4) Deliverable structure - detailed sections (5) Specific rules - extracted from the analysis (6) Anti-patterns - what should never happen (7) One complete reference example.", "Identifie ta tache la plus recurrente. Rassemble 2-3 livrables finis. Utilise les prompts ci-dessus dans l'ordre (Phase 1, puis 2+3, puis 4). Itere jusqu'a ce que le resultat corresponde a ce que tu aurais fait toi-meme.": "Identify your most recurring task. Gather 2-3 finished deliverables. Use the prompts above in order (Phase 1, then 2+3, then 4). Iterate until the output matches what you would have done.", "Programmer Claude pour executer des taches automatiquement, meme quand tu n'es pas la.": "Schedule Claude to run tasks automatically, even when you're not around.", "Les 3 types de taches programmees": "The 3 types of scheduled tasks", "Routines": "Routines", "Infra Anthropic, 24/7. Tourne meme PC eteint. Ideal pour les recaps hebdo.": "Anthropic infra, 24/7. Runs even with your PC off. Ideal for weekly recaps.", "Taches desktop": "Desktop tasks", "Tourne en local sur ton Mac. Acces a tes fichiers. Necessite que l'app soit ouverte.": "Runs locally on your Mac. Access to your files. Requires the app to be open.", "/loop": "/loop", "Repetition en session. Utile pour surveiller un processus ou iterer sur un fichier.": "Repetition within a session. Useful to monitor a process or iterate on a file.", "Dans la sidebar Cowork, clique sur \"Scheduled\" pour voir les taches programmees": "In the Cowork sidebar, click \"Scheduled\" to see scheduled tasks", "Cree ta premiere routine avec le prompt ci-dessous": "Create your first routine with the prompt below", "Verifie le premier resultat et ajuste": "Check the first result and adjust", "Programme une routine qui, chaque lundi a 9h, lit mes derniers echanges Slack et Notion de la semaine precedente et genere un resume de ce qui s'est passe : decisions prises, actions en cours, sujets en attente. Range le resultat dans OUTPUTS/recaps/.": "Schedule a routine that, every Monday at 9am, reads my Slack and Notion activity from last week and generates a summary: decisions made, actions in progress, open topics. Save the result to OUTPUTS/recaps/.", "Un resume automatique de ta semaine, genere sans effort. Chaque lundi, tu trouves un recap pret a lire.": "An automatic weekly summary, generated effortlessly. Every Monday, you find a ready-to-read recap.", " - Commence par une tache simple et previsible. Les routines Anthropic tournent 24/7 sans que ton Mac soit allume. Les taches creatives marchent mieux en interactif.": " - Start with a simple, predictable task. Anthropic routines run 24/7 without your Mac being on. Creative tasks work better interactively.", "Programme une tache qui te fait gagner 15 minutes par semaine. Verifie le resultat apres la premiere execution.": "Schedule a task that saves you 15 minutes a week. Check the result after the first run.", "Aller au-dela des connecteurs web. Claude peut piloter Chrome, creer des presentations PowerPoint, rediger dans Word, et manipuler des PDFs.": "Go beyond web connectors. Claude can drive Chrome, create PowerPoint decks, write in Word, and manipulate PDFs.", "Dans Customize > Connecteurs > Bureau, active \"Claude in Chrome\" (inclus par defaut)": "In Customize > Connectors > Desktop, enable \"Claude in Chrome\" (included by default)", "Installe l'extension Chrome \"Claude in Chrome\" depuis le Chrome Web Store": "Install the \"Claude in Chrome\" extension from the Chrome Web Store", "Teste : \"Ouvre mon Google Sheets de suivi et resume les donnees\"": "Test: \"Open my tracking Google Sheet and summarize the data\"", "Active le connecteur \"PowerPoint (By Anthropic)\" et teste : \"Cree une presentation de 5 slides sur [sujet]\"": "Enable the \"PowerPoint (By Anthropic)\" connector and test: \"Create a 5-slide deck on [topic]\"", "Active \"Word (By Anthropic)\" et teste : \"Redige un document structure sur [sujet]\"": "Enable \"Word (By Anthropic)\" and test: \"Draft a structured document on [topic]\"", "Explore \"PDF Tools\" pour remplir, signer, fusionner des PDFs": "Explore \"PDF Tools\" to fill, sign, and merge PDFs", "Cree une presentation PowerPoint de 5 slides sur [sujet]. Utilise les couleurs Synapse (bleu #00A0FF, violet #BC2DFF). Slide 1 = titre, Slide 2 = contexte, Slide 3-4 = contenu principal, Slide 5 = next steps.": "Create a 5-slide PowerPoint deck on [topic]. Use Synapse colors (blue #00A0FF, violet #BC2DFF). Slide 1 = title, Slide 2 = context, Slide 3-4 = main content, Slide 5 = next steps.", "Un fichier .pptx genere directement, ouvrable dans PowerPoint ou Google Slides. Claude peut aussi ouvrir et modifier des presentations existantes.": "A .pptx file generated directly, openable in PowerPoint or Google Slides. Claude can also open and edit existing decks.", " - Claude in Chrome navigue sur le web pour toi (lecture d'articles, remplissage de formulaires). PowerPoint et Word creent des fichiers natifs que tu peux ouvrir et modifier normalement. Combine-les avec tes skills pour des workflows complets.": " - Claude in Chrome browses the web for you (reading articles, filling forms). PowerPoint and Word create native files you can open and edit normally. Combine them with your skills for end-to-end workflows.", "Active un connecteur Bureau et produis un livrable reel (presentation, document, ou PDF rempli).": "Enable a desktop connector and produce a real deliverable (deck, document, or filled PDF).", "Mettre en place des regles automatiques qui s'executent avant ou apres les actions de Claude. Ce n'est pas de l'IA, c'est du code deterministe - comme des git hooks.": "Set up automatic rules that run before or after Claude's actions. Not AI, deterministic code, like git hooks.", "C'est quoi un hook ?": "What is a hook?", " - Un hook, c'est un script qui se declenche automatiquement quand un evenement se produit. Par exemple : \"quand Claude attend mon input, envoie-moi une notification macOS\". Ca se configure dans le fichier ": " - A hook is a script that fires automatically when an event happens. For example: \"when Claude is waiting for my input, send me a macOS notification\". You configure it in the ", " - un fichier de configuration technique qu'on n'avait pas encore touche.": " file, a technical config file we haven't touched yet.", "Comprends le principe : Evenement > Filtre > Action automatique": "Get the principle: Event > Filter > Automatic action", "Demande a Claude de creer ton premier hook avec le prompt ci-dessous": "Ask Claude to create your first hook with the prompt below", "Verifie que le fichier .claude/settings.json a ete cree": "Check that the .claude/settings.json file was created", "Teste en lancant une tache et en attendant que Claude te notifie": "Test by launching a task and waiting for Claude to notify you", "Cree un hook simple dans .claude/settings.json qui m'envoie une notification macOS quand tu attends mon input. Explique-moi ce que tu as fait.": "Create a simple hook in .claude/settings.json that sends me a macOS notification when you're waiting for my input. Explain what you did.", "Un fichier .claude/settings.json avec un hook Notification fonctionnel. Tu recois une notification macOS chaque fois que Claude attend ton input.": "A .claude/settings.json file with a working Notification hook. You get a macOS notification every time Claude is waiting for input.", " - Les hooks RENFORCENT les restrictions. Une instruction dans CLAUDE.md est une demande. Un hook est une application. Si une regle doit tenir a chaque fois, fais-en un hook. Pour les demandes complexes, tu peux aussi creer un hook /plan qui active le mode planification de Claude.": " - Hooks ENFORCE restrictions. An instruction in CLAUDE.md is a request. A hook is enforcement. If a rule must hold every time, make it a hook. For complex requests, you can also create a /plan hook that activates Claude's planning mode.", "Cree un hook de notification. Teste qu'il fonctionne.": "Create a notification hook. Test that it works.", "Deleguer a des sous-agents specialises avec leur propre contexte isole. Tu envoies une mission, tu recuperes le resultat resume.": "Delegate to specialized subagents with their own isolated context. You send a mission, you get back a summarized result.", "Comprends le concept : un subagent a sa propre fenetre de contexte. Il ne voit que ce que tu lui donnes.": "Understand the concept: a subagent has its own context window. It only sees what you give it.", "Teste le prompt ci-dessous avec deux documents reels": "Test the prompt below with two real documents", "Observe comment le contexte principal n'est pas pollue par les details": "Notice how the main context isn't polluted by the details", "Lance deux subagents en parallele. Le premier analyse le document A et extrait les KPIs. Le deuxieme analyse le document B et extrait les risques. Fusionne les resultats dans une note de synthese.": "Launch two subagents in parallel. The first analyzes document A and extracts the KPIs. The second analyzes document B and extracts the risks. Merge the results into a synthesis note.", "Deux analyses en parallele, fusionnees en un seul livrable. Le contexte principal n'est pas pollue par les details.": "Two parallel analyses, merged into one deliverable. The main context isn't polluted by details.", "Subagent 1 analyse le code, Subagent 2 ecrit les tests": "Subagent 1 reviews the code, Subagent 2 writes the tests", "Subagent 1 recherche le prospect, Subagent 2 redige l'email personnalise": "Subagent 1 researches the prospect, Subagent 2 drafts the personalized email", "Subagent 1 verifie la conformite, Subagent 2 redige le rapport d'ecart": "Subagent 1 checks compliance, Subagent 2 drafts the gap report", "Subagent 1 analyse les feedbacks, Subagent 2 redige la spec": "Subagent 1 analyzes feedback, Subagent 2 drafts the spec", "Subagent 1 analyse les publications, Subagent 2 synthetise les conclusions": "Subagent 1 analyzes the publications, Subagent 2 synthesizes the conclusions", "Subagent 1 analyse le CV, Subagent 2 prepare les questions d'entretien": "Subagent 1 reviews the resume, Subagent 2 prepares interview questions", "Subagent 1 analyse l'appel d'offres hospitalier US, Subagent 2 redige la reponse cross-functional (commercial + clinique + produit)": "Subagent 1 analyzes the US hospital RFP, Subagent 2 drafts the cross-functional response (sales + clinical + product)", " - Utilise un subagent chaque fois qu'une tache secondaire risque d'inonder ta conversation. Le subagent lit 50 fichiers mais ne te renvoie que 10 lignes de conclusions.": " - Use a subagent whenever a secondary task risks flooding your conversation. The subagent reads 50 files but only sends back 10 lines of conclusions.", "Identifie une tache decomposable en 2 sous-taches. Lance un subagent pour chacune.": "Identify a task that splits into 2 subtasks. Launch a subagent for each.", "Orchestrer des equipes d'agents qui travaillent en parallele avec communication bidirectionnelle.": "Orchestrate teams of agents working in parallel with bidirectional communication.", "Subagent vs Agent Team": "Subagent vs Agent Team", " - Un subagent rapporte au principal (unidirectionnel). Un agent team = plusieurs agents qui communiquent entre eux (bidirectionnel). C'est la difference entre deleguer une tache et orchestrer une equipe.": " - A subagent reports to the main one (one-way). An agent team = multiple agents communicating with each other (two-way). It's the difference between delegating a task and orchestrating a team.", "Concois un workflow multi-agent sur un cas concret de ton metier": "Design a multi-agent workflow on a concrete case from your job", "Lance 2-3 agents en parallele avec des roles clairs": "Launch 2-3 agents in parallel with clear roles", "Orchestre la fusion des resultats": "Orchestrate the merge of results", "Mesure le gain de temps vs execution sequentielle": "Measure the time saved vs sequential execution", "Je dois preparer une presentation complete sur [sujet]. Lance une equipe de 3 agents : Agent 1 = recherche et donnees. Agent 2 = redaction et structure. Agent 3 = mise en forme et visuels. Coordonne-les et fusionne le resultat.": "I need to prepare a full presentation on [topic]. Launch a team of 3 agents: Agent 1 = research and data. Agent 2 = writing and structure. Agent 3 = formatting and visuals. Coordinate them and merge the result.", "Agent 1 ecrit les tests, Agent 2 refactore, Agent 3 met a jour la doc": "Agent 1 writes tests, Agent 2 refactors, Agent 3 updates the docs", "Veille concurrentielle > analyse > deck comparatif > recommandations": "Competitive monitoring > analysis > comparison deck > recommendations", "Revue documentaire > gap analysis > plan de remediation > rapport": "Document review > gap analysis > remediation plan > report", "Research users > specs > maquettes > user stories": "User research > specs > mockups > user stories", "Revue litterature > extraction donnees > synthese > recommandations": "Literature review > data extraction > synthesis > recommendations", "Collecte donnees > reporting > analyse > presentation staff meeting": "Data collection > reporting > analysis > staff meeting presentation", "Market scan > clinical evidence review > product positioning > GTM brief": "Market scan > clinical evidence review > product positioning > GTM brief", " - Le secret n'est pas le nombre d'agents mais la qualite du decoupage. Des taches reellement independantes = gain de temps. Des taches interdependantes = overhead de coordination.": " - The secret isn't the number of agents but the quality of the breakdown. Truly independent tasks = time saved. Interdependent tasks = coordination overhead.", "Choisis un livrable qui te prend 2-3 heures. Decoupe en 3 sous-taches. Lance un agent par sous-tache.": "Pick a deliverable that takes 2-3 hours. Break it into 3 subtasks. Launch one agent per subtask.", "Combiner tout ce que tu as appris dans un workflow de bout en bout qui divise ton temps par 3-5.": "Combine everything you've learned into an end-to-end workflow that cuts your time by 3-5x.", "Choisis un livrable complexe qui te prend 4-6 heures": "Pick a complex deliverable that takes you 4-6 hours", "Concois le workflow : skills, connecteurs, hooks, agents": "Design the workflow: skills, connectors, hooks, agents", "Execute le workflow complet": "Run the full workflow", "Mesure le temps. Calcule le ROI : temps gagne x frequence x 52 = heures/an": "Measure the time. Calculate the ROI: time saved x frequency x 52 = hours/year", "Documente le workflow pour l'AI Task Force": "Document the workflow for the AI Task Force", "J'ai un livrable complexe a produire : [description]. C'est une tache que je fais [frequence]. Aide-moi a concevoir un workflow optimal en utilisant skills, connecteurs et agents paralleles. Montre-moi le plan avant d'executer.": "I have a complex deliverable to produce: [description]. It's a task I do [frequency]. Help me design an optimal workflow using skills, connectors, and parallel agents. Show me the plan before executing.", "Un workflow documente, reproductible, qui divise ton temps par 3-5 sur cette tache. Un ROI mesurable.": "A documented, reproducible workflow that cuts your time by 3-5x on this task. A measurable ROI.", "CI/CD review complet : analyse PR > RFC > tests > merge": "Full CI/CD review: PR analysis > RFC > tests > merge", "Reponse appel d'offres : analyse cahier des charges > redaction > relecture > soumission": "RFP response: spec analysis > drafting > review > submission", "Preparation audit : collecte preuves > gap analysis > plan d'actions > rapport": "Audit prep: evidence collection > gap analysis > action plan > report", "Discovery to delivery : research > specs > maquettes > stories > tickets": "Discovery to delivery: research > specs > mockups > stories > tickets", "Revue systematique : search > screening > extraction > synthese > publication": "Systematic review: search > screening > extraction > synthesis > publication", "Preparation staff meeting : collecte data > analyse > deck > diffusion": "Staff meeting prep: data collection > analysis > deck > distribution", "US prospect workflow : discovery call > stakeholder mapping > clinical alignment > product fit > proposal": "US prospect workflow: discovery call > stakeholder mapping > clinical alignment > product fit > proposal", " - Le ROI se mesure en heures gagnees PAR SEMAINE. Un workflow qui te fait gagner 2h sur une tache hebdomadaire = 100h/an. Partage tes workflows avec l'AI Task Force.": " - ROI is measured in hours saved PER WEEK. A workflow saving 2h on a weekly task = 100h/year. Share your workflows with the AI Task Force.", "Construis ton workflow. Mesure le temps. Calcule le ROI annuel. Partage ton retour d'experience.": "Build your workflow. Measure the time. Calculate the annual ROI. Share your feedback.", "Ressources Claude": "Claude resources", "Le dossier racine de ton espace Claude. Tout est organise ici.": "The root folder of your Claude space. Everything is organized here.", "Configuration Claude : le CLAUDE.md (cerveau), les skills (recettes), et les settings.": "Claude config: the CLAUDE.md (brain), skills (recipes), and settings.", "Le cerveau. Lu en premier a chaque session. Contient tes regles, ton contexte, et ton catalogue de ressources (skills, templates, outputs).": "The brain. Read first at every session. Contains your rules, context, and resource catalog (skills, templates, outputs).", "Tes taches recurrentes automatisees. Un sous-dossier par skill avec SKILL.md + exemples.": "Your automated recurring tasks. One subfolder per skill with SKILL.md + examples.", "Ton identite, tes regles, ta strategie. Les fichiers qui font de Claude TON assistant.": "Your identity, rules, strategy. The files that make Claude YOUR assistant.", "Ton poste, parcours, competences, outils.": "Your role, background, skills, tools.", "Ton ton, tes patterns interdits, tes formats preferes. LE fichier le plus important.": "Your tone, forbidden patterns, preferred formats. THE most important file.", "Ta boite, ton equipe, tes OKR, tes chantiers.": "Your company, team, OKRs, workstreams.", "Livrables generes par Claude, ranges par projet.": "Deliverables generated by Claude, organized by project.", "Tes modeles de reference (.docx, .xlsx, .pptx).": "Your reference templates (.docx, .xlsx, .pptx).", "1. Identifier": "1. Identify", "la tache": "the task", "2. Collecter": "2. Collect", "tes vrais livrables": "your real deliverables", "3. Analyser": "3. Analyze", "les patterns": "the patterns", "4. Creer": "4. Create", "SKILL.md": "SKILL.md", "5. Tester": "5. Test", "et iterer": "and iterate", "Evenement": "Event", "Claude attend, ecrit...": "Claude waiting, writing...", "Filtre": "Filter", "Quel type d'action ?": "Which action type?", "Action automatique": "Automatic action", "Notifier, valider, loguer": "Notify, validate, log", "Sonnet": "Sonnet", "Questions du quotidien": "Everyday questions", "Reponse en ~15 sec": "Reply in ~15 sec", "Ton modele par defaut": "Your default model", "Opus": "Opus", "Analyse complexe": "Complex analysis", "Nuances et contexte juridique": "Nuance and regulatory context", "Strategie, juridique": "Strategy, legal", "Extended Thinking": "Extended Thinking", "Raisonnement etape par etape": "Step-by-step reasoning", "Tu vois \"comment\" il pense": "You see \"how\" it thinks", "Debug, audit, maths": "Debug, audit, math", "Parametres": "Settings", "General": "General", "Compte": "Account", "Utilisation": "Usage", "Capacites": "Capabilities", "Claude Code": "Claude Code", "Cowork": "Cowork", "Profil": "Profile", "Nom complet, avatar, description du travail": "Full name, avatar, job description", "Instructions pour Claude": "Instructions for Claude", "Tes instructions permanentes ici...": "Your permanent instructions here...", "Customize": "Customize", "Local": "Local", "Claude-Work": "Claude-Work", "Reinitialiser ma progression": "Reset my progress", "Remettre ta progression a zero ?": "Reset your progress?"};
+  var EN_FR = {};
+  Object.keys(FR_EN).forEach(function(k){ EN_FR[FR_EN[k]] = k; });
+
+  var LANG_KEY = 'guide-lang';
+  var currentLang = localStorage.getItem(LANG_KEY) || 'fr';
+
+  // Public helper for JS-driven text
+  window.__i18n_t = function(key) {
+    var entry = I18N_KEYS[key];
+    if (!entry) return key;
+    return entry[currentLang] || entry.fr || key;
+  };
+
+  function translateKeyedElements() {
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n');
+      var entry = I18N_KEYS[key];
+      if (!entry) return;
+      var val = entry[currentLang] || entry.fr;
+      if (val == null) return;
+      if (key.indexOf('html:') === 0) el.innerHTML = val;
+      else el.textContent = val;
+    });
+  }
+
+  // Walk text nodes inside specified scopes and swap via FR/EN map (full string match).
+  function translateTextNodes() {
+    // Scope: whole body but skip <script>, <style>, <title>, [data-i18n] (those handled above).
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode: function(node) {
+        var p = node.parentNode;
+        if (!p) return NodeFilter.FILTER_REJECT;
+        var tag = p.tagName;
+        if (tag === 'SCRIPT' || tag === 'STYLE') return NodeFilter.FILTER_REJECT;
+        // Skip nodes whose direct parent has data-i18n
+        if (p.hasAttribute && p.hasAttribute('data-i18n')) return NodeFilter.FILTER_REJECT;
+        var txt = node.nodeValue;
+        if (!txt || !txt.trim()) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    var nodes = [];
+    var n;
+    while ((n = walker.nextNode())) nodes.push(n);
+
+    nodes.forEach(function(node) {
+      var original = node.nodeValue;
+      var trimmed = original.trim();
+      if (!trimmed) return;
+      // Preserve surrounding whitespace
+      var leading = original.match(/^\s*/)[0];
+      var trailing = original.match(/\s*$/)[0];
+
+      if (currentLang === 'en') {
+        // store original FR if not stored
+        if (!node.__origFr) node.__origFr = original;
+        var en = FR_EN[trimmed];
+        if (en != null) {
+          node.nodeValue = leading + en + trailing;
+        }
+      } else {
+        // restore FR original if stored
+        if (node.__origFr != null) {
+          node.nodeValue = node.__origFr;
+        } else {
+          // Maybe it's currently EN, try reverse
+          var fr = EN_FR[trimmed];
+          if (fr != null) {
+            node.nodeValue = leading + fr + trailing;
+          }
+        }
+      }
+    });
+  }
+
+  function applyLang() {
+    document.documentElement.setAttribute('lang', currentLang);
+    translateKeyedElements();
+    translateTextNodes();
+    var btn = document.getElementById('lang-toggle');
+    if (btn) {
+      // Show target language (the one you'd switch to)
+      btn.textContent = currentLang === 'fr' ? 'EN' : 'FR';
+      btn.setAttribute('title', currentLang === 'fr' ? 'Switch to English' : 'Passer en francais');
+    }
+    // Reapply accordion heights for any open accordions (translations may change height)
+    document.querySelectorAll('.accordion-item.open').forEach(function(item) {
+      var body = item.querySelector('.accordion-body');
+      if (body) body.style.maxHeight = body.scrollHeight + 'px';
+    });
+  }
+
+  window.toggleLang = function() {
+    currentLang = currentLang === 'fr' ? 'en' : 'fr';
+    localStorage.setItem(LANG_KEY, currentLang);
+    applyLang();
+  };
+
+  // Apply after existing DOMContentLoaded logic. Use a setTimeout to run after.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(applyLang, 0);
+    });
+  } else {
+    setTimeout(applyLang, 0);
+  }
+})();
+</script>
+
 </body>
 </html>
